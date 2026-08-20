@@ -1,0 +1,19 @@
+# Promptfoo harness for the KleidiAI MCP server.
+#
+# Scores retrieval accuracy: for each held-out question, does search_kleidiai_docs
+# rank the correct corpus doc first? Deterministic, no LLM/API key required.
+# Run: PROMPTFOO_PYTHON=../packages/server-py/.venv/bin/python npm run eval
+#
+# The agentic tool-use layer (mcp-agent-provider) is deferred until a model key
+# is configured; it will add a second provider here, not replace this one.
+
+description: "KleidiAI MCP — retrieval accuracy (top-1 doc)"
+
+providers:
+  - id: file://mcp_provider.py
+    label: search_kleidiai_docs
+
+prompts:
+  - "{{question}}"
+
+tests: file://generate_tests.py:generate_tests

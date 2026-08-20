@@ -1,0 +1,85 @@
+# Corpus manifest — provenance for every committed doc under corpus/.
+#
+# Each entry records: source URL, fetch date (UTC ISO 8601), SHA-256 of the
+# fetched bytes, relative path under corpus/, and a one-line description.
+#
+# Adding a doc: fetch, record entry, commit doc + manifest together.
+# Removing a doc: keep the entry with `removed_at:` and the reason.
+#
+# See `corpus/.../README.md` (added in M1) for the fetch/refresh tooling.
+
+version: 1
+generated_at: 2026-07-14
+sources:
+  - id: kleidiai-readme
+    url: https://github.com/ARM-software/kleidiai/blob/main/README.md
+    raw_url: https://raw.githubusercontent.com/ARM-software/kleidiai/main/README.md
+    commit: b87ef9c94f45f11c81a6b1fdaed1b2b45ea58c0c
+    fetched_at: 2026-07-14T02:48:09Z
+    sha256: c830f1408c9022d5c856cb3a85c9942554554d2b162ad008f2111f8d892af73e
+    path: kleidiai/README.md
+    license: Apache-2.0
+    description: KleidiAI top-level README — scope, micro-kernel concept, supported ukernels, build/entry points
+  - id: llamacpp-build
+    url: https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md
+    raw_url: https://raw.githubusercontent.com/ggml-org/llama.cpp/master/docs/build.md
+    commit: 2969d6d15d67a08e7b83f26164b15350c79c5248
+    fetched_at: 2026-07-14T02:57:55Z
+    sha256: ba260b4812823328f55c4fe442312fad63804f2291b756c597c7479d9245b96c
+    path: llamacpp/build.md
+    license: MIT
+    description: llama.cpp build guide — Arm KleidiAI section (GGML_CPU_KLEIDIAI=ON, GGML_KLEIDIAI_SME, runtime SME/dotprod/i8mm kernel selection)
+  - id: kleidiai-matmul-pack
+    url: https://github.com/ARM-software/kleidiai/blob/main/kai/ukernels/matmul/pack/README.md
+    raw_url: https://raw.githubusercontent.com/ARM-software/kleidiai/main/kai/ukernels/matmul/pack/README.md
+    commit: b87ef9c94f45f11c81a6b1fdaed1b2b45ea58c0c
+    fetched_at: 2026-07-14T03:01:59Z
+    sha256: a2a87ac74936c3728785f95024bfd0414917576277f9bfdea5972dd25ccbc62c
+    path: kleidiai/matmul-pack-README.md
+    license: Apache-2.0
+    description: KleidiAI matmul packing micro-kernels — LHS/RHS + bias packing variants, mr/nr terminology; underpins the int4 kernel-port demo
+  - id: kleidiai-microkernel-names
+    url: https://github.com/ARM-software/kleidiai/blob/main/docs/microkernel_names.md
+    raw_url: https://raw.githubusercontent.com/ARM-software/kleidiai/main/docs/microkernel_names.md
+    commit: b87ef9c94f45f11c81a6b1fdaed1b2b45ea58c0c
+    fetched_at: 2026-07-14T03:41:17Z
+    sha256: e97519eba3c0344127001730c909f074cf6fae2191be6e139a8c46714fb81f58
+    path: kleidiai/microkernel-names.md
+    license: Apache-2.0
+    description: KleidiAI micro-kernel naming scheme — grammar for tech (neon/sve/sme), feature (i8mm/dotprod), quantization schemes and axes (cx/dx/c32); decodes kernel names for the int4 demo
+  - id: kleidiai-matmul-qsi4cx
+    url: https://github.com/ARM-software/kleidiai/blob/main/docs/matmul_qsi4cx/README.md
+    raw_url: https://raw.githubusercontent.com/ARM-software/kleidiai/main/docs/matmul_qsi4cx/README.md
+    commit: b87ef9c94f45f11c81a6b1fdaed1b2b45ea58c0c
+    fetched_at: 2026-08-05T23:06:36Z
+    sha256: 0e99c7434a87182a278ef53b682a84192a25bd79c9ce63de72a7432c1b21af08
+    path: kleidiai/matmul-qsi4cx-README.md
+    license: Apache-2.0
+    description: KleidiAI int4 matmul guide — running qsi4cx (symmetric int4, per-channel) micro-kernels end to end; dynamic int8 LHS quantization, RHS scales, packing steps, kernel-name dissection; core reference for the int4 kernel-port demo
+  - id: learnarm-llamacpp-sme2-integration
+    url: https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/mobile-graphics-and-gaming/performance_llama_cpp_sme2/kleidiai_integration.md
+    raw_url: https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/mobile-graphics-and-gaming/performance_llama_cpp_sme2/kleidiai_integration.md
+    commit: 86b80af19f520d695cd4dc9ce829a63f5e85e109
+    fetched_at: 2026-08-05T23:08:13Z
+    sha256: 333ecd4972b92d4a36da128d1f604532dab1f87a650ebc7abbb924aeb32af91b
+    path: learn-arm/llamacpp-sme2-kleidiai-integration.md
+    license: CC-BY-SA-4.0
+    description: learn.arm.com learning path (source repo) — how KleidiAI integrates into the llama.cpp ggml-cpu backend as a tensor trait; eligible GGML_OP_MUL_MAT operators, kernel selection priority (SME2 > I8MM > DotProd), RHS repack at model load, LHS quant+pack and GEMM/GEMV kernel call stacks at prefill/decode
+  - id: mlexamples-llamacpp-int4-patch
+    url: https://github.com/Arm-Examples/ML-examples/blob/main/kleidiai-examples/llama_cpp/README.md
+    raw_url: https://raw.githubusercontent.com/Arm-Examples/ML-examples/main/kleidiai-examples/llama_cpp/README.md
+    commit: 0e453847ea28043194c32791a591d0f5a8a5ae2e
+    fetched_at: 2026-08-05T23:09:04Z
+    sha256: 8d39bc5cef098efa07106082728de43d2150006363c5d32ac12d6e0cf89bd5b4
+    path: ml-examples/llamacpp-int4-patch-README.md
+    license: MIT
+    description: Arm ML-examples guide — applying the KleidiAI int4 matmul patch (per-block c32 quantization, llama.cpp Q4_0) to llama.cpp and cross-building for Android/Linux Arm targets; hands-on companion to the qsi4cx guide and the kernel-port demo
+
+# Example entry once seeded in M1:
+#
+# - id: kleidiai-readme
+#   url: https://github.com/ARM-software/kleidiai/blob/main/README.md
+#   fetched_at: 2026-05-28T00:00:00Z
+#   sha256: <hex>
+#   path: kleidiai/README.md
+#   description: KleidiAI top-level README — scope, build, entry points

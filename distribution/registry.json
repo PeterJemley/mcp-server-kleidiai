@@ -1,0 +1,18 @@
+{
+  "$schema": "https://registry.modelcontextprotocol.io/schemas/server.json",
+  "name": "io.github.peterjemley/mcp-server-kleidiai",
+  "description": "MCP server exposing KleidiAI + llama.cpp Arm optimization expertise",
+  "repository": {
+    "url": "https://github.com/PeterJemley/mcp-server-kleidiai",
+    "source": "github"
+  },
+  "version": "0.0.1",
+  "packages": [
+    {
+      "registry_name": "pypi",
+      "name": "mcp-server-kleidiai",
+      "version": "0.0.1"
+    }
+  ],
+  "remotes": []
+}

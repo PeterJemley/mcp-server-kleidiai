@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "kleidiai": {
+      "command": "packages/server-py/.venv/bin/python",
+      "args": ["-m", "mcp_server_kleidiai"]
+    }
+  }
+}

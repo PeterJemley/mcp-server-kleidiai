@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+.env
+
+# TypeScript / Node
+node_modules/
+*.tsbuildinfo
+.npm
+.eslintcache
+.pnpm-debug.log*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Test / coverage
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Promptfoo runtime cache (committed reports live under evals/reports/)
+.promptfoo/
+
+# Demo build dependency (pinned checkout, fetched by demos/kernel-port/fetch_kleidiai.sh)
+demos/kernel-port/third_party/
+
+# Release-time corpus staging (distribution/prepare_corpus.py); the committed
+# corpus/ is the single source of truth
+packages/server-py/src/mcp_server_kleidiai/_corpus/
+packages/server-ts/corpus/
+packages/server-ts/patterns.yaml
+
+# Per-machine local settings
+.claude/settings.local.json
+
+# Cross-project planning notes (kept out of the KleidiAI portfolio)
+notes/
+
+# Session handoff stays local/private; excluded from the public release tree
+# (tracked in the private archive repo only — ignore rule protects the
+# public working clone from re-adding it)
+/where-to-begin.md

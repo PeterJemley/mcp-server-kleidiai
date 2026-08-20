@@ -1,0 +1,512 @@
+# Held-out QA set for retrieval + tool-use evals.
+#
+# Each entry:
+#   id:                  stable identifier
+#   question:            natural-language question
+#   expected_doc_ids:    corpus manifest IDs that MUST appear in retrieval
+#   expected_tool:       which MCP tool should be called (null = retrieval-only)
+#   expected_tool_args:  acceptable arg patterns (regex or exact)
+#   notes:               curator notes — why this question, what it tests
+#
+# Curation target: ~50 entries by M2.
+# Mix:
+#   - 20 retrieval-only (find this doc)
+#   - 20 tool-use (call this tool with these args)
+#   - 10 end-to-end (multi-tool agent task)
+#
+# Mix status after batch 3 (2026-08-05): 48 entries = 37 retrieval-only,
+# 7 tool-use, 4 end-to-end. The tool-use and end-to-end tranches remain
+# under target ON PURPOSE: scoring them meaningfully needs the agent
+# provider (gated on a model API key), and padding tool-use questions that
+# only the deterministic provider can score would add near-duplicates of
+# retrieval questions. Grow those tranches alongside the agent provider.
+#
+# Rule: never tune questions to make the server look better. Hard questions
+# are deliberate. A regression is a signal, not a thing to mask.
+
+version: 1
+
+# First batch (15). Building toward the ~50 target. expected_doc_ids are
+# ground truth — the doc that *should* answer the question — set independently
+# of what the current retriever returns. Entries tagged HARD are ones the
+# stub retriever currently gets wrong; they are kept deliberately.
+questions:
+  # --- retrieval-only: KleidiAI concept (kleidiai-readme) ---
+  - id: what-is-microkernel
+    question: What is a micro-kernel (ukernel) in KleidiAI?
+    expected_doc_ids: [kleidiai-readme]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Core definition; the README has a dedicated "What is a micro-kernel?" section.
+
+  - id: hard-who-is-kleidiai-for
+    question: Who is KleidiAI intended for?
+    expected_doc_ids: [kleidiai-readme]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      HARD (lexical gap). README answers this ("library for AI/ML framework
+      developers") but phrases it as "designed for"/"library for", not
+      "intended for" — the query synonym has no lexical overlap, so keyword
+      retrieval misses and returns llamacpp-build. A semantic retriever should
+      fix this; kept to measure exactly that.
+
+  - id: how-to-include-microkernels
+    question: How do I incorporate specific KleidiAI micro-kernels into my C/C++ project?
+    expected_doc_ids: [kleidiai-readme]
+    expected_tool: null
+    expected_tool_args: null
+    notes: README — include the corresponding .c/.h files plus a common header.
+
+  # --- retrieval-only: llama.cpp integration (llamacpp-build) ---
+  - id: enable-kleidiai-llamacpp
+    question: How do I enable KleidiAI when building llama.cpp?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      Canonical GGML_CPU_KLEIDIAI=ON CMake flag. REVIEWED 2026-08-05, KEPT
+      single ground truth: the learn.arm doc names the flag once as context;
+      the build doc is the canonical how-to. Its current top-1 loss to the
+      learn.arm doc is a real category-D failure.
+
+  - id: verify-kleidiai-runtime
+    question: How can I verify at runtime that KleidiAI is actually being used?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: null
+    expected_tool_args: null
+    notes: The "CPU_KLEIDIAI model buffer size" load line confirms it.
+
+  - id: sme-env-var
+    question: Which environment variable controls SME behavior in llama.cpp?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: null
+    expected_tool_args: null
+    notes: GGML_KLEIDIAI_SME (unset=auto, 0=off, n>0=assume n units).
+
+  - id: arm-cpu-features-used
+    question: Which Arm CPU features do KleidiAI micro-kernels exploit?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Build doc lists dotprod, int8mm, SVE, SME with runtime selection.
+
+  # --- retrieval-only: packing (kleidiai-matmul-pack) ---
+  - id: rhs-bias-packing
+    question: Which micro-kernel packs RHS weights and bias into blocks?
+    expected_doc_ids: [kleidiai-matmul-pack]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Pack README documents kai_run_rhs_pack_* variants for weights+bias.
+
+  # --- retrieval-only: naming scheme (kleidiai-microkernel-names) ---
+  - id: sme-tech-identifier
+    question: What does the "sme" tech identifier mean in a kernel name?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Naming grammar lists tech = neon|sve|sve2|...|sme|sme2|...
+
+  - id: quantization-axis-values
+    question: What quantization axis values does the naming scheme define?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: quantization_axis = cx | dx | d32 | c32 (per-channel/dimension/block).
+
+  - id: per-channel-quantization
+    question: What does per-channel quantization ("cx") mean?
+    expected_doc_ids: [kleidiai-microkernel-names, kleidiai-matmul-qsi4cx]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      Naming doc defines "cx" as per-channel quantized. WIDENED 2026-08-05
+      after corpus growth: the qsi4cx guide explains the concept in full
+      ("the quantization is called per-channel because ... the N dimension
+      corresponds to the output channel") — a complete definitional answer,
+      not a mention.
+
+  - id: instruction-families
+    question: What primary instruction families can appear in a KleidiAI kernel name?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: instruction = dot | i8mm | mla | mmla | mopa | sdot.
+
+  # --- tool-use: agent should call search_kleidiai_docs ---
+  - id: tooluse-enable-kleidiai
+    question: I'm on an M-series Mac — how do I turn on KleidiAI acceleration in llama.cpp?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)(enable|kleidiai).*(llama|build)|GGML_CPU_KLEIDIAI"
+    notes: >-
+      Agent must decide to search, then ground the answer in the build doc.
+      REVIEWED 2026-08-05, KEPT single ground truth: same reasoning as
+      enable-kleidiai-llamacpp — the build doc is canonical for enabling; the
+      learn.arm doc only mentions the flag. Failure stands (category D).
+
+  # --- HARD: kept deliberately; stub retriever currently wrong (M1 findings) ---
+  - id: hard-read-kernel-name
+    question: How do I read/decode a KleidiAI micro-kernel name?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      HARD. Stub retriever returns kleidiai-readme (its "micro-kernel"/"name"
+      density outweighs the naming doc). Correct answer is the naming-scheme doc.
+
+  - id: hard-generic-packing
+    question: RHS and LHS packing for matmul
+    expected_doc_ids: [kleidiai-matmul-pack]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      HARD. Short generic phrasing pulls the naming doc's example-name chunks
+      ahead of the packing doc. Tests robustness to terse queries.
+
+  # ===== Batch 2 (2026-07-14) — deepen coverage of the 4 seeded docs =====
+
+  # kleidiai-readme
+  - id: what-is-kleidiai
+    question: What is KleidiAI, in one sentence?
+    expected_doc_ids: [kleidiai-readme]
+    expected_tool: null
+    expected_tool_args: null
+    notes: README opens with "an open-source library that provides optimized performance-critical routines".
+
+  - id: ukernel-abbreviation
+    question: What does the abbreviation ukernel stand for?
+    expected_doc_ids: [kleidiai-readme]
+    expected_tool: null
+    expected_tool_args: null
+    notes: README — "A micro-kernel, or ukernel".
+
+  - id: integration-languages
+    question: Which programming languages can KleidiAI micro-kernels be included in?
+    expected_doc_ids: [kleidiai-readme]
+    expected_tool: null
+    expected_tool_args: null
+    notes: README — designed for adoption into C or C++ ML/AI frameworks.
+
+  # llamacpp-build
+  - id: cmake-flag-kleidiai
+    question: What CMake option enables KleidiAI in a llama.cpp build?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)GGML_CPU_KLEIDIAI|cmake.*kleidiai"
+    notes: -DGGML_CPU_KLEIDIAI=ON. Tool-use — agent should search then cite the build doc.
+
+  - id: runtime-kernel-selection
+    question: How does llama.cpp select which micro-kernels to run?
+    expected_doc_ids: [llamacpp-build, learnarm-llamacpp-sme2-integration]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      Build doc — "selects the most efficient kernels at runtime based on
+      detected CPU capabilities". WIDENED 2026-08-05 after corpus growth: the
+      learn.arm integration doc has a dedicated section on micro-kernel
+      selection priority (SME2 > I8MM > DotProd) — a complete, direct answer,
+      not a passing mention. Either doc fully serves the question.
+
+  - id: sme-auto-enable
+    question: Is SME enabled automatically in llama.cpp?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Build doc — SME auto-enabled via runtime detection when supported.
+
+  - id: disable-sme
+    question: How do I disable SME in a llama.cpp KleidiAI build?
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)GGML_KLEIDIAI_SME|disable.*sme"
+    notes: GGML_KLEIDIAI_SME=0. Tool-use.
+
+  # kleidiai-matmul-pack
+  - id: why-pack-matmul
+    question: Why does KleidiAI pack matmul inputs before multiplication?
+    expected_doc_ids: [kleidiai-matmul-pack]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Pack README — packing of RHS/LHS is done for performance (efficient layout).
+
+  - id: int4-rhs-pack
+    question: Which packing kernel handles int4 (qsi4) RHS weights?
+    expected_doc_ids: [kleidiai-matmul-pack]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      Pack README lists kai_run_rhs_pack_*_qsi4* variants; underpins the int4
+      demo. REVIEWED 2026-08-05, KEPT single ground truth: the question asks
+      WHICH kernel — the pack README holds the reference enumeration; the
+      qsi4cx guide only walks through one example. Failure stands (category D).
+
+  - id: rhs-lhs-meaning
+    question: What do RHS and LHS refer to in matmul packing?
+    expected_doc_ids: [kleidiai-matmul-pack]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Pack README — Right Hand Side (weights) and Left Hand Side (activations).
+
+  # kleidiai-microkernel-names
+  - id: simd-engine-identifiers
+    question: What SIMD engine identifiers can appear in a KleidiAI kernel name?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Naming grammar — tech = neon|sve|sve2|sve2p1|sme|sme2|sme2p1.
+
+  - id: feature-identifiers
+    question: What primary feature values does the kernel naming grammar allow?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Naming grammar — feature = i8mm | dotprod.
+
+  - id: per-dimension-quant
+    question: What does per-dimension quantization (dx) mean in a kernel name?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Naming doc defines dx as per-dimension quantized.
+
+  - id: packed-buffer-layout
+    question: What does the p-by notation (pWxH) mean in a packed buffer name?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Naming doc — "Packed buffers include a p<width>x<height> layout in full names".
+
+  - id: directory-vs-kernel-name
+    question: What is the difference between a micro-kernel directory name and a micro-kernel name?
+    expected_doc_ids: [kleidiai-microkernel-names]
+    expected_tool: null
+    expected_tool_args: null
+    notes: Naming doc has distinct "Micro-kernel directory name" and "Micro-kernel name" rules.
+
+  # ===== Batch 3 (2026-08-05) — cover the three new corpus docs, grow the
+  # tool-use tranche, seed the end-to-end tranche.
+  #
+  # e2e-* entries are end-to-end agent tasks. The deterministic provider scores
+  # them weakly (top-1 doc must be in expected_doc_ids — any of the docs the
+  # task spans); their full grading criteria live in notes and activate with
+  # the agent provider (gated on a model API key). Multi-doc expected_doc_ids
+  # on regular questions follow the widening policy: every listed doc contains
+  # a complete, direct answer, per its curator note.
+
+  # kleidiai-matmul-qsi4cx (int4 per-channel guide)
+  - id: int4-target-cpu-feature
+    question: Which Arm CPU extension is required to run the int4 per-channel matmul micro-kernels?
+    expected_doc_ids: [kleidiai-matmul-qsi4cx]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      qsi4cx guide "Target Arm CPUs" — FEAT_I8MM. The build doc and patch guide
+      list feature sets generally; only this guide states the requirement for
+      the int4 per-channel kernels specifically.
+
+  - id: lhs-dynamic-quantization
+    question: Why is LHS quantization and packing repeated on every inference run, while RHS packing happens only once?
+    expected_doc_ids: [kleidiai-matmul-qsi4cx, learnarm-llamacpp-sme2-integration]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      Both docs answer completely (multi-doc ground truth from authoring, per
+      the widening policy): qsi4cx guide — "the content of the LHS matrix
+      changes at runtime" vs RHS "commonly keeps the weights ... perform this
+      operation only once"; learn.arm doc — activations change token to token,
+      weights are constant so repacking happens once at model load.
+
+  - id: int4-three-microkernels
+    question: How many micro-kernels are involved in an int4 per-channel matmul, and what does each do?
+    expected_doc_ids: [kleidiai-matmul-qsi4cx]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      qsi4cx guide — three: LHS quant+pack (kai_lhs_quant_pack_qai8dxp_f32),
+      RHS pack (kai_rhs_pack_nxk/kxn_qsi4cxp_qs4cxs1s0), and the matmul kernel.
+
+  - id: int4-nibble-storage
+    question: When allocating the native int4 RHS matrix, why is the k dimension divided by two?
+    expected_doc_ids: [kleidiai-matmul-qsi4cx]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      qsi4cx guide step 3 — two 4-bit values are held in one 8-bit value, so
+      the byte size adjusts by k/2.
+
+  - id: tooluse-run-int4-matmul
+    question: I want to try KleidiAI's int4 matmul micro-kernels in a small C program — how do I set that up?
+    expected_doc_ids: [kleidiai-matmul-qsi4cx]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)int4.*(matmul|micro|kernel|run)|qsi4cx|run.*int4"
+    notes: >-
+      Agent should search, then ground the walkthrough in the qsi4cx guide's
+      9-step example (headers, M/N/K, allocation, packing, matmul, CMake).
+
+  # learnarm-llamacpp-sme2-integration
+  - id: kleidiai-ggml-types
+    question: Which ggml tensor data-type combinations can KleidiAI micro-kernels accelerate in llama.cpp?
+    expected_doc_ids: [learnarm-llamacpp-sme2-integration]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      learn.arm doc's operator table — F32 LHS with Q4_0 / Q8_0 / F16 RHS,
+      F32 output, for GGML_OP_MUL_MAT.
+
+  - id: kleidiai-integration-location
+    question: Where in the llama.cpp source tree does the KleidiAI integration code live?
+    expected_doc_ids: [learnarm-llamacpp-sme2-integration]
+    expected_tool: null
+    expected_tool_args: null
+    notes: learn.arm doc — ./ggml/src/ggml-cpu/kleidiai, integrated as a trait of ggml-cpu.
+
+  - id: rhs-repack-model-load
+    question: At what point does llama.cpp repack model weights into the KleidiAI layout, and why only then?
+    expected_doc_ids: [learnarm-llamacpp-sme2-integration]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      learn.arm doc — once at model load (ggml_backend_tensor_set ->
+      tensor_traits::repack), because weights never change during inference.
+
+  - id: hard-decode-vs-prefill-kernel
+    question: Why does llama.cpp run a different KleidiAI micro-kernel during token decode than during prefill?
+    expected_doc_ids: [learnarm-llamacpp-sme2-integration]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      HARD. learn.arm doc — prefill uses the SME2 GEMM kernel (…_sme2_mopa,
+      matrix output), decode uses the SME2 GEMV kernel (…_sme2_sdot, vector
+      output). Dense "micro-kernel" phrasing is expected to pull keyword
+      retrieval to the README or naming doc.
+
+  # mlexamples-llamacpp-int4-patch
+  - id: patch-quantization-scheme
+    question: What quantization scheme does the KleidiAI llama.cpp patch enable, and what is that format called in llama.cpp?
+    expected_doc_ids: [mlexamples-llamacpp-int4-patch]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      Patch guide Goal — int4 matmul micro-kernels with per-block quantization
+      (c32); "In the context of llama.cpp, this int4 format is called Q4_0."
+
+  - id: tooluse-apply-kleidiai-patch
+    question: How do I apply Arm's KleidiAI patch to llama.cpp?
+    expected_doc_ids: [mlexamples-llamacpp-int4-patch]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)(apply|patch).*(kleidiai|llama)|kleidiai.*patch|git apply"
+    notes: >-
+      Patch guide steps 1–4: clone llama.cpp, checkout b8deef0 (stable base),
+      copy the patch, git apply.
+
+  - id: tooluse-weights-caching
+    question: Model loading with the KleidiAI llama.cpp backend is slow — is there a way to cache the transformed weights?
+    expected_doc_ids: [mlexamples-llamacpp-int4-patch]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)cach|KLEIDIAI_CACHE|(model )?load(ing)? (time|slow)|weights"
+    notes: >-
+      Patch guide — -DGGML_KLEIDIAI_CACHE=ON stores kai_transformed_weights.cache
+      next to the binaries so the weight transformation happens only on first run.
+
+  - id: tooluse-patch-min-ndk
+    question: What minimum Android NDK version do I need to build llama.cpp with the KleidiAI patch?
+    expected_doc_ids: [mlexamples-llamacpp-int4-patch]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)ndk|android.*(build|version)"
+    notes: Patch guide dependencies — Android NDK minimum version r27.
+
+  # cross-doc discrimination (deliberate)
+  - id: hard-q4-0-kleidiai-format
+    question: What does llama.cpp's Q4_0 format correspond to in KleidiAI quantization terms?
+    expected_doc_ids: [mlexamples-llamacpp-int4-patch]
+    expected_tool: null
+    expected_tool_args: null
+    notes: >-
+      HARD (cross-doc). Only the patch guide states the mapping explicitly
+      (int4 per-block c32 = Q4_0). The learn.arm doc mentions Q4_0 in its
+      operator table and kernel names, and the naming doc defines c32, so
+      keyword retrieval has two dense distractors.
+
+  # end-to-end agent tasks (grading activates with the agent provider)
+  - id: e2e-port-kernel-int4
+    question: I have an f32 matmul in my C++ inference code and want to port it to KleidiAI int4 per-channel for an Android phone with i8mm. Which micro-kernels do I need, and how do I decode the variant name to check I picked the right one?
+    expected_doc_ids: [kleidiai-matmul-qsi4cx, kleidiai-microkernel-names, kleidiai-matmul-pack]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)int4|qsi4cx|pack|name|matmul"
+    notes: >-
+      End-to-end (feeds the M3 kernel-port demo). Agent grading: chains
+      searches across the three docs; names all three required kernels (LHS
+      quant+pack, RHS pack, matmul variant) and decodes the variant name
+      (qai8dxp / qsi4cxp / 8x8x32 / neon / i8mm) using the naming grammar.
+
+  - id: e2e-enable-verify-llamacpp
+    question: Enable KleidiAI in my llama.cpp build on an M-series Mac, and show me how to prove it is actually being used at runtime.
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)kleidiai.*(enable|build|verify|runtime)|GGML_CPU_KLEIDIAI"
+    notes: >-
+      End-to-end. Agent grading: cites GGML_CPU_KLEIDIAI=ON for the build AND
+      the "CPU_KLEIDIAI model buffer size" load line for verification — both
+      from the build doc; partial credit for either alone.
+
+  - id: e2e-choose-quant-scheme
+    question: For running an LLM on a phone, should I use per-channel (cx) or per-block (c32) int4 quantization — and what is the difference?
+    expected_doc_ids: [kleidiai-microkernel-names, kleidiai-matmul-qsi4cx, mlexamples-llamacpp-int4-patch]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)quant|cx|c32|int4|per.(channel|block)"
+    notes: >-
+      End-to-end. Agent grading: defines both axes from the naming doc,
+      connects cx to the qsi4cx guide and c32 to the patch guide's Q4_0/LLM
+      context, and notes llama.cpp's Q4_0 path implies c32 for GGUF models.
+
+  - id: e2e-trace-decode-kernel
+    question: On an SME2 device running a Q4_0 model in llama.cpp, which KleidiAI micro-kernel executes during token decode, and what does its name tell me about the computation?
+    expected_doc_ids: [learnarm-llamacpp-sme2-integration, kleidiai-microkernel-names]
+    expected_tool: search_kleidiai_docs
+    expected_tool_args: "(?i)decode|sme2|gemv|kernel name|micro.?kernel"
+    notes: >-
+      End-to-end. Agent grading: identifies the decode-stage GEMV kernel
+      (kai_run_matmul_clamp_f32_qsi8d32p1x4_qsi4c32p4vlx4_1x4vl_sme2_sdot)
+      from the learn.arm call stacks, then decodes its segments (qsi8d32p LHS,
+      qsi4c32p RHS, sme2 tech, sdot instruction) via the naming grammar.
+
+  # ===== Batch 4 (2026-08-20) — tool-use tranche growth for the two new
+  # tools (get_kleidiai_pattern, plan_kernel_port) that completed the locked
+  # v1 tool surface. The deterministic provider still scores these on top-1
+  # doc (the docs behind each pattern/plan); expected_tool activates with the
+  # agent provider.
+
+  - id: tooluse-pattern-enable-llamacpp
+    question: Give me the canonical checklist for enabling KleidiAI in a llama.cpp build and proving it is active.
+    expected_doc_ids: [llamacpp-build]
+    expected_tool: get_kleidiai_pattern
+    expected_tool_args: "(?i)enable.?kleidiai.?llamacpp"
+    notes: >-
+      Agent grading: calls get_kleidiai_pattern("enable-kleidiai-llamacpp")
+      (or discovers it via the catalog) and relays GGML_CPU_KLEIDIAI=ON plus
+      the CPU_KLEIDIAI buffer-size verification line with the source URL.
+
+  - id: tooluse-plan-port-i8mm
+    question: Plan the exact micro-kernel set to port an f32 matmul with int4 per-channel weights in n x k layout to a CPU with i8mm.
+    expected_doc_ids: [kleidiai-matmul-qsi4cx, kleidiai-matmul-pack, kleidiai-microkernel-names]
+    expected_tool: plan_kernel_port
+    expected_tool_args: "(?i)int4|per.?channel|qsi4cx"
+    notes: >-
+      Agent grading: calls plan_kernel_port with rhs_quant int4-per-channel
+      and i8mm in cpu_features; relays all three kernels (nxk RHS pack, LHS
+      quant pack, 8x8x32 i8mm matmul), the pack-once/quant-every-call order,
+      and the -march build flags. Multi-doc ground truth per the widening
+      policy: the plan's content spans the qsi4cx guide (recipe), pack doc
+      (RHS packing), and naming doc (variant decode).
+
+  - id: tooluse-pattern-decode-name
+    question: Walk me through what each part of the name kai_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm means.
+    expected_doc_ids: [kleidiai-microkernel-names, kleidiai-matmul-qsi4cx]
+    expected_tool: get_kleidiai_pattern
+    expected_tool_args: "(?i)decode.?microkernel.?name|naming"
+    notes: >-
+      Agent grading: uses the decode-microkernel-name pattern (or the naming
+      doc via search) and expands every segment: matmul+clamp, f32 dst,
+      qai8dxp LHS, qsi4cxp RHS, 8x8 tile, x32 accumulations, neon, i8mm.
+      Both listed docs contain the complete dissection.

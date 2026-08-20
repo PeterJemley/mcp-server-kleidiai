@@ -1,0 +1,5292 @@
+{
+  "evalId": "eval-FU5-2026-08-20T19:21:15",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-08-20T19:21:15.940Z",
+    "prompts": [
+      {
+        "id": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "raw": "{{question}}",
+        "label": "{{question}}",
+        "provider": "search_kleidiai_docs",
+        "metrics": {
+          "score": 41,
+          "testPassCount": 41,
+          "testFailCount": 10,
+          "testErrorCount": 0,
+          "assertPassCount": 41,
+          "assertFailCount": 10,
+          "totalLatencyMs": 805,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 51,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "8af06d52-5a67-414e-aa58-e627e7d5d342",
+        "latencyMs": 62,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What is a micro-kernel (ukernel) in KleidiAI?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "what-is-microkernel",
+          "vars": {
+            "question": "What is a micro-kernel (ukernel) in KleidiAI?",
+            "expected": "kleidiai-readme",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What is a micro-kernel (ukernel) in KleidiAI?",
+          "expected": "kleidiai-readme",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "b8ca82be-8033-4345-8a3d-eeb0024e58a2",
+        "latencyMs": 70,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Who is KleidiAI intended for?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-readme",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "hard-who-is-kleidiai-for",
+          "vars": {
+            "question": "Who is KleidiAI intended for?",
+            "expected": "kleidiai-readme",
+            "hard": true
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Who is KleidiAI intended for?",
+          "expected": "kleidiai-readme",
+          "hard": true
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "926b755e-b878-46c9-b015-5d8f96a71676",
+        "latencyMs": 74,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How do I incorporate specific KleidiAI micro-kernels into my C/C++ project?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-readme",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "how-to-include-microkernels",
+          "vars": {
+            "question": "How do I incorporate specific KleidiAI micro-kernels into my C/C++ project?",
+            "expected": "kleidiai-readme",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How do I incorporate specific KleidiAI micro-kernels into my C/C++ project?",
+          "expected": "kleidiai-readme",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "fcbff4b9-df04-432f-b7fc-ce5902176092",
+        "latencyMs": 76,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How do I enable KleidiAI when building llama.cpp?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "mlexamples-llamacpp-int4-patch",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "enable-kleidiai-llamacpp",
+          "vars": {
+            "question": "How do I enable KleidiAI when building llama.cpp?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How do I enable KleidiAI when building llama.cpp?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "f1cd08b6-7ed0-4f22-b947-60de8c01b0a5",
+        "latencyMs": 14,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How can I verify at runtime that KleidiAI is actually being used?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "verify-kleidiai-runtime",
+          "vars": {
+            "question": "How can I verify at runtime that KleidiAI is actually being used?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How can I verify at runtime that KleidiAI is actually being used?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "ecced36c-66d6-4a71-8c26-7ac0760f21bf",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Which environment variable controls SME behavior in llama.cpp?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sme-env-var",
+          "vars": {
+            "question": "Which environment variable controls SME behavior in llama.cpp?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Which environment variable controls SME behavior in llama.cpp?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "3664586c-7843-411d-8169-d7a213f8f37f",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Which Arm CPU features do KleidiAI micro-kernels exploit?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-readme",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "arm-cpu-features-used",
+          "vars": {
+            "question": "Which Arm CPU features do KleidiAI micro-kernels exploit?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Which Arm CPU features do KleidiAI micro-kernels exploit?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "bcc9d3c8-aa19-451d-b6a0-2e08ab4e5d10",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Which micro-kernel packs RHS weights and bias into blocks?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-pack",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "rhs-bias-packing",
+          "vars": {
+            "question": "Which micro-kernel packs RHS weights and bias into blocks?",
+            "expected": "kleidiai-matmul-pack",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Which micro-kernel packs RHS weights and bias into blocks?",
+          "expected": "kleidiai-matmul-pack",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "e2b0aa49-d0da-494a-acbc-b77bb0042df8",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What does the \"sme\" tech identifier mean in a kernel name?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sme-tech-identifier",
+          "vars": {
+            "question": "What does the \"sme\" tech identifier mean in a kernel name?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What does the \"sme\" tech identifier mean in a kernel name?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "de99f13f-6ed7-4c14-bbca-26b7b3e8e35e",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What quantization axis values does the naming scheme define?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "quantization-axis-values",
+          "vars": {
+            "question": "What quantization axis values does the naming scheme define?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What quantization axis values does the naming scheme define?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "8d6252c0-8656-4d1e-9bac-116b1c545039",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What does per-channel quantization (\"cx\") mean?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "per-channel-quantization",
+          "vars": {
+            "question": "What does per-channel quantization (\"cx\") mean?",
+            "expected": "kleidiai-microkernel-names,kleidiai-matmul-qsi4cx",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 10,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What does per-channel quantization (\"cx\") mean?",
+          "expected": "kleidiai-microkernel-names,kleidiai-matmul-qsi4cx",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "dd38d411-4aeb-4bde-a582-5a40894a0219",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What primary instruction families can appear in a KleidiAI kernel name?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "instruction-families",
+          "vars": {
+            "question": "What primary instruction families can appear in a KleidiAI kernel name?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 11,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What primary instruction families can appear in a KleidiAI kernel name?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "428cacbf-9e4f-49f4-bc36-7d921f863e19",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "I'm on an M-series Mac — how do I turn on KleidiAI acceleration in llama.cpp?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "tooluse-enable-kleidiai",
+          "vars": {
+            "question": "I'm on an M-series Mac — how do I turn on KleidiAI acceleration in llama.cpp?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 12,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "I'm on an M-series Mac — how do I turn on KleidiAI acceleration in llama.cpp?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "eece0fcc-5968-4025-9ee9-a0a7e5b5cd09",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How do I read/decode a KleidiAI micro-kernel name?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "hard-read-kernel-name",
+          "vars": {
+            "question": "How do I read/decode a KleidiAI micro-kernel name?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": true
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 13,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How do I read/decode a KleidiAI micro-kernel name?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": true
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "aff58c34-055a-4a6c-a0fc-2e3715c8be4e",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "RHS and LHS packing for matmul",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-pack",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "hard-generic-packing",
+          "vars": {
+            "question": "RHS and LHS packing for matmul",
+            "expected": "kleidiai-matmul-pack",
+            "hard": true
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 14,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "RHS and LHS packing for matmul",
+          "expected": "kleidiai-matmul-pack",
+          "hard": true
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "e2fa0164-c1c7-45bc-9e4c-bd85d567c0ae",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What is KleidiAI, in one sentence?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "what-is-kleidiai",
+          "vars": {
+            "question": "What is KleidiAI, in one sentence?",
+            "expected": "kleidiai-readme",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 15,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What is KleidiAI, in one sentence?",
+          "expected": "kleidiai-readme",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "ff52fa6f-fb03-4a09-9dfb-8afcf2d53d48",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What does the abbreviation ukernel stand for?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-readme",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "ukernel-abbreviation",
+          "vars": {
+            "question": "What does the abbreviation ukernel stand for?",
+            "expected": "kleidiai-readme",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 16,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What does the abbreviation ukernel stand for?",
+          "expected": "kleidiai-readme",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "eec9bc0a-1274-4641-bf71-1decb273e141",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Which programming languages can KleidiAI micro-kernels be included in?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "integration-languages",
+          "vars": {
+            "question": "Which programming languages can KleidiAI micro-kernels be included in?",
+            "expected": "kleidiai-readme",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 17,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Which programming languages can KleidiAI micro-kernels be included in?",
+          "expected": "kleidiai-readme",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "ff15fb34-a8d9-45f1-976d-6835d6bb346e",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What CMake option enables KleidiAI in a llama.cpp build?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "cmake-flag-kleidiai",
+          "vars": {
+            "question": "What CMake option enables KleidiAI in a llama.cpp build?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 18,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What CMake option enables KleidiAI in a llama.cpp build?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "2e80154b-0194-4b6b-a531-5f69337561d7",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How does llama.cpp select which micro-kernels to run?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "runtime-kernel-selection",
+          "vars": {
+            "question": "How does llama.cpp select which micro-kernels to run?",
+            "expected": "llamacpp-build,learnarm-llamacpp-sme2-integration",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 19,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How does llama.cpp select which micro-kernels to run?",
+          "expected": "llamacpp-build,learnarm-llamacpp-sme2-integration",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "0864b6cf-d374-42c3-ac4e-9a4e14bc9e4c",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Is SME enabled automatically in llama.cpp?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sme-auto-enable",
+          "vars": {
+            "question": "Is SME enabled automatically in llama.cpp?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 20,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Is SME enabled automatically in llama.cpp?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "1912815c-55a6-442e-89d8-f475c3f06345",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How do I disable SME in a llama.cpp KleidiAI build?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "disable-sme",
+          "vars": {
+            "question": "How do I disable SME in a llama.cpp KleidiAI build?",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 21,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How do I disable SME in a llama.cpp KleidiAI build?",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "27279efe-42b8-4c39-848d-e623097a8783",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Why does KleidiAI pack matmul inputs before multiplication?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "why-pack-matmul",
+          "vars": {
+            "question": "Why does KleidiAI pack matmul inputs before multiplication?",
+            "expected": "kleidiai-matmul-pack",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 22,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Why does KleidiAI pack matmul inputs before multiplication?",
+          "expected": "kleidiai-matmul-pack",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "b305c5fd-bc41-445d-a2b2-13323cd69b69",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Which packing kernel handles int4 (qsi4) RHS weights?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-pack",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "int4-rhs-pack",
+          "vars": {
+            "question": "Which packing kernel handles int4 (qsi4) RHS weights?",
+            "expected": "kleidiai-matmul-pack",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 23,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Which packing kernel handles int4 (qsi4) RHS weights?",
+          "expected": "kleidiai-matmul-pack",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "58b870ba-5597-414e-887f-70cde070adff",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What do RHS and LHS refer to in matmul packing?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-pack",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "rhs-lhs-meaning",
+          "vars": {
+            "question": "What do RHS and LHS refer to in matmul packing?",
+            "expected": "kleidiai-matmul-pack",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 24,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What do RHS and LHS refer to in matmul packing?",
+          "expected": "kleidiai-matmul-pack",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "e8c4e1be-d292-41e9-9edd-7e08c61af5f3",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What SIMD engine identifiers can appear in a KleidiAI kernel name?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "simd-engine-identifiers",
+          "vars": {
+            "question": "What SIMD engine identifiers can appear in a KleidiAI kernel name?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 25,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What SIMD engine identifiers can appear in a KleidiAI kernel name?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "237063dd-78fc-438c-9c26-1ff26f5bce68",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What primary feature values does the kernel naming grammar allow?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "feature-identifiers",
+          "vars": {
+            "question": "What primary feature values does the kernel naming grammar allow?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 26,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What primary feature values does the kernel naming grammar allow?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "5cd7d2fc-9e9a-40c4-99af-4fb736773e59",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What does per-dimension quantization (dx) mean in a kernel name?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "per-dimension-quant",
+          "vars": {
+            "question": "What does per-dimension quantization (dx) mean in a kernel name?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 27,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What does per-dimension quantization (dx) mean in a kernel name?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "32832b8e-835a-4d80-b324-bc88e72963eb",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What does the p-by notation (pWxH) mean in a packed buffer name?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-microkernel-names",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "packed-buffer-layout",
+          "vars": {
+            "question": "What does the p-by notation (pWxH) mean in a packed buffer name?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 28,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What does the p-by notation (pWxH) mean in a packed buffer name?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "7d458d9b-30ca-4fd8-afba-c5d5f08966d1",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What is the difference between a micro-kernel directory name and a micro-kernel name?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-readme",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "directory-vs-kernel-name",
+          "vars": {
+            "question": "What is the difference between a micro-kernel directory name and a micro-kernel name?",
+            "expected": "kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 29,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What is the difference between a micro-kernel directory name and a micro-kernel name?",
+          "expected": "kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "629fbb6d-31c9-4dec-936b-a4cff1eee212",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Which Arm CPU extension is required to run the int4 per-channel matmul micro-kernels?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "int4-target-cpu-feature",
+          "vars": {
+            "question": "Which Arm CPU extension is required to run the int4 per-channel matmul micro-kernels?",
+            "expected": "kleidiai-matmul-qsi4cx",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 30,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Which Arm CPU extension is required to run the int4 per-channel matmul micro-kernels?",
+          "expected": "kleidiai-matmul-qsi4cx",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "b189bf07-c9eb-46ff-92c6-ba4cb2041f62",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Why is LHS quantization and packing repeated on every inference run, while RHS packing happens only once?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "lhs-dynamic-quantization",
+          "vars": {
+            "question": "Why is LHS quantization and packing repeated on every inference run, while RHS packing happens only once?",
+            "expected": "kleidiai-matmul-qsi4cx,learnarm-llamacpp-sme2-integration",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 31,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Why is LHS quantization and packing repeated on every inference run, while RHS packing happens only once?",
+          "expected": "kleidiai-matmul-qsi4cx,learnarm-llamacpp-sme2-integration",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "6755ed19-44ef-43d3-9731-c78e42f62712",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How many micro-kernels are involved in an int4 per-channel matmul, and what does each do?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "int4-three-microkernels",
+          "vars": {
+            "question": "How many micro-kernels are involved in an int4 per-channel matmul, and what does each do?",
+            "expected": "kleidiai-matmul-qsi4cx",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 32,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How many micro-kernels are involved in an int4 per-channel matmul, and what does each do?",
+          "expected": "kleidiai-matmul-qsi4cx",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "4f86514a-8aaa-4b23-912a-69651594758e",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "When allocating the native int4 RHS matrix, why is the k dimension divided by two?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "int4-nibble-storage",
+          "vars": {
+            "question": "When allocating the native int4 RHS matrix, why is the k dimension divided by two?",
+            "expected": "kleidiai-matmul-qsi4cx",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 33,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "When allocating the native int4 RHS matrix, why is the k dimension divided by two?",
+          "expected": "kleidiai-matmul-qsi4cx",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "7f96a8b6-e933-4858-9fcf-4d5a310563d4",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "I want to try KleidiAI's int4 matmul micro-kernels in a small C program — how do I set that up?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "tooluse-run-int4-matmul",
+          "vars": {
+            "question": "I want to try KleidiAI's int4 matmul micro-kernels in a small C program — how do I set that up?",
+            "expected": "kleidiai-matmul-qsi4cx",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 34,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "I want to try KleidiAI's int4 matmul micro-kernels in a small C program — how do I set that up?",
+          "expected": "kleidiai-matmul-qsi4cx",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "4aaa5f45-84cb-4205-b031-85e2b5ee6831",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Which ggml tensor data-type combinations can KleidiAI micro-kernels accelerate in llama.cpp?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "kleidiai-ggml-types",
+          "vars": {
+            "question": "Which ggml tensor data-type combinations can KleidiAI micro-kernels accelerate in llama.cpp?",
+            "expected": "learnarm-llamacpp-sme2-integration",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 35,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Which ggml tensor data-type combinations can KleidiAI micro-kernels accelerate in llama.cpp?",
+          "expected": "learnarm-llamacpp-sme2-integration",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "8edf8d77-0fd6-403d-a0ec-0742124deee4",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Where in the llama.cpp source tree does the KleidiAI integration code live?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "kleidiai-integration-location",
+          "vars": {
+            "question": "Where in the llama.cpp source tree does the KleidiAI integration code live?",
+            "expected": "learnarm-llamacpp-sme2-integration",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 36,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Where in the llama.cpp source tree does the KleidiAI integration code live?",
+          "expected": "learnarm-llamacpp-sme2-integration",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "80a764de-6b2d-45ad-8098-7ddc98dd9197",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "At what point does llama.cpp repack model weights into the KleidiAI layout, and why only then?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "rhs-repack-model-load",
+          "vars": {
+            "question": "At what point does llama.cpp repack model weights into the KleidiAI layout, and why only then?",
+            "expected": "learnarm-llamacpp-sme2-integration",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 37,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "At what point does llama.cpp repack model weights into the KleidiAI layout, and why only then?",
+          "expected": "learnarm-llamacpp-sme2-integration",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "03f85d60-c6a9-401a-859b-9c49115168ec",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Why does llama.cpp run a different KleidiAI micro-kernel during token decode than during prefill?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "hard-decode-vs-prefill-kernel",
+          "vars": {
+            "question": "Why does llama.cpp run a different KleidiAI micro-kernel during token decode than during prefill?",
+            "expected": "learnarm-llamacpp-sme2-integration",
+            "hard": true
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 38,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Why does llama.cpp run a different KleidiAI micro-kernel during token decode than during prefill?",
+          "expected": "learnarm-llamacpp-sme2-integration",
+          "hard": true
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "1e28d0dc-a05e-415b-997a-02d5b47da338",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What quantization scheme does the KleidiAI llama.cpp patch enable, and what is that format called in llama.cpp?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "mlexamples-llamacpp-int4-patch",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "patch-quantization-scheme",
+          "vars": {
+            "question": "What quantization scheme does the KleidiAI llama.cpp patch enable, and what is that format called in llama.cpp?",
+            "expected": "mlexamples-llamacpp-int4-patch",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 39,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What quantization scheme does the KleidiAI llama.cpp patch enable, and what is that format called in llama.cpp?",
+          "expected": "mlexamples-llamacpp-int4-patch",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "05642746-1d17-48ec-acda-efead0251255",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "How do I apply Arm's KleidiAI patch to llama.cpp?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "mlexamples-llamacpp-int4-patch",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "tooluse-apply-kleidiai-patch",
+          "vars": {
+            "question": "How do I apply Arm's KleidiAI patch to llama.cpp?",
+            "expected": "mlexamples-llamacpp-int4-patch",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 40,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "How do I apply Arm's KleidiAI patch to llama.cpp?",
+          "expected": "mlexamples-llamacpp-int4-patch",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "525af1d1-663e-4794-97fd-33973526e7d1",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Model loading with the KleidiAI llama.cpp backend is slow — is there a way to cache the transformed weights?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "mlexamples-llamacpp-int4-patch",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "tooluse-weights-caching",
+          "vars": {
+            "question": "Model loading with the KleidiAI llama.cpp backend is slow — is there a way to cache the transformed weights?",
+            "expected": "mlexamples-llamacpp-int4-patch",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 41,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Model loading with the KleidiAI llama.cpp backend is slow — is there a way to cache the transformed weights?",
+          "expected": "mlexamples-llamacpp-int4-patch",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "24e42865-38ba-4461-bdb6-705936f3bffe",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What minimum Android NDK version do I need to build llama.cpp with the KleidiAI patch?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "mlexamples-llamacpp-int4-patch",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "tooluse-patch-min-ndk",
+          "vars": {
+            "question": "What minimum Android NDK version do I need to build llama.cpp with the KleidiAI patch?",
+            "expected": "mlexamples-llamacpp-int4-patch",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 42,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What minimum Android NDK version do I need to build llama.cpp with the KleidiAI patch?",
+          "expected": "mlexamples-llamacpp-int4-patch",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\ncontext.vars.expected.split(',').includes(String(output).trim())",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "721f4917-620e-4a62-bd9b-d84948c573d9",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "What does llama.cpp's Q4_0 format correspond to in KleidiAI quantization terms?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "hard-q4-0-kleidiai-format",
+          "vars": {
+            "question": "What does llama.cpp's Q4_0 format correspond to in KleidiAI quantization terms?",
+            "expected": "mlexamples-llamacpp-int4-patch",
+            "hard": true
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 43,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "What does llama.cpp's Q4_0 format correspond to in KleidiAI quantization terms?",
+          "expected": "mlexamples-llamacpp-int4-patch",
+          "hard": true
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "6b6617f6-ffa7-4aee-8eae-8d9a9d8fbabe",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "I have an f32 matmul in my C++ inference code and want to port it to KleidiAI int4 per-channel for an Android phone with i8mm. Which micro-kernels do I need, and how do I decode the variant name to check I picked the right one?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "e2e-port-kernel-int4",
+          "vars": {
+            "question": "I have an f32 matmul in my C++ inference code and want to port it to KleidiAI int4 per-channel for an Android phone with i8mm. Which micro-kernels do I need, and how do I decode the variant name to check I picked the right one?",
+            "expected": "kleidiai-matmul-qsi4cx,kleidiai-microkernel-names,kleidiai-matmul-pack",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 44,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "I have an f32 matmul in my C++ inference code and want to port it to KleidiAI int4 per-channel for an Android phone with i8mm. Which micro-kernels do I need, and how do I decode the variant name to check I picked the right one?",
+          "expected": "kleidiai-matmul-qsi4cx,kleidiai-microkernel-names,kleidiai-matmul-pack",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "aa9b8a53-1419-431f-a27c-404f1204e3f2",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Enable KleidiAI in my llama.cpp build on an M-series Mac, and show me how to prove it is actually being used at runtime.",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "e2e-enable-verify-llamacpp",
+          "vars": {
+            "question": "Enable KleidiAI in my llama.cpp build on an M-series Mac, and show me how to prove it is actually being used at runtime.",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 45,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Enable KleidiAI in my llama.cpp build on an M-series Mac, and show me how to prove it is actually being used at runtime.",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "b157f264-eb29-49cc-9995-9353b7bff02d",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "For running an LLM on a phone, should I use per-channel (cx) or per-block (c32) int4 quantization — and what is the difference?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "e2e-choose-quant-scheme",
+          "vars": {
+            "question": "For running an LLM on a phone, should I use per-channel (cx) or per-block (c32) int4 quantization — and what is the difference?",
+            "expected": "kleidiai-microkernel-names,kleidiai-matmul-qsi4cx,mlexamples-llamacpp-int4-patch",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 46,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "For running an LLM on a phone, should I use per-channel (cx) or per-block (c32) int4 quantization — and what is the difference?",
+          "expected": "kleidiai-microkernel-names,kleidiai-matmul-qsi4cx,mlexamples-llamacpp-int4-patch",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "a87aadcf-2b0f-47cc-ad67-b322e7295e88",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "On an SME2 device running a Q4_0 model in llama.cpp, which KleidiAI micro-kernel executes during token decode, and what does its name tell me about the computation?",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "learnarm-llamacpp-sme2-integration",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "e2e-trace-decode-kernel",
+          "vars": {
+            "question": "On an SME2 device running a Q4_0 model in llama.cpp, which KleidiAI micro-kernel executes during token decode, and what does its name tell me about the computation?",
+            "expected": "learnarm-llamacpp-sme2-integration,kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 47,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "On an SME2 device running a Q4_0 model in llama.cpp, which KleidiAI micro-kernel executes during token decode, and what does its name tell me about the computation?",
+          "expected": "learnarm-llamacpp-sme2-integration,kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "616f66c2-4f75-4f76-8ace-a1b45fb02ecc",
+        "latencyMs": 9,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Give me the canonical checklist for enabling KleidiAI in a llama.cpp build and proving it is active.",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "llamacpp-build",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "tooluse-pattern-enable-llamacpp",
+          "vars": {
+            "question": "Give me the canonical checklist for enabling KleidiAI in a llama.cpp build and proving it is active.",
+            "expected": "llamacpp-build",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 48,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Give me the canonical checklist for enabling KleidiAI in a llama.cpp build and proving it is active.",
+          "expected": "llamacpp-build",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "05315184-4c37-4fee-85eb-372054852f9b",
+        "latencyMs": 10,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Plan the exact micro-kernel set to port an f32 matmul with int4 per-channel weights in n x k layout to a CPU with i8mm.",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "tooluse-plan-port-i8mm",
+          "vars": {
+            "question": "Plan the exact micro-kernel set to port an f32 matmul with int4 per-channel weights in n x k layout to a CPU with i8mm.",
+            "expected": "kleidiai-matmul-qsi4cx,kleidiai-matmul-pack,kleidiai-microkernel-names",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 49,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Plan the exact micro-kernel set to port an f32 matmul with int4 per-channel weights in n x k layout to a CPU with i8mm.",
+          "expected": "kleidiai-matmul-qsi4cx,kleidiai-matmul-pack,kleidiai-microkernel-names",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "context.vars.expected.split(',').includes(String(output).trim())"
+              }
+            }
+          ]
+        },
+        "id": "bfcffbed-9507-47a0-a371-ef3698dfdfd2",
+        "latencyMs": 9,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Walk me through what each part of the name kai_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm means.",
+          "label": "{{question}}",
+          "config": {}
+        },
+        "promptId": "d3bcaf71c11c2678899be04d872718325f0916b3b0705e805ee29930663a42e2",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://mcp_provider.py",
+          "label": "search_kleidiai_docs"
+        },
+        "response": {
+          "output": "kleidiai-matmul-qsi4cx",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "tooluse-pattern-decode-name",
+          "vars": {
+            "question": "Walk me through what each part of the name kai_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm means.",
+            "expected": "kleidiai-microkernel-names,kleidiai-matmul-qsi4cx",
+            "hard": false
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "context.vars.expected.split(',').includes(String(output).trim())"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 50,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "question": "Walk me through what each part of the name kai_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm means.",
+          "expected": "kleidiai-microkernel-names,kleidiai-matmul-qsi4cx",
+          "hard": false
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 41,
+      "failures": 10,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 51,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 234,
+      "evaluationDurationMs": 234
+    }
+  },
+  "config": {
+    "description": "KleidiAI MCP — retrieval accuracy (top-1 doc)",
+    "prompts": [
+      "{{question}}"
+    ],
+    "providers": [
+      {
+        "id": "file://mcp_provider.py",
+        "label": "search_kleidiai_docs"
+      }
+    ],
+    "tests": "file://generate_tests.py:generate_tests",
+    "outputPath": [
+      "reports/report.json"
+    ],
+    "extensions": []
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.18",
+    "nodeVersion": "v26.5.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "exportedAt": "2026-08-20T19:21:16.207Z",
+    "evaluationCreatedAt": "2026-08-20T19:21:15.940Z"
+  },
+  "vars": [
+    "question",
+    "expected",
+    "hard"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": false
+  }
+}

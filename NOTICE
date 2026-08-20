@@ -1,0 +1,22 @@
+mcp-server-kleidiai
+Copyright 2026 Peter Jemley
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party content:
+
+- Documents under corpus/ are byte-identical copies of upstream sources and
+  retain their original licenses, recorded per entry in corpus/manifest.yaml:
+  the four KleidiAI documents are Apache-2.0 (Arm Limited and/or its
+  affiliates); the llama.cpp build document and the ML-examples patch guide
+  are MIT (per their upstream projects); and
+  corpus/learn-arm/llamacpp-sme2-kleidiai-integration.md is CC-BY-SA-4.0
+  (Arm Developer Ecosystem).
+
+- The int4 weight-quantization routine in
+  demos/kernel-port/src/matmul_int4_kleidiai.cpp follows the
+  matmul_clamp_f32_qai8dxp_qsi4cxp example from ARM-software/kleidiai
+  (Apache-2.0, Copyright Arm Limited and/or its affiliates).
+
+- demos/kernel-port/fetch_kleidiai.sh clones ARM-software/kleidiai
+  (Apache-2.0) as a build-time dependency; it is not redistributed here.

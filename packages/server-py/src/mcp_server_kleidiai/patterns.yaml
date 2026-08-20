@@ -1,0 +1,122 @@
+# Curated KleidiAI patterns served by get_kleidiai_pattern.
+#
+# This is derived content, not fetched corpus: each pattern condenses one
+# workflow the corpus documents, and `sources` lists the manifest doc ids the
+# content comes from (URLs are resolved from corpus/manifest.yaml at serve
+# time; tests reject a pattern citing an unknown doc id). Nothing here may
+# state a fact the cited docs don't contain.
+
+patterns:
+  - id: enable-kleidiai-llamacpp
+    title: Enable and verify KleidiAI in a llama.cpp build
+    when_to_use: >-
+      You want llama.cpp on an Arm CPU to use KleidiAI micro-kernels, and
+      proof it is actually active at runtime.
+    steps:
+      - "Build with the CPU backend flag: `cmake -B build -DGGML_CPU_KLEIDIAI=ON`"
+      - >-
+        Verify at model load: the output must contain a line like
+        `load_tensors: CPU_KLEIDIAI model buffer size =  3474.00 MiB` —
+        no CPU_KLEIDIAI buffer line means KleidiAI is not in use.
+      - >-
+        Kernel choice is automatic: llama.cpp selects the most efficient
+        micro-kernels at runtime from detected CPU features (dotprod, int8mm,
+        SVE, SME).
+      - >-
+        SME control via the GGML_KLEIDIAI_SME environment variable: unset =
+        enable automatically if supported; 0 = disable SME.
+    caveats:
+      - Applies to the CPU backend; GPU backends (Metal, CUDA) are separate.
+    sources: [llamacpp-build]
+
+  - id: int4-matmul-microkernel-set
+    title: The three micro-kernels for f32 x int4 per-channel matmul (i8mm)
+    when_to_use: >-
+      You are porting an f32 matmul to KleidiAI int4 with per-channel
+      quantization (qsi4cx) on a CPU with FEAT_I8MM, calling the
+      micro-kernels directly from C/C++.
+    steps:
+      - >-
+        RHS pack (once, at load): `kai_rhs_pack_nxk_qsi4cxp_qs4cxs1s0` for
+        [N,K] weights (or `kai_rhs_pack_kxn_qsi4cxp_qs4cxs1s0` for [K,N]),
+        with params lhs_zero_point=1, rhs_zero_point=8, bias optional, one
+        f32 scale per output channel. Weights are static — pack them once
+        and free the native matrix.
+      - >-
+        LHS quant+pack (every call): `kai_lhs_quant_pack_qai8dxp_f32`
+        dynamically quantizes activations f32 -> int8 and packs; must run
+        before every matmul because activations change.
+      - >-
+        Matmul: `kai_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm`
+        over the two packed buffers, with clamp min/max (use -FLT_MAX/FLT_MAX
+        for no clamping).
+      - >-
+        Packing arguments (mr, nr, kr, sr) and packed-buffer sizes come from
+        the matmul kernel's kai_get_* helper methods — never hardcode them.
+      - >-
+        Build the three .c files with
+        `-march=armv8.2-a+dotprod+i8mm`, including the KleidiAI root (for
+        kai_common.h), pack, and matmul directories.
+    caveats:
+      - Requires FEAT_I8MM; k must be a multiple of 8 (LHS pack) and even (RHS pack).
+      - Two int4 values per byte — RHS native size is n * (k/2) bytes.
+    sources: [kleidiai-matmul-qsi4cx, kleidiai-matmul-pack]
+
+  - id: decode-microkernel-name
+    title: Decode a KleidiAI micro-kernel filename
+    when_to_use: >-
+      You have a kernel name like
+      kai_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm and need to
+      know what it computes and whether it fits your case.
+    steps:
+      - "Operation: `matmul_clamp` = matrix multiplication followed by a min/max clamp."
+      - "Destination type: `f32`."
+      - >-
+        LHS descriptor `qai8dxp`: quantized (q) asymmetric (a) signed 8-bit
+        (i8) per-dimension (dx), packed (p).
+      - >-
+        RHS descriptor `qsi4cxp`: quantized (q) symmetric (s) signed 4-bit
+        (i4) per-channel (cx), packed (p).
+      - >-
+        Tile spec `8x8x32`: 8x8 output block; 32 accumulations in the single
+        innermost loop.
+      - "Suffix: technology (`neon`) and the Arm extension exploited (`i8mm`)."
+      - >-
+        A `p` in a buffer descriptor means that matrix must be transformed by
+        the matching pack micro-kernel first; the matmul kernel's header
+        names the pack kernels it requires.
+    caveats:
+      - >-
+        The full grammar (quantization axis/block variants like c32, engine
+        and feature identifiers like sme2/mopa) is in the naming-scheme doc;
+        per-block (c32) and per-channel (cx) kernels are not interchangeable.
+    sources: [kleidiai-microkernel-names, kleidiai-matmul-qsi4cx]
+
+  - id: llamacpp-kleidiai-kernel-selection
+    title: How llama.cpp selects and drives KleidiAI micro-kernels
+    when_to_use: >-
+      You need to understand or debug which KleidiAI kernels llama.cpp runs
+      for a quantized model (e.g. Q4_0), and when packing happens.
+    steps:
+      - >-
+        Selection priority is SME2 -> I8MM -> DotProd, decided at runtime
+        from detected CPU features.
+      - >-
+        RHS (weights) are repacked exactly once at model load into a
+        cache-friendly layout (weights never change during inference) —
+        e.g. Q4_0 with SME2 uses
+        kai_run_rhs_pack_nxk_qsi4c32ps1s0scalef16_qsu4c32s16s0_neon.
+      - >-
+        LHS (activations) are quantized and packed on every token, then the
+        selected kernel runs.
+      - >-
+        Prefill (GEMM) and decode (GEMV) use different kernels — with SME2:
+        kai_matmul_clamp_f32_qsi8d32p1vlx4_qsi4c32p4vlx4_1vlx4vl_sme2_mopa
+        for prefill,
+        kai_run_matmul_clamp_f32_qsi8d32p1x4_qsi4c32p4vlx4_1x4vl_sme2_sdot
+        for decode.
+    caveats:
+      - >-
+        The llama.cpp path uses per-block (qsi4c32) quantization, not the
+        per-channel (qsi4cx) scheme of the standalone int4 port guide.
+    sources: [learnarm-llamacpp-sme2-integration, llamacpp-build]

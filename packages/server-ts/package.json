@@ -1,0 +1,39 @@
+{
+  "name": "mcp-server-kleidiai",
+  "version": "0.0.1",
+  "description": "MCP server exposing KleidiAI + llama.cpp Arm optimization expertise",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "mcp-server-kleidiai": "dist/src/index.js"
+  },
+  "main": "dist/src/index.js",
+  "files": [
+    "dist/src",
+    "corpus",
+    "patterns.yaml"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test \"dist/test/*.test.js\"",
+    "start": "node dist/src/index.js",
+    "prepack": "python3 ../../distribution/prepare_corpus.py prepare && npm run build",
+    "postpack": "python3 ../../distribution/prepare_corpus.py clean"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PeterJemley/mcp-server-kleidiai.git"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "yaml": "^2.6.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2"
+  }
+}

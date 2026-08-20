@@ -1,0 +1,13 @@
+{
+  "name": "mcp-server-kleidiai-evals",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Promptfoo eval harness for the KleidiAI MCP server",
+  "scripts": {
+    "eval": "promptfoo eval",
+    "view": "promptfoo view"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.121.0"
+  }
+}

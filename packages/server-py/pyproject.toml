@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-server-kleidiai"
+version = "0.0.1"
+description = "MCP server exposing KleidiAI + llama.cpp Arm optimization expertise"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [
+    { name = "Peter Jemley", email = "fibonaccicube@gmail.com" }
+]
+keywords = ["mcp", "model-context-protocol", "kleidiai", "llama.cpp", "arm", "ai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    # Bounded to the SDK major the code targets (2.x: mcp.server.mcpserver);
+    # majors restructure the package, so migrate deliberately, not by pip.
+    "mcp>=2.0,<3",
+    "pyyaml>=6.0,<7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    # Lint/type tools pinned exactly: CI installs fresh, so floating versions
+    # make CI enforce different rules than the local venv (bitten 2026-08-20,
+    # first CI run: newer ruff's default ruleset failed on committed code).
+    "ruff==0.16.3",
+    "mypy==2.3.1",
+    "types-PyYAML",
+]
+
+[project.scripts]
+mcp-server-kleidiai = "mcp_server_kleidiai.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/peterjemley/mcp-server-kleidiai"
+Repository = "https://github.com/peterjemley/mcp-server-kleidiai"
+Issues = "https://github.com/peterjemley/mcp-server-kleidiai/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_server_kleidiai"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+strict = true
+python_version = "3.10"
