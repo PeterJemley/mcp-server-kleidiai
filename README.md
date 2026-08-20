@@ -93,7 +93,7 @@ distribution/    Publish tooling + cross-SDK parity checks (schema-sync)
 `architecture.md` explains how the pieces fit; `v0-decisions.md` records the
 locked design decisions and their reasoning; `about.md` is the plain-language
 tour; `docs/evidence-discipline.md` maps the evidence-handling principles to
-where the repo enforces them; `docs/workbook.md` is the fully worked Q&A.
+where the repo enforces them; `docs/msk-workbook.md` is the fully worked Q&A.
 
 ## Roadmap
 

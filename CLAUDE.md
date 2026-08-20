@@ -46,7 +46,7 @@ The minimum publishable cut:
 
 ### Reader-facing documents (docs/)
 
-- **The workbook (`docs/workbook.md`) is written in plain language, generous
+- **The workbook (`docs/msk-workbook.md`) is written in plain language, generous
   to the reader**: every term of art, acronym, or piece of jargon is fully
   explained in plain language at first use (the ubiquitous ones live in its
   baseline-vocabulary section). Answers are fully worked — no gotchas, no

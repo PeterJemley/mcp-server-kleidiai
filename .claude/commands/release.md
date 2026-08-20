@@ -36,8 +36,12 @@ flipping the repo public).
    demo numbers).
 3. MCP registry: `mcp-publisher publish` with `distribution/registry.json`
    (login first; see registry.modelcontextprotocol.io docs).
-4. First public release only: flip the repo public (`gh repo edit
-   --visibility public`) — the human decides when.
+4. Public visibility: the public artifact is the separate release repo
+   (`PeterJemley/mcp-server-kleidiai`, fed by
+   `distribution/release-public.sh` from this archive repo — content guard
+   included). Sync it first (`release-public.sh "..."`), then flip it:
+   `gh repo edit PeterJemley/mcp-server-kleidiai --visibility public` —
+   the human decides when.
 
 ## Post
 

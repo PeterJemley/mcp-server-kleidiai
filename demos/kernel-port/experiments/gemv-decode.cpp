@@ -1,6 +1,6 @@
 // Experiment: does a dedicated GEMV variant close the decode gap?
 //
-// Tests the explanation in docs/workbook.md Q30 for why the int4 port gains only
+// Tests the explanation in docs/msk-workbook.md Q30 for why the int4 port gains only
 // 2.36x at M=1 vs ~13x at M>=32: the incumbent kernel is a GEMM variant with
 // an 8-row output tile that M=1 cannot amortize. Prediction, stated before
 // running (recorded in the session log and results table): a 1-row-tile GEMV
