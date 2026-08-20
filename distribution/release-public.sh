@@ -16,8 +16,10 @@
 RELEASE_REPO="https://github.com/PeterJemley/mcp-server-kleidiai.git"
 AUTHOR_NAME="Peter Jemley"
 AUTHOR_EMAIL="fibonaccicube@gmail.com"
-# Files tracked in the archive repo but never released.
-EXCLUDES="where-to-begin.md distribution/release-guard-patterns.txt"
+# Files tracked in the archive repo but never released. Dependabot runs in
+# the archive (where dependencies are actually managed and merged); in the
+# release repo it would file PRs against snapshots nobody merges.
+EXCLUDES="where-to-begin.md distribution/release-guard-patterns.txt .github/dependabot.yml"
 
 MSG=${1:?"usage: $0 \"Release commit message\""}
 cd "$(dirname "$0")/.."
