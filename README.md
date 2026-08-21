@@ -49,11 +49,15 @@ embeddings at feasible local size; three dilution-fix mechanisms). See
 
 ## Kernel-port demo (M3, in progress)
 
-An agent uses this server to port an f32 matmul to KleidiAI int4
-(`qai8dxp`/`qsi4cxp`, i8mm variant). Rehearsed on an Apple M5 Pro,
-single-threaded: **2.4× (decode) to 13.5× (prompt)** over a vectorized f32
+Ports an f32 matmul to KleidiAI int4 (`qai8dxp`/`qsi4cxp`, i8mm variant).
+The port and benchmark are committed and reproducible from
+[`demos/kernel-port/`](./demos/kernel-port/): on an Apple M5 Pro,
+single-threaded, **2.4× (decode) to 13.5× (prompt)** over a vectorized f32
 baseline, weights 67 MB → 8.4 MB, quantization error matching int4 theory to
-two digits. See [`demos/kernel-port/`](./demos/kernel-port/).
+two digits. Those numbers are from the hand-written rehearsal. The recorded
+session — an agent re-deriving the port using this server's tools — is
+pending and will be published here when it exists; until then, no
+agent-driven claim attaches to these numbers.
 
 ## Run from source
 
