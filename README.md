@@ -39,10 +39,10 @@ pattern/planner content (`distribution/schema-sync/check.sh`).
 
 ## Measured, honestly
 
-Retrieval accuracy is scored on a 48-question held-out QA set (top-1 doc
+Retrieval accuracy is scored on a 51-question held-out QA set (top-1 doc
 metric) and the reports are committed — reviewers see scores without running
-anything. Current: **38/48 (79%)** overall, with the 10 remaining failures
-grouped by mechanism and tracked by strict-xfail tests. Retriever decisions
+anything. Current: **41/51 (80%)** overall (2026-08-20 report), with the 10
+remaining failures grouped by mechanism and tracked by strict-xfail tests. Retriever decisions
 are made by measured A/B, including two refutations on the record (semantic
 embeddings at feasible local size; three dilution-fix mechanisms). See
 [`evals/reports/report.md`](./evals/reports/report.md).
