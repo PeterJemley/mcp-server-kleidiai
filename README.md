@@ -6,7 +6,10 @@ An MCP server that gives AI agents structured access to KleidiAI + llama.cpp
 Arm optimization expertise — a curated, provenance-verified corpus behind
 queryable tools, with the retrieval quality measured and committed.
 
-The first MCP server in this niche.
+As of August 2026, the only MCP server we've found that serves KleidiAI
+*knowledge* — adjacent MCP servers in this space run benchmarks; none serve
+the documentation (checked 2026-08-21 against the MCP registry, GitHub, and
+web search).
 
 ## Why
 

@@ -34,7 +34,7 @@ So when a developer asks their AI assistant *"how do I get the most out of Kleid
 
 ## Why it's exciting
 
-- **It's the first of its kind.** No KleidiAI-focused MCP server exists today. We're not competing with anyone — we're carving out the niche.
+- **It fills a real gap.** The KleidiAI-adjacent MCP servers we could find (as of August 2026) run benchmarks; none serve the knowledge itself — a curated, provenance-verified corpus behind queryable tools. That gap is the niche this project occupies.
 - **It runs on hardware you already own.** Apple Silicon Macs, Snapdragon laptops, anything with a recent Arm chip. The whole story unfolds locally, no cloud bill, no cloud privacy worry.
 - **It demonstrates the near future of AI assistance.** Specialized knowledge + agentic tool use + on-device inference, stitched together into something a real developer would actually use.
 - **It's small enough to ship.** Six weeks from scaffold to v1.0 published. Not a moonshot — a real, scoped, completable project.

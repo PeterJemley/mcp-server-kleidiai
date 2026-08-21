@@ -87,3 +87,23 @@ same A/B — never by assumption.
 - **M3 (week 4)** — Killer demo recorded: agent ports a real matmul kernel to KleidiAI int4; benchmark video + notebook + transcript in `demos/kernel-port/`.
 - **M4 (week 5)** — PyPI publish; MCP registry submission via `mcp-publisher`; finalize `LICENSE`; install docs in README.
 - **M5 (week 6)** — TypeScript port; shared-schema CI; npm publish.
+
+## Niche claim narrowed: "first" -> "only knowledge server found" (2026-08-21)
+
+All public copies of "the first MCP server in this niche" are replaced with a
+dated, hedged, checkable claim: as of August 2026, the only MCP server found
+that serves KleidiAI knowledge — adjacent servers benchmark it, none serve
+the documentation.
+
+**Why:** Verification ahead of circulating the public repo found the niche no
+longer empty. `sirmos/arm-pulse` (public 2026-06-13) is a KleidiAI-powered
+benchmark suite + MCP server; `CisnerosCodes/arm-migrate-mcp` (2026-07-15) is
+a migration harness with measured KleidiAI benchmarks; Arm ships an official
+MCP server whose `knowledge_base_search` covers Arm learning resources
+generally. None serve a curated KleidiAI corpus, so the narrowed claim holds
+— but "first" cannot be proven from public history (this project's public
+repo dates from 2026-08-20, after both community servers) and a primacy claim
+invites refutation where a substance claim invites confirmation. Checked
+2026-08-21: MCP registry search ("kleidiai": zero entries), GitHub repo
+search, web search. Same discipline as retrieval: claims are decided by
+looking, recorded with their evidence, and revisited by re-running the check.

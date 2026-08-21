@@ -55,9 +55,10 @@ Sources of truth: `CLAUDE.md` (operating handbook), `v0-decisions.md`
 **Q1. In one sentence, what is this project?**
 
 An MCP server giving AI agents structured, provenance-cited access to
-KleidiAI + llama.cpp Arm-optimization expertise — the first MCP server in
-that niche — with the retrieval quality measured and committed rather than
-asserted. ("Provenance" means a documented chain of origin: where every
+KleidiAI + llama.cpp Arm-optimization expertise — as of August 2026 the
+only knowledge server found in that niche (adjacent MCP servers benchmark
+KleidiAI; none serve its documentation) — with the retrieval quality
+measured and committed rather than asserted. ("Provenance" means a documented chain of origin: where every
 piece of knowledge came from, when it was fetched, and proof it hasn't been
 altered since.)
 

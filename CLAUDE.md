@@ -1,6 +1,6 @@
 # mcp-server-kleidiai — Project Context
 
-mcp-server-kleidiai is **an MCP server that gives AI agents structured access to KleidiAI + llama.cpp Arm optimization expertise**. It is the first MCP server in this niche — Arm has intro-level MCP tutorials but nothing that exposes KleidiAI knowledge as a queryable tool surface.
+mcp-server-kleidiai is **an MCP server that gives AI agents structured access to KleidiAI + llama.cpp Arm optimization expertise**. As of a recorded search on 2026-08-21 (MCP registry: zero "kleidiai" entries; GitHub repo search; web search), it is the only MCP server found that serves curated KleidiAI documentation: Arm's official MCP server targets x86-to-Arm migration with a general knowledge-base tool, and community KleidiAI MCP servers (e.g. sirmos/arm-pulse, public 2026-06-13) run benchmarks rather than serve knowledge. Public claims stay in this shape — "the only X we've found, as of DATE" — never "first," which public history cannot prove.
 
 This is a portfolio piece demonstrating MCP knowledge bases, evaluation frameworks, and agentic AI workflows — in particular, the discipline of building a queryable evidence system where every claim carries its provenance and the quality numbers are measured and published rather than asserted.
 
