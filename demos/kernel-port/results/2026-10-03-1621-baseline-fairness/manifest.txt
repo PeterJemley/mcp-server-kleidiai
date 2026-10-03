@@ -1,0 +1,7 @@
+repo_commit: 86f5d21f4a144768b2c7405cdf4e1bdcc91e64d9
+kleidiai_commit: b87ef9c94f45f11c81a6b1fdaed1b2b45ea58c0c
+machine: Mac17,8 / Apple M5 Pro
+macos: 27.0.1 (26A434)
+compiler: Apple clang version 21.0.0 (clang-2100.3.34.2)
+power: Now drawing from 'Battery Power'
+date_utc: 2026-10-03T20:21:57Z

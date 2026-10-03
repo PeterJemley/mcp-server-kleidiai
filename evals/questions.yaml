@@ -1,9 +1,11 @@
-# Held-out QA set for retrieval + tool-use evals.
+# QA set for retrieval + tool-use evals. A development set, not a held-out
+# one: these questions were also used to choose the retriever (2026-08-05),
+# so scores on them may run slightly high. A separate held-out set is planned.
 #
 # Each entry:
 #   id:                  stable identifier
 #   question:            natural-language question
-#   expected_doc_ids:    corpus manifest IDs that MUST appear in retrieval
+#   expected_doc_ids:    corpus manifest IDs that answer it; scoring checks that the top-ranked doc is one of them
 #   expected_tool:       which MCP tool should be called (null = retrieval-only)
 #   expected_tool_args:  acceptable arg patterns (regex or exact)
 #   notes:               curator notes — why this question, what it tests
@@ -14,8 +16,8 @@
 #   - 20 tool-use (call this tool with these args)
 #   - 10 end-to-end (multi-tool agent task)
 #
-# Mix status after batch 3 (2026-08-05): 48 entries = 37 retrieval-only,
-# 7 tool-use, 4 end-to-end. The tool-use and end-to-end tranches remain
+# Mix status after batch 4 (2026-08-20): 51 entries = 37 retrieval-only,
+# 10 tool-use, 4 end-to-end. The tool-use and end-to-end tranches remain
 # under target ON PURPOSE: scoring them meaningfully needs the agent
 # provider (gated on a model API key), and padding tool-use questions that
 # only the deterministic provider can score would add near-duplicates of
@@ -29,7 +31,8 @@ version: 1
 # First batch (15). Building toward the ~50 target. expected_doc_ids are
 # ground truth — the doc that *should* answer the question — set independently
 # of what the current retriever returns. Entries tagged HARD are ones the
-# stub retriever currently gets wrong; they are kept deliberately.
+# stub retriever got wrong when they were written; they are kept
+# deliberately, and the tag records that history, not current difficulty.
 questions:
   # --- retrieval-only: KleidiAI concept (kleidiai-readme) ---
   - id: what-is-microkernel
@@ -67,8 +70,9 @@ questions:
     notes: >-
       Canonical GGML_CPU_KLEIDIAI=ON CMake flag. REVIEWED 2026-08-05, KEPT
       single ground truth: the learn.arm doc names the flag once as context;
-      the build doc is the canonical how-to. Its current top-1 loss to the
-      learn.arm doc is a real category-D failure.
+      the build doc is the canonical how-to. Its top-1 loss (to the
+      learn.arm doc under the old scorer, to the patch guide since the
+      2026-08-05 retriever swap) is a real category-D failure.
 
   - id: verify-kleidiai-runtime
     question: How can I verify at runtime that KleidiAI is actually being used?
@@ -143,9 +147,10 @@ questions:
       Agent must decide to search, then ground the answer in the build doc.
       REVIEWED 2026-08-05, KEPT single ground truth: same reasoning as
       enable-kleidiai-llamacpp — the build doc is canonical for enabling; the
-      learn.arm doc only mentions the flag. Failure stands (category D).
+      learn.arm doc only mentions the flag. Failed under the old scorer
+      (category D); passes since the 2026-08-05 retriever swap.
 
-  # --- HARD: kept deliberately; stub retriever currently wrong (M1 findings) ---
+  # --- HARD: kept deliberately; the stub retriever got these wrong at M1 ---
   - id: hard-read-kernel-name
     question: How do I read/decode a KleidiAI micro-kernel name?
     expected_doc_ids: [kleidiai-microkernel-names]
@@ -239,7 +244,8 @@ questions:
       Pack README lists kai_run_rhs_pack_*_qsi4* variants; underpins the int4
       demo. REVIEWED 2026-08-05, KEPT single ground truth: the question asks
       WHICH kernel — the pack README holds the reference enumeration; the
-      qsi4cx guide only walks through one example. Failure stands (category D).
+      qsi4cx guide only walks through one example. Failed under the old
+      scorer (category D); passes since the 2026-08-05 retriever swap.
 
   - id: rhs-lhs-meaning
     question: What do RHS and LHS refer to in matmul packing?

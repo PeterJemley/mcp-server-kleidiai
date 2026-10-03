@@ -49,10 +49,41 @@ explanation was tested (`experiments/gemv-decode.cpp`): a 1-row GEMV variant
 (`1x8x32_neon_dotprod`) runs decode 2.14x faster than the GEMM incumbent
 (0.186 vs 0.398 ms, 5.27x over f32) and loses at M=32 (5.897 vs 2.290 ms) —
 the predicted crossover. The same experiment measured the per-call LHS
-quantization at 0.001 ms (negligible, refuting an earlier guess), and the
-f32 baseline's flat GFLOP/s across shapes indicates a compute ceiling, not
-a bandwidth cap. Practical rule, matching llama.cpp's own integration:
-GEMM variant for prefill, GEMV variant for decode.
+quantization at 0.001 ms (negligible, refuting an earlier guess). Practical
+rule, matching llama.cpp's own integration: GEMM variant for prefill, GEMV
+variant for decode.
+
+## Is the f32 baseline a fair "before"? (2026-10-03)
+
+The published f32 loop re-reads all 67 MB of weights for every input row,
+while the int4 kernel reuses each loaded weight across rows. A
+preregistered experiment (`experiments/baseline-fairness.md`; computed
+results in `results/2026-10-03-1621-baseline-fairness/summary.md`, five
+process runs) measured what that difference is worth:
+
+| shape | int4 vs published f32 loop | int4 vs f32 loop with reuse | int4 vs Accelerate sgemm |
+|---|---|---|---|
+| decode (M=1) | 2.26x | same (no reuse at M=1) | 1.27x |
+| batch (M=32) | 12.39x | 6.47x | 0.68x |
+| prompt (M=256) | 12.65x | 6.52x | 0.32x |
+
+- **The f32 loop is limited inside the core, not by memory bandwidth:**
+  with the weights small enough to stay in cache it runs only 1.07x faster
+  (the plan's rule: within 0.85–1.15 means compute-limited). The limit is
+  the loop's own, though, not the chip's: sharing each weight across 4 rows
+  lifts the same f32 code from 38 to 74 GFLOP/s.
+- **About half of the batch/prompt speedup is weight reuse,** which f32
+  can have too: 6.5x survives against the reuse-matched loop (share 0.51
+  at M=256, 0.52 at M=32; under the plan's rule, anything below 0.8
+  means the headline is restated).
+- **Apple's Accelerate f32 sgemm** reaches 1507 GFLOP/s on one thread,
+  which points to the chip's matrix unit (the M5 Pro supports SME), and
+  beats this vector-unit int4 port at M=32 and M=256. KleidiAI also ships
+  SME2 kernels; testing one is the natural next experiment.
+- Controls passed: the published rows reproduced within ±10%, and the M=1
+  rows of the reuse loops timed at 1.00x the published loop. Deviation:
+  this run was on battery power, not AC; an AC replication is declared in
+  the plan.
 
 ## The recorded session
 

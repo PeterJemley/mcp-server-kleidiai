@@ -38,7 +38,7 @@ A handful of terms appear everywhere, so here they are once, up front:
 - **Quantization** — storing numbers in fewer bits (say, 4 instead of 32)
   to save memory and time, at a small, quantifiable cost in precision.
 - **Eval(s)** — evaluations: fixed, repeatable measurements of quality
-  against a held-back set of test questions.
+  against a fixed set of test questions.
 - **CI (continuous integration)** — an automated checker that builds the
   project and runs all its tests on every change, so breakage is caught
   the moment it happens.
@@ -98,13 +98,16 @@ Three things, in order of importance:
    fingerprint changes, so it proves content hasn't been tampered with.)
    Reproducing the scaffolding is trivial; reproducing careful curation is
    not.
-2. **The evals** — a 51-question held-out set (questions kept separate
-   from development, so the system can't be tuned to them) with committed
-   score reports, including honest failures. Most portfolio projects
+2. **The evals** — a 51-question *development* set with committed score
+   reports. "Development" because the same questions were used to choose
+   between retriever designs, so the score may run slightly high; a
+   separate *held-out* set (questions never used for any design choice,
+   scored once) is planned. The reports include including honest failures. Most portfolio projects
    assert reliability; this one demonstrates it, including two
    on-the-record refutations of ideas that didn't survive measurement (§6).
-3. **The demo** — a real kernel port with a 13.5× measured speedup, staged
-   so the recorded agent session is verifiably genuine (§7).
+3. **The demo** — a real kernel port whose speedup is measured against
+   fair baselines (6.5× over an f32 loop with the same weight reuse, Q30b),
+   staged so the recorded agent session is verifiably genuine (§7).
 
 The retrieval itself is deliberately boring (§4). (Source: `CLAUDE.md`
 § Load-Bearing Constraints.)
@@ -561,13 +564,17 @@ standard throughput measure. Measured on an Apple M5 Pro, single thread
 | prompt (M=256) | f32 baseline | 245.575 | 35.0 | 67.1 | 1.00× |
 | prompt (M=256) | KleidiAI int4 | 18.192 | 472.2 | 8.4 | **13.50×** |
 
-Reading: the f32 baseline's flat ~35 GFLOP/s across all three shapes
-indicates the same *compute ceiling* everywhere — if M=1 were limited by
+Reading: the f32 baseline runs at a flat ~35 GFLOP/s across all three
+shapes. This was first read as a *compute ceiling*: if M=1 were limited by
 memory **bandwidth** (how fast data can stream from RAM) instead, that row
-would fall *below* the M=32/256 figure, and it doesn't happen. At
-M=32/256, each loaded weight is reused across M input rows and the int4
-path shows i8mm's arithmetic throughput in full: 447–472 GFLOP/s,
-12.6–13.5×. At M=1 the win is real but smaller (2.36×), and the
+would fall *below* the M=32/256 figure, and it doesn't. That argument
+turned out not to settle the question, because this f32 loop re-reads
+every weight for every row, so a bandwidth limit would also give a flat
+line. Q30b tested it directly, and the compute reading survived. At
+M=32/256 the int4 kernel reuses each loaded weight across several input
+rows and reaches 447–472 GFLOP/s, 12.6–13.5× the f32 loop. Q30b shows
+that about half of that ratio is the reuse itself, which an f32 loop can
+also have. At M=1 the win is real but smaller (2.36×), and the
 explanation — **which has now been tested, see Q30a** — is the kernel's
 shape: this is a **GEMM** variant (GEneral Matrix-Matrix multiply) whose
 name declares an 8-row output tile (`8x8x32`) that M=1 cannot amortize.
@@ -576,8 +583,8 @@ for a single row) exist for decode: llama.cpp's integration selects a
 different `…sme2_sdot` GEMV kernel for token generation than for prefill
 (see the learn-arm doc's call stacks). The 8× weight-size reduction
 (67.1 → 8.4 MB) remains a genuine end-to-end benefit (cache footprint,
-keeping the model resident in memory) even though neither implementation
-is bandwidth-saturated at these sizes.
+keeping the model resident in memory); Q30b shows the f32 loop isn't
+limited by memory bandwidth at this size.
 
 **Q30a. That was an explanation, not a measurement. What happened when it was tested?**
 
@@ -611,6 +618,69 @@ throughput, which is also why decode on SME2 hardware gets an `sdot`
 kernel. Practical consequence for the demo and for real ports: variant
 selection is shape-dependent — ship a GEMM kernel for prefill and a GEMV
 kernel for decode, exactly as llama.cpp does.
+
+**Q30b. Was the f32 baseline a fair "before"? (tested 2026-10-03)**
+
+The worry came from an audit. The published f32 loop works through the
+input one row at a time, and for each row it reads all 67 MB of weights
+again, so 32 rows means 32 full passes. The int4 kernel instead computes
+small blocks of rows together, so each weight it loads is **reused**
+across several rows. That raised two questions. Both were written down
+with their predictions and pass/fail rules, and committed to git before
+anything ran (a **preregistration**: the commit's timestamp proves the
+predictions came first).
+
+*Question 1: is the flat ~35 GFLOP/s a compute limit or a memory limit?*
+The test shrinks the weight matrix until it fits in the processor's
+**cache** (a small, very fast memory on the chip itself), from 67 MB down
+to 2 and 4 MB, changing nothing else. If memory bandwidth were the limit,
+the small version would run at least 1.5× faster; if it were a compute
+limit, it would stay within 15%. Measured: 1.07× faster (1.06–1.07 in each
+of five runs). So the loop is **compute-limited**, and Q30's reading
+stands.
+
+There's a refinement, though. The limit belongs to this loop, not to the
+chip. Every multiply-add in it needs two numbers fetched (one input value,
+one weight). When the same code shares each fetched weight across 4 rows,
+it needs fewer fetches per multiply-add and runs at 74 GFLOP/s instead of
+38. So ~35 GFLOP/s was never "the f32 number to beat" on this machine
+(see Q32).
+
+*Question 2: how much of the 12.6–13.5× is that reuse?* The test adds f32
+loops that share each weight across 4 or 8 rows, then compares the int4
+port with the faster of them. Measured: the port is 6.5× faster than the
+reuse-matched loop at both M=32 and M=256, against 12.4–12.7× over the
+original loop in the same runs. About half survives (0.51 and 0.52). The
+plan's rule said that anything below 0.8 means the headline must be
+restated, so the README now leads with 6.5× and gives 12.4–12.7× second,
+labelled as being against the loop without reuse.
+
+*Also measured, with no prediction made in advance:* Apple's own math
+library, **Accelerate**, which ships with macOS. Its f32 matrix multiply
+(`sgemm`) on one thread reaches 1,507 GFLOP/s at M=256. That is about 3×
+the int4 port and 20× the reuse-matched f32 loop, and it points to the
+M5 Pro's separate matrix unit (**SME**, Arm's Scalable Matrix Extension)
+rather than the ordinary vector units all the other code here uses.
+Accelerate beats the int4 port 1.5× at M=32 and 3.1× at M=256; the int4
+port wins at decode (M=1, 1.3×) and keeps its 8× smaller weights.
+
+This doesn't contradict the port; it shows the comparison spans two
+different pieces of hardware. KleidiAI also ships kernels for the SME
+matrix unit (llama.cpp uses them, see Q30), so comparing one of those
+with Accelerate is the obvious next experiment.
+
+*Checks that the run was sound:*
+- The published numbers reproduced within ±10%: f32 at 38 GFLOP/s
+  against 35, and int4 at 2.26×, 12.39× and 12.65×.
+- The reuse loops at M=1, where there is nothing to reuse, timed at
+  exactly the published loop's speed.
+- Every output was checked against the f32 result.
+- One deviation is on record: the run used battery power, not plugged in
+  as planned. A plugged-in replication is declared in the plan and will be
+  reported whatever it shows.
+
+(Source: `demos/kernel-port/experiments/baseline-fairness.md`;
+`demos/kernel-port/results/2026-10-03-1621-baseline-fairness/summary.md`.)
 
 **Q31. The port's rel-RMSE against f32 is 6.7×10⁻². Derive why that is exactly the expected value, not an error.**
 
@@ -655,26 +725,43 @@ it from using SIMD to add eight numbers at once. `-ffast-math` grants
 permission to reorder, letting the compiler **vectorize** the loop (turn
 it into SIMD form). Without it, the "baseline" would be
 one-number-at-a-time scalar code — a strawman that flatters the port.
-Inference engines routinely enable fast-math or hand-vectorize; a
-competent engineer's f32 kernel runs ~35 GFLOP/s on this machine, so
-that's the number to beat. The before/after is only meaningful if the
-"before" is defensible. (Source: `demos/kernel-port/build.sh` header
+Inference engines routinely enable fast-math or hand-vectorize. But
+vectorizing makes the loop competent, not the strongest f32 baseline:
+sharing each weight across rows doubles its speed, and Apple's Accelerate
+library is faster still (Q30b). The before/after is only meaningful if the
+"before" is defensible, which is why the headline now reports the stronger
+baselines too. (Source: `demos/kernel-port/build.sh` header
 comment.)
 
 **Q33. The port already exists in the repo. Doesn't that make the recorded "agent ports it live" demo theater?**
 
-It would, if the answer key were on disk during recording. The design:
-`demo-reset.sh before` refuses to run unless all work is safely committed,
-then moves the rehearsal port, the README (which contains the recipe), and
-the recording plan into a git-ignored `.rehearsal/` folder and installs a
-baseline-only harness and build script. The recorded agent must re-derive
-the port through the MCP server's tools. `demo-reset.sh restore` recovers
-the rehearsed state losslessly from version control. The rehearsal's
-existence is disclosed in the README — the integrity claim is "re-derived
-without the answer key", not "never done before". The rehearsal is what
-de-risks the recording: the destination is known to be reachable, so a
-failed session means process, not physics. (Source:
-`demos/kernel-port/demo-reset.sh`; `recording-plan.md`.)
+It would, if the answer key were anywhere the agent can look during
+recording. Inside this repository it is in many places: the rehearsal port
+in `src/`, the demo README's recipe, the experiments (which reuse the
+port's kernels and quantization recipe), this workbook, the QA set's
+curator notes, and the repository's **git history** (the stored record of
+every past version, which `git log` or `git diff` will print on request).
+Hiding files in place can't remove the last of these: after deleting the
+port, a routine `git status` or `git diff` shows exactly what was deleted.
+
+So the recording happens somewhere else. `demo-reset.sh workspace <dir>`
+builds a fresh folder outside the repository containing only the baseline:
+the f32 kernel, a harness and build script that know nothing of the port,
+and Arm's own KleidiAI source checkout (the library being ported to, which
+any developer would have). It becomes a new git repository whose single
+commit is that baseline, so there is no history to find. It registers the
+MCP server for the agent and then searches every file outside the KleidiAI
+checkout for the port's identifiers, refusing to finish if any survive.
+The agent can still reach this repository by path, but every file it
+reads appears in the recorded transcript. The integrity claim is
+"re-derived without the answer key in reach", and the transcript is where
+a reader checks it.
+
+The rehearsal's existence is disclosed in the README; the claim is
+"re-derived", not "never done before". The rehearsal is what de-risks the
+recording: the destination is known to be reachable, so a failed session
+means process, not physics. (Source: `demos/kernel-port/demo-reset.sh`;
+`recording-plan.md`.)
 
 ---
 

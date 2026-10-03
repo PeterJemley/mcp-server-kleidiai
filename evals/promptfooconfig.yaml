@@ -1,6 +1,6 @@
 # Promptfoo harness for the KleidiAI MCP server.
 #
-# Scores retrieval accuracy: for each held-out question, does search_kleidiai_docs
+# Scores retrieval accuracy: for each QA-set question, does search_kleidiai_docs
 # rank the correct corpus doc first? Deterministic, no LLM/API key required.
 # Run: PROMPTFOO_PYTHON=../packages/server-py/.venv/bin/python npm run eval
 #

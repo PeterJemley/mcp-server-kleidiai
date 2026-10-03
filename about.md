@@ -29,7 +29,7 @@ So when a developer asks their AI assistant *"how do I get the most out of Kleid
 ## Three pieces
 
 1. **The server itself** — answers questions about KleidiAI + llama.cpp by drawing from the curated knowledge base. Distributed as a Python package today, and a TypeScript package shortly after — so anyone with an AI assistant can install it in seconds.
-2. **An evaluation system** — measures how *accurate* the server's answers are, against a real held-out set of questions, with score reports committed right into the repo for anyone to read. This is the part most similar projects skip. We don't.
+2. **An evaluation system** — measures how *accurate* the server's answers are, against a set of real test questions, with score reports committed right into the repo for anyone to read. (Those questions also guided the design, so the score may run a little high; a separate, untouched set is planned.) This is the part most similar projects skip. We don't.
 3. **A demonstration** — an end-to-end recorded session where an AI agent uses the server to actually port a piece of code to KleidiAI, then benchmarks the speedup. Real numbers, on real hardware.
 
 ## Why it's exciting

@@ -41,6 +41,10 @@ synthesized.
       requirement: the agent must re-derive the port, not find it in `src/`.
       `README.md` already discloses the off-camera rehearsal — no sleight
       of hand, but no answer key on disk either.
+      *Superseded 2026-10-03:* recording now happens in a separate workspace
+      (`demo-reset.sh workspace <dir>`), because in place the port stays
+      visible through git status, diff and log, and through the workbook
+      and QA set.
 - [ ] Register the server with the MCP client: stdio config from the root
       README (`packages/server-py/.venv/bin/python -m mcp_server_kleidiai`).
 - [ ] Pre-flight checklist: server responds over stdio, tool listed,

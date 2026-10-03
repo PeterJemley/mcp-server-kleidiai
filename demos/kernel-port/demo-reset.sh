@@ -1,33 +1,53 @@
 #!/bin/sh -e
-# Flips this directory between the recording "before" state and the full
-# rehearsed state. Requires a clean git tree so restore is always lossless.
+# Builds the workspace for the recorded kernel-port session, in which the
+# agent must re-derive the int4 port through the MCP server rather than find
+# it on disk:
 #
-#   ./demo-reset.sh before   — strip every answer key (rehearsal port, README
-#                              recipe, recording plan) into .rehearsal/ and
-#                              write a baseline-only harness + build script.
-#                              The recorded agent must re-derive the port via
-#                              the MCP server, not find it on disk.
-#   ./demo-reset.sh restore  — put the rehearsed state back from git and
-#                              remove .rehearsal/.
+#   ./demo-reset.sh workspace <dir>
+#
+# <dir> must be new and outside this repo. It becomes a git repository whose
+# only commit is the baseline: the f32 kernel, a baseline-only harness and
+# build script, and (ignored) the KleidiAI checkout, plus an .mcp.json that
+# registers the server. The answer keys (rehearsal port, README recipe,
+# recording plan, experiments) never enter it, nor does this repo's history,
+# and the build refuses if any of the port's identifiers survive.
+CALLER_PWD=$(pwd)
 cd "$(dirname "$0")"
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
-ANSWER_KEYS="src/matmul_int4_kleidiai.h src/matmul_int4_kleidiai.cpp README.md recording-plan.md"
+ANSWER_KEYS="src/matmul_int4_kleidiai.h src/matmul_int4_kleidiai.cpp README.md recording-plan.md experiments"
 
 case "${1:-}" in
-before)
-    if ! git -C "$REPO_ROOT" diff --quiet || ! git -C "$REPO_ROOT" diff --cached --quiet; then
-        echo "git tree not clean — commit or stash first so restore is lossless" >&2
+workspace)
+    dest=${2:?"usage: $0 workspace <new-directory>"}
+    case "$dest" in
+    /*) ;;
+    *) dest="$CALLER_PWD/$dest" ;;
+    esac
+    if [ -e "$dest" ]; then
+        echo "$dest already exists — give a new directory" >&2
         exit 1
     fi
-    mkdir -p .rehearsal
-    for f in $ANSWER_KEYS; do
-        mkdir -p ".rehearsal/$(dirname "$f")"
-        mv "$f" ".rehearsal/$f"
-    done
-    rm -rf build
+    if ! git -C "$REPO_ROOT" diff --quiet || ! git -C "$REPO_ROOT" diff --cached --quiet; then
+        echo "git tree not clean — commit or stash first: the workspace is built from HEAD" >&2
+        exit 1
+    fi
+    mkdir -p "$dest"
+    dest=$(cd "$dest" && pwd -P)
+    case "$dest/" in
+    "$(cd "$REPO_ROOT" && pwd -P)"/*)
+        rmdir "$dest"
+        echo "the workspace must be outside this repo, or the agent finds the port one directory up" >&2
+        exit 1
+        ;;
+    esac
+    # A half-built workspace must never be mistaken for a finished one.
+    trap 'rm -rf "$dest"' EXIT
 
-    cat > src/main.cpp <<'CPP'
+    git -C "$REPO_ROOT" archive "HEAD:$(git rev-parse --show-prefix)" | tar -x -C "$dest"
+    (cd "$dest" && rm -rf $ANSWER_KEYS demo-reset.sh .gitkeep)
+    # Baseline-only harness and build script: the agent's starting point.
+    cat > "$dest/src/main.cpp" <<'CPP'
 // Benchmark harness. matmul_f32 (src/matmul_f32.cpp) is the kernel to be
 // ported; add the ported implementation alongside it, check it against the
 // f32 result, and print a comparable row.
@@ -109,7 +129,7 @@ int main() {
 }
 CPP
 
-    cat > build.sh <<'SH'
+    cat > "$dest/build.sh" <<'SH'
 #!/bin/sh -e
 # Builds the benchmark. -ffast-math lets clang vectorize the baseline's dot
 # loop (standard practice in inference engines).
@@ -121,16 +141,51 @@ $CXX -O3 -ffast-math -std=c++17 -march=armv8.2-a+dotprod+i8mm \
     -o build/bench
 echo "built build/bench"
 SH
-    chmod +x build.sh
-    echo "before-state ready: answer keys in .rehearsal/, baseline-only harness in place"
-    ;;
-restore)
-    git -C "$REPO_ROOT" checkout -- "$(pwd)"
-    rm -rf .rehearsal build
-    echo "rehearsed state restored from git"
+    chmod +x "$dest/build.sh"
+
+    if [ -d third_party/kleidiai ]; then
+        cp -R third_party "$dest/"
+    fi
+    "$dest/fetch_kleidiai.sh"
+
+    server_python="$REPO_ROOT/packages/server-py/.venv/bin/python"
+    if [ ! -x "$server_python" ]; then
+        echo "warning: $server_python is missing — set up the server venv (root README) before recording" >&2
+    fi
+    cat > "$dest/.mcp.json" <<JSON
+{
+  "mcpServers": {
+    "kleidiai": {
+      "command": "$server_python",
+      "args": ["-m", "mcp_server_kleidiai"]
+    }
+  }
+}
+JSON
+
+    # The port's identifiers. KleidiAI's own checkout legitimately contains
+    # them; nothing else in the workspace may. (Options precede the operands:
+    # macOS grep stops parsing options at the first operand.)
+    leaks=$(grep -rlE --exclude-dir=third_party --exclude-dir=.git \
+        'matmul_int4_kleidiai|KleidiInt4Matmul|quant_nxk|qsi4c|qai8d|rhs_zero_point|kai_(run|get)_' \
+        "$dest" || true)
+    if [ -n "$leaks" ]; then
+        echo "the port's identifiers survive in the workspace — not fit for recording:" >&2
+        echo "$leaks" >&2
+        exit 1
+    fi
+
+    git -C "$dest" init -q
+    git -C "$dest" add -A
+    git -C "$dest" commit -q -m "Baseline: f32 matmul and benchmark harness"
+    trap - EXIT
+    echo "workspace ready: $dest"
+    echo "  one commit, no history; no answer-key identifiers outside third_party/"
+    echo "  MCP server registered in .mcp.json: $server_python -m mcp_server_kleidiai"
+    echo "  next: cd \"$dest\" && ./build.sh && ./build/bench, then start the agent there"
     ;;
 *)
-    echo "usage: $0 before|restore" >&2
+    echo "usage: $0 workspace <new-directory>" >&2
     exit 2
     ;;
 esac

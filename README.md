@@ -39,22 +39,37 @@ pattern/planner content (`distribution/schema-sync/check.sh`).
 
 ## Measured, honestly
 
-Retrieval accuracy is scored on a 51-question held-out QA set (top-1 doc
-metric) and the reports are committed — reviewers see scores without running
-anything. Current: **41/51 (80%)** overall (2026-08-20 report), with the 10
-remaining failures grouped by mechanism and tracked by strict-xfail tests. Retriever decisions
-are made by measured A/B, including two refutations on the record (semantic
-embeddings at feasible local size; three dilution-fix mechanisms). See
-[`evals/reports/report.md`](./evals/reports/report.md).
+Retrieval accuracy is scored on a 51-question QA set (top-1 doc metric) and
+the reports are committed — reviewers see scores without running anything.
+Current: **41/51 (80%)** overall (2026-08-20 report), with the 10 remaining
+failures grouped by mechanism and tracked by strict-xfail tests. It is a
+*development* set, not a held-out one: the same questions were used to choose
+the retriever, so the score may run slightly high; a separate held-out set is
+planned. Retriever candidates are compared by measured A/B on these
+questions, where only large gaps can be trusted: the semantic-embedding
+candidate's 10-question deficit is one, while the chosen retriever's +4 over
+the old scorer and its 1-question edge over a chunk-level variant are within
+noise (it was also chosen for adding no dependencies). Two refutations are on
+the record (semantic embeddings at feasible local size; three dilution-fix
+mechanisms). See [`evals/reports/report.md`](./evals/reports/report.md).
 
 ## Kernel-port demo (M3, in progress)
 
 Ports an f32 matmul to KleidiAI int4 (`qai8dxp`/`qsi4cxp`, i8mm variant).
 The port and benchmark are committed and reproducible from
-[`demos/kernel-port/`](./demos/kernel-port/): on an Apple M5 Pro,
-single-threaded, **2.4× (decode) to 13.5× (prompt)** over a vectorized f32
-baseline, weights 67 MB → 8.4 MB, quantization error matching int4 theory to
-two digits. Those numbers are from the hand-written rehearsal. The recorded
+[`demos/kernel-port/`](./demos/kernel-port/). On an Apple M5 Pro,
+single-threaded, the port is **2.3× faster at decode** and **6.5× faster at
+batch and prompt sizes** than an f32 loop that reuses each loaded weight
+across rows, as the int4 kernel does (12.4–12.7× against the original f32
+loop, which re-reads every weight for every row). Weights shrink 67 MB →
+8.4 MB, and the quantization error matches int4 theory to two digits.
+Apple's Accelerate f32 `sgemm` (1.5 TFLOP/s on one thread, which points to
+the chip's matrix hardware) beats this vector-unit port at batch (1.5×) and
+prompt (3.1×) sizes; the port wins at decode (1.3×) and on memory. Measured in a
+preregistered experiment
+([plan](./demos/kernel-port/experiments/baseline-fairness.md),
+[results](./demos/kernel-port/results/2026-10-03-1621-baseline-fairness/summary.md))
+on the hand-written rehearsal port. The recorded
 session — an agent re-deriving the port using this server's tools — is
 pending and will be published here when it exists; until then, no
 agent-driven claim attaches to these numbers.
@@ -67,7 +82,7 @@ Not yet on PyPI (that's M4). Until then:
 cd packages/server-py
 /opt/homebrew/bin/python3.12 -m venv .venv
 .venv/bin/pip install -e ".[dev]"
-.venv/bin/python -m pytest tests -q   # 15 passed, 2 xfailed expected
+.venv/bin/python -m pytest tests -q   # 24 passed, 2 xfailed expected
 ```
 
 MCP client configuration (stdio):
