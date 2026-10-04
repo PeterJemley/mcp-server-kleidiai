@@ -19,6 +19,11 @@ transcript + notebook per `v0-decisions.md`.
   reports median ms / GFLOP/s / weight bytes / speedup, and checks each
   against the f32 result (`rel_rmse`). Weight prep is untimed (static in
   inference); LHS quantization is timed (dynamic).
+- `src/bench_harness.h` — the measurement code every benchmark here shares:
+  the timing loop (one untimed warmup, then a repetition rule each program
+  sets for itself), `rel_rmse`, and NaN checks that survive `-ffast-math`.
+  One copy, so the programs can't drift apart
+  (`experiments/bench-harness.md`).
 - `build.sh` — clang build: kai micro-kernels as C, harness as C++,
   `-O3 -march=armv8.2-a+dotprod+i8mm` (+`-ffast-math` for the C++ side).
   Fast-math is deliberate: the baseline must be a competently vectorized f32

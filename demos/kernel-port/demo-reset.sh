@@ -9,13 +9,14 @@
 # only commit is the baseline: the f32 kernel, a baseline-only harness and
 # build script, and (ignored) the KleidiAI checkout, plus an .mcp.json that
 # registers the server. The answer keys (rehearsal port, README recipe,
-# recording plan, experiments) never enter it, nor does this repo's history,
-# and the build refuses if any of the port's identifiers survive.
+# recording plan, experiments, measured results) never enter it, nor does
+# this repo's history, and the build refuses if any of the port's
+# identifiers survive.
 CALLER_PWD=$(pwd)
 cd "$(dirname "$0")"
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
-ANSWER_KEYS="src/matmul_int4_kleidiai.h src/matmul_int4_kleidiai.cpp README.md recording-plan.md experiments"
+ANSWER_KEYS="src/matmul_int4_kleidiai.h src/matmul_int4_kleidiai.cpp README.md recording-plan.md experiments results"
 
 case "${1:-}" in
 workspace)
@@ -52,13 +53,12 @@ workspace)
 // ported; add the ported implementation alongside it, check it against the
 // f32 result, and print a comparable row.
 
-#include <algorithm>
-#include <chrono>
-#include <cmath>
 #include <cstddef>
 #include <cstdio>
 #include <random>
 #include <vector>
+
+#include "bench_harness.h"
 
 void matmul_f32(size_t m, size_t n, size_t k, const float* lhs, const float* rhs, float* dst);
 
@@ -76,32 +76,6 @@ constexpr Shape kShapes[] = {
     {256, 4096, 4096, "prompt (M=256)"},
 };
 
-// Relative RMSE for checking a quantized port against the f32 result.
-double rel_rmse(const float* ref, const float* got, size_t len) {
-    double err = 0.0, mag = 0.0;
-    for (size_t i = 0; i < len; ++i) {
-        const double d = static_cast<double>(ref[i]) - got[i];
-        err += d * d;
-        mag += static_cast<double>(ref[i]) * ref[i];
-    }
-    return mag > 0.0 ? std::sqrt(err / mag) : std::sqrt(err / len);
-}
-
-template <typename Run>
-double median_ms(double gflop, Run&& run) {
-    run();
-    const size_t reps = std::max<size_t>(5, std::min<size_t>(100, static_cast<size_t>(5.0 / gflop)));
-    std::vector<double> samples;
-    for (size_t r = 0; r < reps; ++r) {
-        const auto t0 = std::chrono::steady_clock::now();
-        run();
-        const auto t1 = std::chrono::steady_clock::now();
-        samples.push_back(std::chrono::duration<double, std::milli>(t1 - t0).count());
-    }
-    std::sort(samples.begin(), samples.end());
-    return samples[samples.size() / 2];
-}
-
 }  // namespace
 
 int main() {
@@ -117,13 +91,15 @@ int main() {
 
         matmul_f32(s.m, s.n, s.k, lhs.data(), rhs.data(), ref.data());
         const double gflop = 2.0 * s.m * s.n * s.k / 1e9;
+        // Enough repetitions for stability without minute-long runs.
+        const bench::RepRule rule = bench::fixed_for(gflop, 5, 100);
 
         const double f32_ms =
-            median_ms(gflop, [&] { matmul_f32(s.m, s.n, s.k, lhs.data(), rhs.data(), dst.data()); });
+            bench::time_ms([&] { matmul_f32(s.m, s.n, s.k, lhs.data(), rhs.data(), dst.data()); }, rule).median_ms;
         std::printf(
             "| %s | f32 baseline | %.3f | %.1f | %.1f | %.1e |\n", s.label, f32_ms,
             gflop / (f32_ms / 1e3), s.n * s.k * sizeof(float) / 1e6,
-            rel_rmse(ref.data(), dst.data(), ref.size()));
+            bench::rel_rmse(ref.data(), dst.data(), ref.size()));
     }
     return 0;
 }

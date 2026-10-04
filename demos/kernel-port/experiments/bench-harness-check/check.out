@@ -1,0 +1,41 @@
+built 9 programs (old at e74a3ac, new, and the no-sqrt control) and the P1 test
+
+P1a fixed rules: calls to run() (warmup + timed), old copy vs shared harness
+  ok   gflop 0.001   main 101/101  template 101/101  gemv 201/201  [control off-by-one 102, must differ]
+  ok   gflop 0.0336  main 101/101  template 101/101  gemv 149/149  [control off-by-one 102, must differ]
+  ok   gflop 1.07    main 6/6  template 6/6  gemv 21/21  [control off-by-one 7, must differ]
+  ok   gflop 8.59    main 6/6  template 6/6  gemv 21/21  [control off-by-one 7, must differ]
+  ok   gflop 100     main 6/6  template 6/6  gemv 21/21  [control off-by-one 7, must differ]
+P1b time-based rule (>=10 reps and >=1.5 s, <=200): calls to run()
+  ok     0 ms per call: old 201, shared 201
+  ok   120 ms per call: old 14, shared 14
+  ok   200 ms per call: old 11, shared 11
+P1c rel_rmse: shared vs each old copy, identical values
+  ok   5 random trials x 4 old copies: bit-identical
+  ok   all-zero reference: shared returns plain RMSE 0.5 (old gemv/fairness copies divided by zero)
+P1d scripted clock: exact median, min, max and repetition count
+  ok   odd count: median 5, min 1, max 9, 5 reps
+  ok   even count: upper median 6 (samples[n/2]), 4 reps
+  ok   time rule: stops at 5 reps once 20 ms accumulated
+  ok   [control] median taken as samples[0] fails the test
+P1 failures: 0
+
+P2 behaviour: old vs new output, timing columns masked
+  ok   main      6 lines old, 6 new; compared shape, impl, weights MB, rel RMSE and any text outside the table; masked median ms, GFLOP/s, speedup
+  ok   template  3 lines old, 3 new; compared shape, impl, weights MB, rel RMSE and any text outside the table; masked median ms, GFLOP/s
+  ok   gemv      10 lines old, 10 new; compared M, variant, kind, rel RMSE and any text outside the table; masked total ms, lhs-pack ms, GFLOP/s, vs f32
+  ok   fairness  23 lines old, 23 new; compared part, M, N, K, impl, weights MB, rel RMSE, check and any text outside the table; masked median ms, min ms, max ms, GFLOP/s, vs published f32
+  ok   [control] rel_rmse without sqrt changes 3/6 masked lines of main.cpp (must differ)
+
+P3 one copy: files under demos/kernel-port containing each string (Markdown and this checker excluded)
+  FAIL 'steady_clock::now' (preregistered): before 4 ['demo-reset.sh', 'experiments/baseline-fairness.cpp', 'experiments/gemv-decode.cpp', 'src/main.cpp']; after 0 []
+  ok   '::now()' (not preregistered: widened after the result, see the deviation log): before 4 ['demo-reset.sh', 'experiments/baseline-fairness.cpp', 'experiments/gemv-decode.cpp', 'src/main.cpp']; after 1 ['src/bench_harness.h']
+  ok   'double rel_rmse(' (preregistered): before 4 ['demo-reset.sh', 'experiments/baseline-fairness.cpp', 'experiments/gemv-decode.cpp', 'src/main.cpp']; after 1 ['src/bench_harness.h']
+
+P4 workspace
+  ok   demo-reset.sh workspace exits 0 (leak check passed): 0
+  ok   workspace includes src/bench_harness.h
+  ok   workspace baseline compiles
+  workspace files: .gitignore .mcp.json build.sh fetch_kleidiai.sh results/2026-10-03-1621-baseline-fairness/manifest.txt results/2026-10-03-1621-baseline-fairness/run1.md results/2026-10-03-1621-baseline-fairness/run2.md results/2026-10-03-1621-baseline-fairness/run3.md results/2026-10-03-1621-baseline-fairness/run4.md results/2026-10-03-1621-baseline-fairness/run5.md results/2026-10-03-1621-baseline-fairness/summary.md src/bench_harness.h src/main.cpp src/matmul_f32.cpp
+
+failed checks: 1

@@ -23,7 +23,7 @@ for src in \
 done
 
 $CXX -O3 -ffast-math -std=c++17 $ARCH \
-    -I "$KAI" -I "$KAI_PACK" -I "$KAI_MATMUL" \
+    -I "$KAI" -I "$KAI_PACK" -I "$KAI_MATMUL" -I src \
     experiments/gemv-decode.cpp src/matmul_f32.cpp \
     build/kai_lhs_quant_pack_qai8dxp_f32.o \
     build/kai_rhs_pack_nxk_qsi4cxp_qs4cxs1s0.o \

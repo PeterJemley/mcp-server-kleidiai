@@ -157,6 +157,16 @@ re-run all five. Never re-run to get different numbers.
   declared here, before it runs: it is the run that follows the protocol,
   both runs are reported, and if their verdicts differ, the AC run's
   verdicts govern.
+- 2026-10-04: this program's timing loop, `rel_rmse`, `poison()` and
+  `all_finite()` moved into the shared `src/bench_harness.h`
+  (`bench-harness.md`). The protocol is unchanged: the same warmup, the same
+  repetition rule (at least 10 repetitions and 1.5 s, at most 200), and the
+  same median, minimum and maximum. `bench-harness.md` P1 and P2 check
+  this: the same number of calls, and identical output once timings are
+  masked. The one difference is that `rel_rmse` now returns plain RMSE when
+  the reference is all zero instead of dividing by zero; no reference here
+  is all zero. The pending AC-power replication runs the shared-header
+  build.
 
 ## Outcome
 

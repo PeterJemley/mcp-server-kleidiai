@@ -13,9 +13,7 @@
 // (activations change per call); LHS pack is also timed alone to decompose
 // the per-call cost. Every variant is checked against the f32 reference.
 
-#include <algorithm>
 #include <cfloat>
-#include <chrono>
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
@@ -24,6 +22,7 @@
 #include <random>
 #include <vector>
 
+#include "bench_harness.h"
 #include "kai_lhs_quant_pack_qai8dxp_f32.h"
 #include "kai_rhs_pack_nxk_qsi4cxp_qs4cxs1s0.h"
 
@@ -76,30 +75,6 @@ void quant_nxk_qs4cx(size_t n, size_t k, const float* rhs_f32, uint8_t* rhs_qs4c
     }
 }
 
-double rel_rmse(const float* ref, const float* got, size_t len) {
-    double err = 0.0, mag = 0.0;
-    for (size_t i = 0; i < len; ++i) {
-        const double d = static_cast<double>(ref[i]) - got[i];
-        err += d * d;
-        mag += static_cast<double>(ref[i]) * ref[i];
-    }
-    return std::sqrt(err / mag);
-}
-
-template <typename Run>
-double median_ms(size_t reps, Run&& run) {
-    run();
-    std::vector<double> samples;
-    for (size_t r = 0; r < reps; ++r) {
-        const auto t0 = std::chrono::steady_clock::now();
-        run();
-        const auto t1 = std::chrono::steady_clock::now();
-        samples.push_back(std::chrono::duration<double, std::milli>(t1 - t0).count());
-    }
-    std::sort(samples.begin(), samples.end());
-    return samples[samples.size() / 2];
-}
-
 }  // namespace
 
 int main() {
@@ -127,10 +102,10 @@ int main() {
         for (float& v : lhs) v = dist(rng);
         matmul_f32(m, n, k, lhs.data(), rhs.data(), ref.data());
         const double gflop = 2.0 * m * n * k / 1e9;
-        const size_t reps = std::max<size_t>(20, std::min<size_t>(200, static_cast<size_t>(5.0 / gflop)));
+        const bench::RepRule rule = bench::fixed_for(gflop, 20, 200);
 
         const double f32_ms =
-            median_ms(reps, [&] { matmul_f32(m, n, k, lhs.data(), rhs.data(), dst.data()); });
+            bench::time_ms([&] { matmul_f32(m, n, k, lhs.data(), rhs.data(), dst.data()); }, rule).median_ms;
         std::printf(
             "| %zu | f32 baseline | — | %.3f | — | %.1f | 0 | 1.00x |\n", m, f32_ms,
             gflop / (f32_ms / 1e3));
@@ -152,16 +127,16 @@ int main() {
                 kai_run_lhs_quant_pack_qai8dxp_f32(
                     m, k, v.mr, v.kr, v.sr, 0, lhs.data(), k * sizeof(float), lhs_packed.data());
             };
-            const double pack_ms = median_ms(reps, lhs_pack);
-            const double total_ms = median_ms(reps, [&] {
+            const double pack_ms = bench::time_ms(lhs_pack, rule).median_ms;
+            const double total_ms = bench::time_ms([&] {
                 lhs_pack();
                 v.run(
                     m, n, k, lhs_packed.data(), rhs_packed.data(), dst.data(), n * sizeof(float),
                     sizeof(float), -FLT_MAX, FLT_MAX);
-            });
+            }, rule).median_ms;
             std::printf(
                 "| %zu | %s | %s | %.3f | %.3f | %.1f | %.1e | %.2fx |\n", m, v.name, v.kind,
-                total_ms, pack_ms, gflop / (total_ms / 1e3), rel_rmse(ref.data(), dst.data(), m * n),
+                total_ms, pack_ms, gflop / (total_ms / 1e3), bench::rel_rmse(ref.data(), dst.data(), m * n),
                 f32_ms / total_ms);
         }
     }

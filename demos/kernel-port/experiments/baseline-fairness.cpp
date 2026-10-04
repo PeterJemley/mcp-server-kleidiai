@@ -19,17 +19,14 @@
 
 #include <Accelerate/Accelerate.h>
 
-#include <algorithm>
-#include <chrono>
-#include <cmath>
 #include <cstddef>
-#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <random>
 #include <vector>
 
+#include "bench_harness.h"
 #include "matmul_int4_kleidiai.h"
 
 void matmul_f32(size_t m, size_t n, size_t k, const float* lhs, const float* rhs, float* dst);
@@ -41,6 +38,11 @@ namespace {
 // expected at 1/15 ~= 6.7e-2 for these uniform test weights.
 constexpr double kF32Tolerance = 1e-4;
 constexpr double kInt4Tolerance = 8e-2;
+
+// One untimed warmup call, then repetitions until at least 10 runs and
+// 1.5 s have accumulated (at most 200), so slow shapes get more timed runs
+// than the published harness's 5.
+constexpr bench::RepRule kRule{10, 200, 1500.0};
 
 bool g_failed = false;
 
@@ -77,58 +79,6 @@ void matmul_accelerate(size_t m, size_t n, size_t k, const float* lhs, const flo
         static_cast<int>(n));
 }
 
-// -ffast-math (kept to match the published build) lets the compiler assume
-// floats are never NaN or infinite, so isnan() and NaN comparisons can be
-// folded away. The poison value and the finiteness check therefore work on
-// bit patterns.
-constexpr uint32_t kQuietNanBits = 0x7fc00000u;
-
-void poison(std::vector<float>& v) {
-    for (float& x : v) std::memcpy(&x, &kQuietNanBits, sizeof(x));
-}
-
-bool all_finite(const std::vector<float>& v) {
-    for (const float& x : v) {
-        uint32_t bits;
-        std::memcpy(&bits, &x, sizeof(bits));
-        if ((bits & 0x7f800000u) == 0x7f800000u) return false;
-    }
-    return true;
-}
-
-double rel_rmse(const float* ref, const float* got, size_t len) {
-    double err = 0.0, mag = 0.0;
-    for (size_t i = 0; i < len; ++i) {
-        const double d = static_cast<double>(ref[i]) - got[i];
-        err += d * d;
-        mag += static_cast<double>(ref[i]) * ref[i];
-    }
-    return std::sqrt(err / mag);
-}
-
-struct Timing {
-    double median_ms, min_ms, max_ms;
-};
-
-// One untimed warmup call, then repetitions until at least 10 runs and
-// 1.5 s have accumulated (at most 200), so slow shapes get more timed runs
-// than the published harness's 5.
-template <typename Run>
-Timing time_ms(Run&& run) {
-    run();
-    std::vector<double> samples;
-    double total = 0.0;
-    while (samples.size() < 200 && (samples.size() < 10 || total < 1500.0)) {
-        const auto t0 = std::chrono::steady_clock::now();
-        run();
-        const auto t1 = std::chrono::steady_clock::now();
-        samples.push_back(std::chrono::duration<double, std::milli>(t1 - t0).count());
-        total += samples.back();
-    }
-    std::sort(samples.begin(), samples.end());
-    return {samples[samples.size() / 2], samples.front(), samples.back()};
-}
-
 struct Case {
     const char* part;
     size_t m, n, k;
@@ -149,13 +99,13 @@ struct Case {
     // instead of inheriting the previous row's result.
     template <typename Run>
     void measure(const char* impl, size_t weight_bytes, double tolerance, Run&& run) {
-        poison(dst);
-        const Timing t = time_ms(run);
+        bench::poison(dst);
+        const bench::Timing t = bench::time_ms(run, kRule);
         if (base_ms == 0.0) {
             base_ms = t.median_ms;
         }
-        const double rmse = rel_rmse(ref.data(), dst.data(), dst.size());
-        const bool ok = all_finite(dst) && rmse <= tolerance;
+        const double rmse = bench::rel_rmse(ref.data(), dst.data(), dst.size());
+        const bool ok = bench::all_finite(dst) && rmse <= tolerance;
         g_failed |= !ok;
         const double gflop = 2.0 * m * n * k / 1e9;
         std::printf(
@@ -181,9 +131,10 @@ int main() {
     {
         std::vector<float> a{1.0f, -2.0f, 3.0f, -4.0f}, b = a, p = a;
         for (float& v : b) v *= 1.01f;
-        poison(p);
-        if (rel_rmse(a.data(), a.data(), a.size()) != 0.0 ||
-            rel_rmse(a.data(), b.data(), b.size()) <= kF32Tolerance || !all_finite(a) || all_finite(p)) {
+        bench::poison(p);
+        if (bench::rel_rmse(a.data(), a.data(), a.size()) != 0.0 ||
+            bench::rel_rmse(a.data(), b.data(), b.size()) <= kF32Tolerance || !bench::all_finite(a) ||
+            bench::all_finite(p)) {
             std::fprintf(stderr, "correctness check cannot fail; refusing to run\n");
             return 2;
         }
