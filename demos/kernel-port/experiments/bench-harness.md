@@ -192,9 +192,16 @@ The int4 rows change from 6.6e-02 to 4.4e-03, its square.
   Accelerate exists only on macOS. This container has only x86 C library
   headers, so an empty `gnu/stubs-32.h` was supplied. This checks syntax
   and types only: nothing was compiled to machine code or linked.
-- **Real hardware: pending.** The next Mac session builds all three
-  programs (`build.sh`, `experiments/build-gemv.sh`,
-  `experiments/build-baseline-fairness.sh`).
+- **Real hardware: passed (2026-10-04).** On the M5 Pro, at `94ad63e`,
+  with KleidiAI at the pinned commit, `build.sh`,
+  `experiments/build-gemv.sh` and `experiments/build-baseline-fairness.sh`
+  each built their program (`build/bench`, `build/gemv-decode`,
+  `build/baseline-fairness`). One run of `build/bench` printed a relative
+  RMSE of 0 for the f32 rows and 6.7e-02 for the int4 rows, the same
+  values as the rehearsal table. Its timings were not part of this
+  experiment and aren't recorded as results: the power state wasn't
+  logged, and the plugged-in replication of `baseline-fairness.md` is
+  still pending.
 
 ### Noticed in passing (not a measure)
 

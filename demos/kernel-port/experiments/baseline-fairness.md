@@ -176,3 +176,25 @@ re-run all five. Never re-run to get different numbers.
     and 0.52 at M=32.
   - Computed summary:
     `../results/2026-10-03-1621-baseline-fairness/summary.md`.
+- Run `2026-10-04-1638` (AC power: the replication declared in the
+  deviation log, and the run that follows the protocol). Same machine,
+  macOS and compiler as the first run; built from `94ad63e`, the
+  shared-harness version (`bench-harness.md`):
+  - **Q1: compute-limited.** R = 1.10 (per run 1.04–1.13), inside the
+    0.85–1.15 band on every run, though nearer its upper edge than the
+    first run's 1.07.
+  - **Q2: the headline is restated.** The share surviving is 0.52 at
+    M=256 and 0.51 at M=32. Against the faster reuse-matched loop, int4 is
+    6.48× at M=256 and 6.45× at M=32; against the published loop, 12.71×
+    and 12.52×.
+  - **Controls:** all passed. The published rows reproduced within ±10%,
+    the M=1 fallback rows ran at 1.00× the published loop, and all 115
+    rows across the five runs passed their correctness check.
+  - **Secondary (exploratory):** int4 is 1.36× Accelerate's speed at M=1;
+    Accelerate is 1.45× faster at M=32 and 3.17× faster at M=256.
+  - Computed summary:
+    `../results/2026-10-04-1638-baseline-fairness/summary.md`. It
+    reproduces exactly from the five run files.
+- **The two runs agree on every verdict,** so the published conclusions
+  stand. Per the deviation log, the AC run is the one that follows the
+  protocol, and its numbers are the ones to quote.

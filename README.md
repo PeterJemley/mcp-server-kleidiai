@@ -60,15 +60,15 @@ The port and benchmark are committed and reproducible from
 [`demos/kernel-port/`](./demos/kernel-port/). On an Apple M5 Pro,
 single-threaded, the port is **2.3× faster at decode** and **6.5× faster at
 batch and prompt sizes** than an f32 loop that reuses each loaded weight
-across rows, as the int4 kernel does (12.4–12.7× against the original f32
+across rows, as the int4 kernel does (12.5–12.7× against the original f32
 loop, which re-reads every weight for every row). Weights shrink 67 MB →
 8.4 MB, and the quantization error matches int4 theory to two digits.
 Apple's Accelerate f32 `sgemm` (1.5 TFLOP/s on one thread, which points to
 the chip's matrix hardware) beats this vector-unit port at batch (1.5×) and
-prompt (3.1×) sizes; the port wins at decode (1.3×) and on memory. Measured in a
+prompt (3.2×) sizes; the port wins at decode (1.4×) and on memory. Measured in a
 preregistered experiment
 ([plan](./demos/kernel-port/experiments/baseline-fairness.md),
-[results](./demos/kernel-port/results/2026-10-03-1621-baseline-fairness/summary.md))
+[results](./demos/kernel-port/results/2026-10-04-1638-baseline-fairness/summary.md))
 on the hand-written rehearsal port. The recorded
 session — an agent re-deriving the port using this server's tools — is
 pending and will be published here when it exists; until then, no

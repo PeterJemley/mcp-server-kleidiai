@@ -1,0 +1,7 @@
+repo_commit: 94ad63e0d0f0597ac9841581e160e35a77e3b198
+kleidiai_commit: b87ef9c94f45f11c81a6b1fdaed1b2b45ea58c0c
+machine: Mac17,8 / Apple M5 Pro
+macos: 27.0.1 (26A434)
+compiler: Apple clang version 21.0.0 (clang-2100.3.34.2)
+power: Now drawing from 'AC Power'
+date_utc: 2026-10-04T20:38:01Z

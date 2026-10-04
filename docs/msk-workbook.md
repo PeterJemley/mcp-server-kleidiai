@@ -638,9 +638,9 @@ The test shrinks the weight matrix until it fits in the processor's
 **cache** (a small, very fast memory on the chip itself), from 67 MB down
 to 2 and 4 MB, changing nothing else. If memory bandwidth were the limit,
 the small version would run at least 1.5× faster; if it were a compute
-limit, it would stay within 15%. Measured: 1.07× faster (1.06–1.07 in each
-of five runs). So the loop is **compute-limited**, and Q30's reading
-stands.
+limit, it would stay within 15%. Measured with the Mac plugged in: 1.10×
+faster (1.04–1.13 across five runs; an earlier run on battery gave 1.07×).
+So the loop is **compute-limited**, and Q30's reading stands.
 
 There's a refinement, though. The limit belongs to this loop, not to the
 chip. Every multiply-add in it needs two numbers fetched (one input value,
@@ -652,20 +652,21 @@ it needs fewer fetches per multiply-add and runs at 74 GFLOP/s instead of
 *Question 2: how much of the 12.6–13.5× is that reuse?* The test adds f32
 loops that share each weight across 4 or 8 rows, then compares the int4
 port with the faster of them. Measured: the port is 6.5× faster than the
-reuse-matched loop at both M=32 and M=256, against 12.4–12.7× over the
-original loop in the same runs. About half survives (0.51 and 0.52). The
-plan's rule said that anything below 0.8 means the headline must be
-restated, so the README now leads with 6.5× and gives 12.4–12.7× second,
+reuse-matched loop at both M=32 and M=256, against 12.5–12.7× over the
+original loop in the same runs. About half survives (0.52 at M=256, 0.51
+at M=32). The plan's rule said that anything below 0.8 means the headline
+must be restated, so the README now leads with 6.5× and gives 12.5–12.7×
+second,
 labelled as being against the loop without reuse.
 
 *Also measured, with no prediction made in advance:* Apple's own math
 library, **Accelerate**, which ships with macOS. Its f32 matrix multiply
-(`sgemm`) on one thread reaches 1,507 GFLOP/s at M=256. That is about 3×
+(`sgemm`) on one thread reaches 1,497 GFLOP/s at M=256. That is about 3×
 the int4 port and 20× the reuse-matched f32 loop, and it points to the
 M5 Pro's separate matrix unit (**SME**, Arm's Scalable Matrix Extension)
 rather than the ordinary vector units all the other code here uses.
-Accelerate beats the int4 port 1.5× at M=32 and 3.1× at M=256; the int4
-port wins at decode (M=1, 1.3×) and keeps its 8× smaller weights.
+Accelerate beats the int4 port 1.5× at M=32 and 3.2× at M=256; the int4
+port wins at decode (M=1, 1.4×) and keeps its 8× smaller weights.
 
 This doesn't contradict the port; it shows the comparison spans two
 different pieces of hardware. KleidiAI also ships kernels for the SME
@@ -674,16 +675,19 @@ with Accelerate is the obvious next experiment.
 
 *Checks that the run was sound:*
 - The published numbers reproduced within ±10%: f32 at 38 GFLOP/s
-  against 35, and int4 at 2.26×, 12.39× and 12.65×.
+  against 35, and int4 at 2.32×, 12.52× and 12.71×.
 - The reuse loops at M=1, where there is nothing to reuse, timed at
   exactly the published loop's speed.
 - Every output was checked against the f32 result.
-- One deviation is on record: the run used battery power, not plugged in
-  as planned. A plugged-in replication is declared in the plan and will be
-  reported whatever it shows.
+- One deviation is on record: the first run used battery power, not
+  plugged in as planned. The plan declared a plugged-in replication in
+  advance, to be reported whatever it showed and to govern if the two
+  disagreed. It ran on 2026-10-04 and reached the same verdict on every
+  question; the numbers in this answer are from it.
 
 (Source: `demos/kernel-port/experiments/baseline-fairness.md`;
-`demos/kernel-port/results/2026-10-03-1621-baseline-fairness/summary.md`.)
+`demos/kernel-port/results/2026-10-04-1638-baseline-fairness/summary.md`;
+the battery run: `demos/kernel-port/results/2026-10-03-1621-baseline-fairness/summary.md`.)
 
 **Q31. The port's rel-RMSE against f32 is 6.7×10⁻². Derive why that is exactly the expected value, not an error.**
 
