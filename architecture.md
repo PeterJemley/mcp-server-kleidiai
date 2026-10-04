@@ -43,8 +43,11 @@ corpus + evals, not retrieval cleverness, and every attempt to be cleverer is
 on the record as a measured refutation — static embeddings scored 28/48 vs
 BM25's 38/48, the hybrid tied while adding a dependency, and the three
 dilution-fix mechanisms (section rescue, IDF-weighted coverage, larger
-stopword list) all failed to beat baseline (`evals/reports/report.md`,
-`evals/retrieval/ab_dilution.py`). Known residual failures are pinned by
+stopword list) all failed to beat baseline (`evals/reports/report.md`;
+re-run with `evals/retrieval/ab_configs.py`). Retriever candidates are
+configurations of the one `search()` the server runs (`RetrievalConfig` in
+`corpus.py`), not copies of it, and every candidate's per-question top-1 is
+committed in `ab_configs.tsv` (`evals/retrieval/config-seam.md`). Known residual failures are pinned by
 strict-xfail tests that demand un-marking the day something fixes them.
 
 ## Server: a thin shim on purpose — twice

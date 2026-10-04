@@ -1,0 +1,29 @@
+module under test: packages/server-py/src/mcp_server_kleidiai/corpus.py (vs pre-seam corpus.py at 43dddc7)
+questions: 51, chunks: 206
+
+P1 equivalence (seam vs ab_dilution copy):
+  cur-stop idfcov=0 rescue=0             51/51
+  cur-stop idfcov=0 rescue=1             51/51
+  cur-stop idfcov=1 rescue=0             51/51
+  cur-stop idfcov=1 rescue=1             51/51
+  nltk-stop idfcov=0 rescue=0            51/51
+  nltk-stop idfcov=0 rescue=1            51/51
+  nltk-stop idfcov=1 rescue=0            51/51
+  nltk-stop idfcov=1 rescue=1            51/51
+  P1 TOTAL: 408/408
+
+P1 controls (must report mismatches):
+  seam nltk vs copy cur-stop idf=0 rescue=0: 5 mismatches
+  seam nltk vs copy cur-stop idf=0 rescue=1: 5 mismatches
+  seam nltk vs copy cur-stop idf=1 rescue=0: 4 mismatches
+  seam nltk vs copy cur-stop idf=1 rescue=1: 4 mismatches
+  broken seam (ignores idf_coverage) vs copy cur-stop idf=1 rescue=0: 2 mismatches
+  broken seam (ignores idf_coverage) vs copy cur-stop idf=1 rescue=1: 2 mismatches
+  broken seam (ignores idf_coverage) vs copy nltk-stop idf=1 rescue=0: 2 mismatches
+  broken seam (ignores idf_coverage) vs copy nltk-stop idf=1 rescue=1: 2 mismatches
+
+P2 default output unchanged: 60/60 queries identical (51 QA + 9 test queries; full result lists)
+P2 control (must report differences): k1=1.2 vs committed differs on 59/60 queries
+
+P3 size: corpus.py +77 -28 = net 49; ab_configs.py 81 lines; total 130 vs copy 168 (must be < 168)
+P3 scoring code in driver: none

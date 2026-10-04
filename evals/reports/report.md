@@ -84,8 +84,12 @@ marked (regressed).
 ## Follow-up A/B: dilution-fix candidates (2026-08-20, all refuted)
 
 The fix sketched at M2 close — score max(doc-level, dedicated-section) — was
-implemented and measured (`evals/retrieval/ab_dilution.py`, dev_check metric),
-alongside two other candidate mechanisms, in all 8 combinations:
+implemented and measured (dev_check metric), alongside two other candidate
+mechanisms, in all 8 combinations. The measuring script was a copy of the
+scorer (`ab_dilution.py`, kept in git history); since 2026-10-04 the same
+comparison is `evals/retrieval/ab_configs.py`, which runs the real `search()`
+under 8 named configurations and reproduces every result below exactly
+(`evals/retrieval/config-seam.md`):
 
 | Candidate | Overall | Frozen 30 | Verdict |
 |---|---|---|---|

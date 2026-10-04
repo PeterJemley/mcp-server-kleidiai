@@ -135,8 +135,8 @@ def load_chunks(corpus_dir: Path | None = None) -> list[DocChunk]:
     return chunks
 
 
-def _tokens(s: str) -> list[str]:
-    return [t for t in _TOKEN_RE.findall(s.lower()) if t not in _STOPWORDS]
+def _tokens(s: str, stopwords: frozenset[str] = _STOPWORDS) -> list[str]:
+    return [t for t in _TOKEN_RE.findall(s.lower()) if t not in stopwords]
 
 
 def _snippet(text: str, terms: set[str], width: int = 280) -> str:
@@ -149,19 +149,40 @@ def _snippet(text: str, terms: set[str], width: int = 280) -> str:
     return ("…" if start > 0 else "") + text[start:end].strip() + ("…" if end < len(text) else "")
 
 
-# BM25 parameters: standard Okapi defaults; heading terms count HEADING_WEIGHT
-# times in chunk stats so a section titled for the query outranks a body
-# mention (BM25F-lite). MAX_PER_DOC keeps the result list useful to agents:
-# the winning doc contributes its best passages, runner-up docs still appear.
-_K1 = 1.5
-_B = 0.75
-_HEADING_WEIGHT = 3
+# MAX_PER_DOC keeps the result list useful to agents: the winning doc
+# contributes its best passages, runner-up docs still appear.
 _MAX_PER_DOC = 2
+
+
+@dataclass(frozen=True)
+class RetrievalConfig:
+    """The retriever's settings. The server always uses the defaults; retriever
+    A/Bs pass variants here instead of copying search().
+
+    k1 and b are the standard Okapi BM25 defaults. Heading terms count
+    heading_weight times in chunk stats, so a section titled for the query
+    outranks a body mention (BM25F-lite). idf_coverage weights query-term
+    coverage by doc-level IDF instead of counting distinct terms;
+    section_rescue lets a doc score as its best section scored like a
+    standalone doc. Both are off: the 2026-08-20 A/B refuted them.
+    """
+
+    k1: float = 1.5
+    b: float = 0.75
+    heading_weight: int = 3
+    stopwords: frozenset[str] = _STOPWORDS
+    idf_coverage: bool = False
+    section_rescue: bool = False
+
+
+DEFAULT_CONFIG = RetrievalConfig()
 
 
 @dataclass
 class _Index:
     chunks: list[DocChunk]
+    stopwords: frozenset[str]
+    heading_weight: int
     # chunk level
     term_freqs: list[dict[str, int]]  # heading-weighted
     lengths: list[int]
@@ -177,17 +198,17 @@ class _Index:
 _index: _Index | None = None
 
 
-def _build_index(chunks: list[DocChunk]) -> _Index:
+def _build_index(chunks: list[DocChunk], config: RetrievalConfig) -> _Index:
     term_freqs: list[dict[str, int]] = []
     lengths: list[int] = []
     df: dict[str, int] = {}
     doc_tf: dict[str, dict[str, int]] = {}
     for ch in chunks:
         tf: dict[str, int] = {}
-        for t in _tokens(ch.text):
+        for t in _tokens(ch.text, config.stopwords):
             tf[t] = tf.get(t, 0) + 1
-        for t in _tokens(ch.heading):
-            tf[t] = tf.get(t, 0) + _HEADING_WEIGHT
+        for t in _tokens(ch.heading, config.stopwords):
+            tf[t] = tf.get(t, 0) + config.heading_weight
         term_freqs.append(tf)
         lengths.append(sum(tf.values()))
         for t in tf:
@@ -207,41 +228,69 @@ def _build_index(chunks: list[DocChunk]) -> _Index:
         for t in tf:
             doc_df[t] = doc_df.get(t, 0) + 1
     doc_idf = {t: math.log((nd - d + 0.5) / (d + 0.5) + 1.0) for t, d in doc_df.items()}
-    return _Index(chunks, term_freqs, lengths, avg, idf, doc_tf, doc_lengths, doc_avg, doc_idf)
+    return _Index(
+        chunks, config.stopwords, config.heading_weight, term_freqs, lengths, avg, idf,
+        doc_tf, doc_lengths, doc_avg, doc_idf,
+    )
 
 
-def _bm25(matched: set[str], tf: dict[str, int], idf: dict[str, float], length: int, avg: float) -> float:
-    norm = _K1 * (1.0 - _B + _B * length / avg)
-    return sum(idf[t] * (tf[t] * (_K1 + 1.0)) / (tf[t] + norm) for t in matched)
+def _bm25(
+    matched: set[str], tf: dict[str, int], idf: dict[str, float], length: int, avg: float,
+    config: RetrievalConfig,
+) -> float:
+    k1, b = config.k1, config.b
+    norm = k1 * (1.0 - b + b * length / avg)
+    return sum(idf[t] * (tf[t] * (k1 + 1.0)) / (tf[t] + norm) for t in matched)
 
 
-def search(query: str, chunks: list[DocChunk], limit: int = 5) -> list[SearchResult]:
+def search(
+    query: str, chunks: list[DocChunk], limit: int = 5, config: RetrievalConfig = DEFAULT_CONFIG
+) -> list[SearchResult]:
     """Rank corpus passages for a query with two-level BM25.
 
     Doc-level BM25 (coverage-scaled) decides which docs canonically answer;
     chunk-level BM25 orders passages within each doc, capped at _MAX_PER_DOC
     so runner-up docs still surface. The reported score is the doc-level
     relevance. The index is built lazily and reused while the same chunk list
-    is passed in.
+    and index-shaping settings are passed in.
     """
     global _index
-    q = set(_tokens(query))
+    q = set(_tokens(query, config.stopwords))
     if not q:
         return []
-    if _index is None or _index.chunks is not chunks:
-        _index = _build_index(chunks)
+    if (
+        _index is None
+        or _index.chunks is not chunks
+        or (_index.stopwords, _index.heading_weight) != (config.stopwords, config.heading_weight)
+    ):
+        _index = _build_index(chunks, config)
     idx = _index
+    idf_total = sum(idx.doc_idf.get(t, 0.0) for t in q)
 
-    # Doc-level relevance: BM25 over the whole doc, scaled by the fraction of
-    # distinct query terms the doc contains. Coverage keeps a doc that merely
-    # repeats one rare query term from beating the doc that answers the query.
+    def coverage(matched: set[str]) -> float:
+        if config.idf_coverage:
+            return sum(idx.doc_idf[t] for t in matched) / idf_total if idf_total else 0.0
+        return len(matched) / len(q)
+
+    # Doc-level relevance: BM25 over the whole doc, scaled by query-term
+    # coverage. Coverage keeps a doc that merely repeats one rare query term
+    # from beating the doc that answers the query.
     doc_score: dict[str, float] = {}
     for doc_id, dtf in idx.doc_term_freqs.items():
         matched = {t for t in q if t in dtf}
         if not matched:
             continue
-        s = _bm25(matched, dtf, idx.doc_idf, idx.doc_lengths[doc_id], idx.doc_avg_length)
-        doc_score[doc_id] = s * (len(matched) / len(q))
+        s = _bm25(matched, dtf, idx.doc_idf, idx.doc_lengths[doc_id], idx.doc_avg_length, config)
+        doc_score[doc_id] = s * coverage(matched)
+    if config.section_rescue:
+        for i, ch in enumerate(chunks):
+            if ch.doc_id not in doc_score:
+                continue
+            matched = {t for t in q if t in idx.term_freqs[i]}
+            if not matched:
+                continue
+            s = _bm25(matched, idx.term_freqs[i], idx.doc_idf, idx.lengths[i], idx.doc_avg_length, config)
+            doc_score[ch.doc_id] = max(doc_score[ch.doc_id], s * coverage(matched))
 
     # Chunk-level relevance orders passages; doc-level relevance orders docs.
     # Heading-only chunks count toward doc stats but make useless passages.
@@ -253,7 +302,7 @@ def search(query: str, chunks: list[DocChunk], limit: int = 5) -> list[SearchRes
         matched = {t for t in q if t in tf}
         if not matched:
             continue
-        chunk_s = _bm25(matched, tf, idx.idf, idx.lengths[i], idx.avg_length)
+        chunk_s = _bm25(matched, tf, idx.idf, idx.lengths[i], idx.avg_length, config)
         scored.append((doc_score[ch.doc_id], chunk_s, i))
     scored.sort(reverse=True)
 

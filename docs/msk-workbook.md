@@ -451,7 +451,10 @@ IDF and length normalization fix directly.
 
 Sketch: score each doc as max(whole-doc BM25, best dedicated-section
 score), so a short answering section inside a long doc isn't diluted away.
-Measured across 8 configurations (`evals/retrieval/ab_dilution.py`):
+Measured across 8 configurations, at the time with a script that copied the
+search code (since 2026-10-04 the same comparison is
+`evals/retrieval/ab_configs.py`, which runs the real search with different
+settings and reproduces every result exactly):
 **zero effect** in every combination. The reason is in the score data: the
 docs that "steal" these queries contain their own dedicated sections
 scoring at least as high as the wanted doc's section (Q15's worked
