@@ -56,7 +56,11 @@ candidate's 10-question deficit is one, while the chosen retriever's +4 over
 the old scorer and its 1-question edge over a chunk-level variant are within
 noise (it was also chosen for adding no dependencies). Two refutations are on
 the record (semantic embeddings at feasible local size; three dilution-fix
-mechanisms). See [`evals/reports/report.md`](./evals/reports/report.md).
+mechanisms). A fix for the held-out set's main weakness, two build guides
+confused with each other, was then tested on 211 fresh blind questions and not
+adopted: its gain was small and mostly on questions resembling the ones it was
+chosen from (`evals/build-guide/plan.md`). See
+[`evals/reports/report.md`](./evals/reports/report.md).
 
 ## Kernel-port demo (M3, in progress)
 

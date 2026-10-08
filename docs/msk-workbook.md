@@ -480,6 +480,56 @@ Limits:
 
 (Source: `evals/heldout/plan.md`; `evals/heldout/score.out`.)
 
+**Q22b. Half the held-out misses confuse the two build guides. Could that be fixed, and how would you know? (2026-10-08)**
+
+**Finding the mechanism.** Studying the misses showed why the confusion
+happens. Each document's score is its word relevance (BM25) multiplied by
+its **coverage**: the share of the question's words that appear anywhere in
+the document. The llama.cpp build guide is 2.6 times the average document
+length, so it contains some of almost any question's words somewhere, often
+in sections that have nothing to do with the question. In most misses the
+right document had equal or higher relevance and lost on coverage alone.
+
+**The candidate fix.** Count coverage within each document's best-matching
+section instead, which is where an answer actually lives. On the 169
+questions already studied (the 51 development questions and the 118
+held-out ones), it fixed 8, broke 5, and cut the build-guide confusions on
+the held-out set from 8 to 3. A rival explanation was also tried: the
+build guide simply being long. Penalizing length more strongly fixed only
+1.
+
+**Why that wasn't proof.** The fix was chosen by looking at those very
+misses, so those questions can't test it. That makes the held-out set
+development data for this question. A fresh test was preregistered
+(`evals/build-guide/plan.md`):
+- 211 new blind questions, made the same way, including three per
+  build-guide section, so a modest effect would be detectable;
+- a statistical test that treats each section, not each question, as the
+  unit, because questions about the same section aren't independent;
+- an adoption rule: the fix ships only if it clearly helps the build-guide
+  questions and doesn't lower accuracy on a one-per-section set.
+
+**Result: inconclusive, not adopted.**
+- On the 146 build-guide questions, the fix corrected 6 and broke 2.
+  Chance alone would produce a difference that size about one time in five
+  (p = 0.22), and the bar was one in twenty.
+- Confusions fell from 13 to 9, not the halving required.
+- Length penalties again did almost nothing (1 fixed), so the mechanism
+  looks right in direction.
+
+**The lesson.** 49 of the new build-guide questions closely resembled
+held-out questions studied while choosing the fix, because they came from
+the same sections. Without them, the fix's net gain was +1 of 97. A fix
+chosen by staring at particular failures fits those failures' wording, and
+looks bigger on them than it is. That's why this project tests fixes on
+questions the fix never saw, and why this one stays switched off (it remains
+an option, `section_coverage`, in the retriever's settings).
+
+The shipped retriever scored 100/116 on the new one-per-section set,
+consistent with its held-out 102/118.
+
+(Source: `evals/build-guide/plan.md`; `evals/build-guide/score.out`.)
+
 ---
 
 ## 6. Refutations on the record

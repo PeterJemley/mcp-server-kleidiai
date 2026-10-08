@@ -1,0 +1,34 @@
+questions: 211 (116 core, one per section; 146 from the two build guides)
+
+VALIDITY GATES (any failure makes the measurement invalid)
+  ok   M option off = shipped retriever (full result lists, 380 queries): 380/380
+  ok   A oracle on core (section text as query): 116/116; must be >= 90%
+  ok   B random-doc baseline on core: 15.8%; must be <= 30%
+  ok   C shifted questions on core: 26/116; must be <= constant baseline + 10 points (37/116, always 'llamacpp-build')
+  measurement VALID
+
+Q1 build-guide questions, section coverage (C1) vs shipped (C0)
+  accuracy C0 129/146, C1 133/146; fixed 6, broken 2, net +4
+  section-level sign-flip test (exact, two-sided): p = 0.2188 (6 sections changed)
+  confusions between the two build guides: C0 13, C1 9
+  verdict: INCONCLUSIVE
+
+Q2 core set (one question per section, all documents)
+  C0 100/116 = 86.2% (78.8%-91.3%); C1 104/116 = 89.7% (82.8%-94.0%); net +4
+  decision: KEEP the shipped retriever
+
+SECONDARY (no decision attached)
+  S1 rival, length normalization b=1.0 (C2) on build-guide questions: fixed 1, broken 0, confusions 12; on core 100/116
+  S2 McNemar exact on build-guide questions, ignoring sections: p = 0.2891
+  S3 C0 correct doc anywhere in 5 results, core: 115/116
+  S3 C1 correct doc anywhere in 5 results, core: 115/116
+  S4 core accuracy by source doc (C0 -> C1):
+     kleidiai-matmul-pack                   8/11 -> 8/11
+     kleidiai-matmul-qsi4cx                 14/14 -> 14/14
+     kleidiai-microkernel-names             11/14 -> 13/14
+     kleidiai-readme                        12/17 -> 12/17
+     learnarm-llamacpp-sme2-integration     9/9 -> 9/9
+     llamacpp-build                         36/37 -> 37/37
+     mlexamples-llamacpp-int4-patch         10/14 -> 11/14
+  S5 near-duplicates of a design (v1) question among build-guide questions: 49; net without them +1 of 97
+  S6 design data (already seen when choosing C1): C0 dev 41/51 v1 102/118; C1 dev 41/51 v1 105/118; C2 dev 41/51 v1 103/118; 

@@ -32,6 +32,21 @@ generalizes to within 10 points; the interval's lower end, 79.1%, clears the
 llama.cpp with KleidiAI. That is why the ML-examples patch guide's questions
 score 7/14. The misses are recorded, not fixed.
 
+**Follow-up (2026-10-08): a fix for that confusion, tested on fresh questions
+and not adopted.** Studying the misses suggested a mechanism: coverage counted
+over the whole of the long build guide. Counting coverage within each
+document's best section was then tested on 211 new blind questions
+(`evals/build-guide/plan.md`). The outcome was inconclusive:
+- on the 146 build-guide questions, it fixed 6 and broke 2 (section-level
+  p = 0.22);
+- confusions fell from 13 to 9, short of the halving the plan required;
+- without the 49 questions resembling the studied misses, the net gain was
+  +1 of 97.
+
+The shipped retriever is unchanged. On that test's one-per-section set, it
+scores **100/116 (86.2%; 95% Wilson 78.8%–91.3%)**, consistent with the
+held-out score above.
+
 ## Development set (2026-08-20)
 
 - **Run:** 2026-08-20 (UTC) · harness: promptfoo 0.121.18 · provider: `search_kleidiai_docs` (custom, deterministic)

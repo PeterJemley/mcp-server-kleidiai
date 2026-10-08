@@ -165,6 +165,10 @@ class RetrievalConfig:
     coverage by doc-level IDF instead of counting distinct terms;
     section_rescue lets a doc score as its best section scored like a
     standalone doc. Both are off: the 2026-08-20 A/B refuted them.
+    section_coverage measures coverage within a doc's best-covering section
+    instead of the whole doc, so a long doc can't collect a query's words
+    from unrelated sections. Off: its preregistered test on fresh questions
+    was inconclusive (evals/build-guide/plan.md).
     """
 
     k1: float = 1.5
@@ -173,6 +177,7 @@ class RetrievalConfig:
     stopwords: frozenset[str] = _STOPWORDS
     idf_coverage: bool = False
     section_rescue: bool = False
+    section_coverage: bool = False
 
 
 DEFAULT_CONFIG = RetrievalConfig()
@@ -275,13 +280,20 @@ def search(
     # Doc-level relevance: BM25 over the whole doc, scaled by query-term
     # coverage. Coverage keeps a doc that merely repeats one rare query term
     # from beating the doc that answers the query.
+    best_section_cov: dict[str, float] = {}
+    if config.section_coverage:
+        for i, ch in enumerate(chunks):
+            sec_matched = {t for t in q if t in idx.term_freqs[i]}
+            if sec_matched:
+                best_section_cov[ch.doc_id] = max(best_section_cov.get(ch.doc_id, 0.0), coverage(sec_matched))
     doc_score: dict[str, float] = {}
     for doc_id, dtf in idx.doc_term_freqs.items():
         matched = {t for t in q if t in dtf}
         if not matched:
             continue
         s = _bm25(matched, dtf, idx.doc_idf, idx.doc_lengths[doc_id], idx.doc_avg_length, config)
-        doc_score[doc_id] = s * coverage(matched)
+        cov = best_section_cov.get(doc_id, 0.0) if config.section_coverage else coverage(matched)
+        doc_score[doc_id] = s * cov
     if config.section_rescue:
         for i, ch in enumerate(chunks):
             if ch.doc_id not in doc_score:

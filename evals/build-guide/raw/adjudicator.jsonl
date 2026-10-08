@@ -1,0 +1,211 @@
+{"qid": "q001", "answering_doc_ids": ["llamacpp-build"], "note": "Non-native build (GGML_NATIVE=OFF) or set CMAKE_CUDA_ARCHITECTURES."}
+{"qid": "q002", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_CUDA_FA_ALL_QUANTS; compilation takes much longer."}
+{"qid": "q003", "answering_doc_ids": ["kleidiai-matmul-pack", "kleidiai-microkernel-names"], "note": "Pack guide: block-wise quant params, each block has a scale; naming guide defines d32 and packed p."}
+{"qid": "q004", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "-march=armv8.2a+i8mm in C/CXX flags (CMake target uses armv8.2-a+dotprod+i8mm)."}
+{"qid": "q005", "answering_doc_ids": ["llamacpp-build"], "note": "Open-source inference toolkit for Intel CPUs, GPUs and NPUs."}
+{"qid": "q006", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "dwconv_ukernel_name grammar: dwconv_clamp and rhs_dwconv_pack forms."}
+{"qid": "q007", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "kai_matmul_clamp_f32_qsi8d32p1vlx4_qsi4c32p4vlx4_1vlx4vl_sme2_mopa."}
+{"qid": "q008", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "cmake with CMAKE_SYSTEM_NAME=Linux and aarch64-none-linux-gnu gcc/g++."}
+{"qid": "q009", "answering_doc_ids": ["llamacpp-build"], "note": "Enable -DGGML_HIP_ROCWMMA_FATTN=ON with rocWMMA headers."}
+{"qid": "q010", "answering_doc_ids": ["llamacpp-build"], "note": "Sets CUDA command buffer size, reducing CPU stalls."}
+{"qid": "q011", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "NDK android.toolchain.cmake, arm64-v8a, android-23 after applying patch."}
+{"qid": "q012", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_BACKEND_DL builds backends as dynamically loaded libraries."}
+{"qid": "q013", "answering_doc_ids": ["llamacpp-build"], "note": "CANN backend: cmake -DGGML_CANN=on."}
+{"qid": "q014", "answering_doc_ids": ["kleidiai-readme"], "note": "Kernel name advertises required extensions; check cat /proc/cpuinfo."}
+{"qid": "q015", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_VULKAN=ON."}
+{"qid": "q016", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "qai8dxp: scale factor stored at the end of each row."}
+{"qid": "q017", "answering_doc_ids": ["llamacpp-build", "mlexamples-llamacpp-int4-patch"], "note": "Build guide: cmake -B build -DGGML_CPU_KLEIDIAI=ON; patch guide: native Linux cmake .. && make."}
+{"qid": "q018", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "Padding depends on underlying instructions, mr/nr choice and M, N, K."}
+{"qid": "q019", "answering_doc_ids": ["llamacpp-build"], "note": "Yes, unified memory hurts performance for non-integrated GPUs."}
+{"qid": "q020", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS."}
+{"qid": "q021", "answering_doc_ids": ["kleidiai-readme"], "note": "No traditional ML operators; micro-kernels are building blocks."}
+{"qid": "q022", "answering_doc_ids": ["llamacpp-build"], "note": "Set VK_ICD_FILENAMES to the driver's ICD JSON (MoltenVK or KosmicKrisp)."}
+{"qid": "q023", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "GGML_KLEIDIAI_CACHE and KLEIDIAI_BUILD_TESTS unsupported; MSVC unsupported, use llvm preset."}
+{"qid": "q024", "answering_doc_ids": ["llamacpp-build"], "note": "libvulkan-dev glslc spirv-headers."}
+{"qid": "q025", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "Not required to include, but its directory must be on the include path."}
+{"qid": "q026", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_CUDA=ON -DGGML_NATIVE=OFF."}
+{"qid": "q027", "answering_doc_ids": ["llamacpp-build"], "note": "Higher-level programming model; used to support Intel GPUs."}
+{"qid": "q028", "answering_doc_ids": ["llamacpp-build"], "note": "Most should work but are not thoroughly tested."}
+{"qid": "q029", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_HIP_ROCWMMA_FATTN=ON; rocWMMA from rocm meta package or rocwmma-dev."}
+{"qid": "q030", "answering_doc_ids": ["llamacpp-build"], "note": "spirv-headers-devel."}
+{"qid": "q031", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "Prerequisites: matmul, quantization schemes, Arm cross-compilation, Linux commands."}
+{"qid": "q032", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "RHS weight pack once at load; LHS quant-pack and matmul every step."}
+{"qid": "q033", "answering_doc_ids": ["llamacpp-build"], "note": "GPU may still accelerate parts with -ngl 0; use --device none."}
+{"qid": "q034", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Q4_0."}
+{"qid": "q035", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_KLEIDIAI_SME=0 disables; n>0 sets SME unit count."}
+{"qid": "q036", "answering_doc_ids": ["llamacpp-build"], "note": "GPU may still be used with -ngl 0; use --device none."}
+{"qid": "q037", "answering_doc_ids": ["kleidiai-readme"], "note": "No; applies to packing and quantization kernels too."}
+{"qid": "q038", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_CUDA_P2P; needs driver support, may crash or corrupt output."}
+{"qid": "q039", "answering_doc_ids": ["llamacpp-build"], "note": "sysroot/usr/include for CL headers; sysroot/usr/lib/aarch64-linux-android for libOpenCL.so."}
+{"qid": "q040", "answering_doc_ids": ["kleidiai-readme", "kleidiai-matmul-qsi4cx"], "note": "README: examples directory of standalone C++ apps; int4 guide names one example."}
+{"qid": "q041", "answering_doc_ids": ["llamacpp-build", "mlexamples-llamacpp-int4-patch"], "note": "arm64-windows-llvm-release."}
+{"qid": "q042", "answering_doc_ids": ["llamacpp-build"], "note": "docker run with --device /dev/dri/renderD128 and /dev/dri/card1."}
+{"qid": "q043", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "FEAT_DotProd (optionally I8MM or SME2), 4GB RAM, 4GB storage."}
+{"qid": "q044", "answering_doc_ids": ["llamacpp-build"], "note": "EMDAWNWEBGPU_DIR."}
+{"qid": "q045", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "adb shell."}
+{"qid": "q046", "answering_doc_ids": ["llamacpp-build"], "note": "Output shows CANN model buffer size and CANN compute buffer size."}
+{"qid": "q047", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "Run tools/check_microkernel_names.py (also used in CI)."}
+{"qid": "q048", "answering_doc_ids": ["llamacpp-build"], "note": "Run vulkaninfo."}
+{"qid": "q049", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "Q4_0, Q8_0 and F16 RHS with F32 LHS/output."}
+{"qid": "q050", "answering_doc_ids": ["kleidiai-readme"], "note": "build-essential and cmake >= 3.18."}
+{"qid": "q051", "answering_doc_ids": ["kleidiai-readme"], "note": "No external deps, no dynamic allocation, no memory management, no scheduling."}
+{"qid": "q052", "answering_doc_ids": ["llamacpp-build"], "note": "Set MUSA_ARCHITECTURES, e.g. \"21\"."}
+{"qid": "q053", "answering_doc_ids": ["llamacpp-build"], "note": "CMAKE_INSTALL_RPATH=/opt/cuda-11.7/lib64;$ORIGIN plus CMAKE_BUILD_WITH_INSTALL_RPATH=ON."}
+{"qid": "q054", "answering_doc_ids": ["kleidiai-matmul-pack", "kleidiai-microkernel-names"], "note": "Sequential: low nibble K+0, high nibble K+1."}
+{"qid": "q055", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "At least FEAT_DotProd; optionally FEAT_I8MM or SME2."}
+{"qid": "q056", "answering_doc_ids": ["llamacpp-build"], "note": "git, ucrt gcc, cmake, vulkan-devel, shaderc, spirv-headers."}
+{"qid": "q057", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Caches transformed weights; stores another model copy kai_transformed_weights.cache."}
+{"qid": "q058", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "Scale, plus offset values for asymmetric quantization."}
+{"qid": "q059", "answering_doc_ids": ["llamacpp-build"], "note": "\"21\" (compute capability 2.1)."}
+{"qid": "q060", "answering_doc_ids": ["llamacpp-build"], "note": "-DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON."}
+{"qid": "q061", "answering_doc_ids": ["llamacpp-build"], "note": "Install OpenCL headers/ICD loader into NDK sysroot, then cmake with GGML_OPENCL=ON."}
+{"qid": "q062", "answering_doc_ids": ["llamacpp-build"], "note": "Set HIP_DEVICE_LIB_PATH to directory with oclc_abi_version_400.bc."}
+{"qid": "q063", "answering_doc_ids": ["llamacpp-build"], "note": "docker run with --device /dev/dri devices."}
+{"qid": "q064", "answering_doc_ids": ["llamacpp-build", "mlexamples-llamacpp-int4-patch"], "note": "-DGGML_METAL=OFF."}
+{"qid": "q065", "answering_doc_ids": ["llamacpp-build"], "note": "include/llama.h."}
+{"qid": "q066", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "Scales, offsets, bias and optional reduction sums."}
+{"qid": "q067", "answering_doc_ids": ["llamacpp-build"], "note": "Batch sizes higher than 32."}
+{"qid": "q068", "answering_doc_ids": ["kleidiai-readme"], "note": "Dynamically generated archives change; use released source archives."}
+{"qid": "q069", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "adb shell for Android, ssh for Linux."}
+{"qid": "q070", "answering_doc_ids": ["kleidiai-readme"], "note": "KleidiAI, designed for frameworks with existing runtime/memory/threading."}
+{"qid": "q071", "answering_doc_ids": ["llamacpp-build"], "note": "Yes, -DZENDNN_ROOT=/path/to/zendnn/install."}
+{"qid": "q072", "answering_doc_ids": ["kleidiai-readme"], "note": "The routine's .c and .h files plus the common header kai_common.h."}
+{"qid": "q073", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "kai_run_rhs_pack_nxk_qsi4c32ps1s0scalef16_qsu4c32s16s0_neon."}
+{"qid": "q074", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "b8deef0ec0af5febac1d2cfd9119ff330ed0b762."}
+{"qid": "q075", "answering_doc_ids": ["llamacpp-build"], "note": "Forces custom MMQ kernels; worse large-batch speed, lower VRAM."}
+{"qid": "q076", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "Width (MR or NR) and height = block depth KR/SR."}
+{"qid": "q077", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "Works only where kr/sr = 8, any nr."}
+{"qid": "q078", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1."}
+{"qid": "q079", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "N is the output channel; scales array has one scale per N."}
+{"qid": "q080", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "n * (k/2) bytes; caller allocates."}
+{"qid": "q081", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "Bias - lhs_zero_point*reduce_sum; scale = rhs_scale*lhs_scale/dst_scale."}
+{"qid": "q082", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "neon, sve, sve2, sve2p1, sme, sme2, sme2p1."}
+{"qid": "q083", "answering_doc_ids": ["llamacpp-build"], "note": "cospi, cospif, sinpi, sinpif, rsqrt, rsqrtf."}
+{"qid": "q084", "answering_doc_ids": ["llamacpp-build"], "note": "Yes, an OpenAI-compatible HTTP server."}
+{"qid": "q085", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "4vl = 64 elements (32-bit accum), 4vs = 16 elements on 512-bit."}
+{"qid": "q086", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "lhs_quant_pack_qai8dxp_f32 and rhs_pack nxk/kxn qsi4cxp; mr/nr/kr/sr from matmul getters."}
+{"qid": "q087", "answering_doc_ids": ["llamacpp-build"], "note": "No, BLAS doesn't affect generation performance."}
+{"qid": "q088", "answering_doc_ids": ["llamacpp-build"], "note": "NVIDIA control panel System Memory Fallback."}
+{"qid": "q089", "answering_doc_ids": ["kleidiai-microkernel-names", "kleidiai-readme"], "note": "kai_."}
+{"qid": "q090", "answering_doc_ids": ["llamacpp-build"], "note": "llama-cli -m MODEL -p ... -n 50."}
+{"qid": "q091", "answering_doc_ids": ["llamacpp-build"], "note": "libvulkan-dev glslc spirv-headers; loader dev package doesn't always pull SPIRV headers."}
+{"qid": "q092", "answering_doc_ids": ["llamacpp-build"], "note": "--n-gpu-layers 0 or build with -DGGML_METAL=OFF; --device none."}
+{"qid": "q093", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "kai_run_matmul_clamp_f32_qsi8d32p1x4_qsi4c32p4vlx4_1x4vl_sme2_sdot."}
+{"qid": "q094", "answering_doc_ids": ["llamacpp-build"], "note": "CPU only."}
+{"qid": "q095", "answering_doc_ids": ["llamacpp-build"], "note": "llama-cli -m MODEL -p ... -n 50."}
+{"qid": "q096", "answering_doc_ids": ["llamacpp-build"], "note": "Dawn commit 18eb229."}
+{"qid": "q097", "answering_doc_ids": ["kleidiai-readme"], "note": "docs/microkernel_tables.md and kai/ukernels source directory."}
+{"qid": "q098", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_BLAS=ON, GGML_BLAS_VENDOR=Intel10_64lp, icx/icpx, GGML_NATIVE=ON."}
+{"qid": "q099", "answering_doc_ids": ["kleidiai-readme"], "note": "Dispatch output regions across the framework's threads."}
+{"qid": "q100", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "kai_run_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm with -FLT_MAX, FLT_MAX."}
+{"qid": "q101", "answering_doc_ids": ["llamacpp-build"], "note": "Forces MMQ kernels; worse large-batch speed, lower VRAM."}
+{"qid": "q102", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "Beginning of each block before packing, end of each block after."}
+{"qid": "q103", "answering_doc_ids": ["llamacpp-build"], "note": "CMAKE_CUDA_COMPILER pointing to that toolkit's nvcc, plus rpath."}
+{"qid": "q104", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "[quantization] operand_type [quantization_axis] [pack_description]."}
+{"qid": "q105", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "[a] optional, a+ one or more, a | b choice."}
+{"qid": "q106", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_CUDA=ON."}
+{"qid": "q107", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "adb push to /data/local/tmp."}
+{"qid": "q108", "answering_doc_ids": ["llamacpp-build"], "note": "Must source setup_env.sh in each new terminal."}
+{"qid": "q109", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "adb push model.gguf /data/local/tmp."}
+{"qid": "q110", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1."}
+{"qid": "q111", "answering_doc_ids": ["llamacpp-build"], "note": "First build downloads and builds ZenDNN (5-10 min); use ZENDNN_ROOT."}
+{"qid": "q112", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "llama-cli, llama-bench, libllama.so, libggml.so to /data/local/tmp."}
+{"qid": "q113", "answering_doc_ids": ["llamacpp-build"], "note": "Old CUDA vs new glibc; add noexcept(true) in math_functions.h."}
+{"qid": "q114", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "export LD_LIBRARY_PATH=. then llama-cli ... -t 4."}
+{"qid": "q115", "answering_doc_ids": ["llamacpp-build"], "note": "w64devkit, Git Bash MINGW64, or MSYS2."}
+{"qid": "q116", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "SME2 -> I8MM -> DotProd."}
+{"qid": "q117", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Weights transformed only on first run; cached copy stored on disk."}
+{"qid": "q118", "answering_doc_ids": ["llamacpp-build"], "note": "Source the Vulkan SDK setup_env.sh again."}
+{"qid": "q119", "answering_doc_ids": ["kleidiai-readme"], "note": "API may change without notice; use release versions."}
+{"qid": "q120", "answering_doc_ids": ["llamacpp-build"], "note": "Intel CPUs, GPUs and NPUs."}
+{"qid": "q121", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_CPU_KLEIDIAI=ON; look for CPU_KLEIDIAI model buffer size line."}
+{"qid": "q122", "answering_doc_ids": ["llamacpp-build"], "note": "--n-gpu-layers 0 (or --device none)."}
+{"qid": "q123", "answering_doc_ids": ["llamacpp-build"], "note": "Depends on Dawn; -DGGML_WEBGPU=ON."}
+{"qid": "q124", "answering_doc_ids": ["kleidiai-microkernel-names", "kleidiai-matmul-pack"], "note": "Sequential vs interleaved with nibble distance 4 vs interleaved (K+16)."}
+{"qid": "q125", "answering_doc_ids": ["llamacpp-build"], "note": "Emscripten to WebAssembly with emdawnwebgpu bindings."}
+{"qid": "q126", "answering_doc_ids": ["llamacpp-build"], "note": "include/llama.h."}
+{"qid": "q127", "answering_doc_ids": ["llamacpp-build"], "note": "Copy glslc, vulkan-1.lib, headers and write vulkan.pc into w64devkit."}
+{"qid": "q128", "answering_doc_ids": ["llamacpp-build"], "note": "4x; larger command buffer lets more ops queue across GPUs."}
+{"qid": "q129", "answering_doc_ids": ["llamacpp-build"], "note": "LunarG Getting Started with the Linux Tarball Vulkan SDK guide."}
+{"qid": "q130", "answering_doc_ids": ["kleidiai-microkernel-names", "kleidiai-matmul-pack"], "note": "cx per-channel, dx per-dimension, c32/d32 block quantization of 32."}
+{"qid": "q131", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_CUDA_P2P."}
+{"qid": "q132", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_NATIVE=OFF."}
+{"qid": "q133", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "adb push model to /data/local/tmp."}
+{"qid": "q134", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "Weights never change during inference."}
+{"qid": "q135", "answering_doc_ids": ["kleidiai-readme"], "note": "They can process just a portion of the output tensor."}
+{"qid": "q136", "answering_doc_ids": ["kleidiai-readme", "kleidiai-microkernel-names"], "note": "<op>_<dst>_<src0>_<src1>; kai_<folder>_<compute-params>_<tech>_<feature>.c/.h."}
+{"qid": "q137", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "8x8 output block, 32 accumulations in innermost loop."}
+{"qid": "q138", "answering_doc_ids": ["llamacpp-build"], "note": "CANN model/compute buffer size lines in output."}
+{"qid": "q139", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "\"p\" size \"x\" size."}
+{"qid": "q140", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "libllama.so and libggml.so."}
+{"qid": "q141", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "ggml/src/ggml-cpu/kleidiai; GGML_CPU_KLEIDIAI."}
+{"qid": "q142", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "CMake 3.27.0 or above."}
+{"qid": "q143", "answering_doc_ids": ["kleidiai-matmul-qsi4cx", "learnarm-llamacpp-sme2-integration"], "note": "LHS/activation content changes at runtime."}
+{"qid": "q144", "answering_doc_ids": ["llamacpp-build"], "note": "Use a Fedora toolbox container."}
+{"qid": "q145", "answering_doc_ids": ["kleidiai-readme"], "note": "CMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake, ANDROID_ABI=arm64-v8a."}
+{"qid": "q146", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_WEBGPU=ON with Dawn installed."}
+{"qid": "q147", "answering_doc_ids": ["llamacpp-build"], "note": "Data Center Max, Flex, Arc, built-in GPU and iGPU."}
+{"qid": "q148", "answering_doc_ids": ["llamacpp-build"], "note": "Yes, necessary; no supported CUDA packages there."}
+{"qid": "q149", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "MSVC not supported, use llvm preset; cache disabled on Windows."}
+{"qid": "q150", "answering_doc_ids": ["llamacpp-build"], "note": "Yes, hurts non-integrated GPUs."}
+{"qid": "q151", "answering_doc_ids": ["kleidiai-readme"], "note": "KLEIDIAI_INTERNAL_EXTRA_ARCH=+sme."}
+{"qid": "q152", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "int4 per-block quantization (c32)."}
+{"qid": "q153", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_CUDA=ON."}
+{"qid": "q154", "answering_doc_ids": ["llamacpp-build"], "note": "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1."}
+{"qid": "q155", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Apply patch, cmake with NDK toolchain, arm64-v8a, android-23."}
+{"qid": "q156", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "13.3.rel1 or above."}
+{"qid": "q157", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "4GB RAM and 4GB storage."}
+{"qid": "q158", "answering_doc_ids": ["llamacpp-build"], "note": "ggml/src/ggml-cuda/CMakeLists.txt."}
+{"qid": "q159", "answering_doc_ids": ["llamacpp-build"], "note": "cmake/arm64-windows-llvm.cmake."}
+{"qid": "q160", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "C++17; KleidiAI root, matmul/pack, matmul_clamp_f32_qai8dxp_qsi4cxp dirs."}
+{"qid": "q161", "answering_doc_ids": ["llamacpp-build"], "note": "MUSA_ARCHITECTURES CMake option."}
+{"qid": "q162", "answering_doc_ids": ["llamacpp-build"], "note": "Patch math_functions.h declarations with noexcept(true)."}
+{"qid": "q163", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS."}
+{"qid": "q164", "answering_doc_ids": ["kleidiai-matmul-qsi4cx", "kleidiai-matmul-pack"], "note": "Performance: better cache locality/utilization."}
+{"qid": "q165", "answering_doc_ids": ["llamacpp-build"], "note": "Intel GPUs."}
+{"qid": "q166", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "b8deef0ec0af...; stable base for applying the patch."}
+{"qid": "q167", "answering_doc_ids": ["llamacpp-build"], "note": "No; oneMKL build does not support Intel GPU, use SYCL."}
+{"qid": "q168", "answering_doc_ids": ["llamacpp-build"], "note": "Build OpenCL headers/ICD loader, then cmake with arm64-windows-llvm toolchain and GGML_OPENCL=ON."}
+{"qid": "q169", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "No commitment to support or keep up to date."}
+{"qid": "q170", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "matmul_clamp_f32_qai8dxp_qsi4cxp example."}
+{"qid": "q171", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "cmake with aarch64-none-linux-gnu gcc/g++ from GNU_TOOLCHAIN_PATH."}
+{"qid": "q172", "answering_doc_ids": ["llamacpp-build"], "note": "CUDA_SCALE_LAUNCH_QUEUES=4x."}
+{"qid": "q173", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "Use packing kernels' get_*_packed_size helpers with mr/nr/kr/sr."}
+{"qid": "q174", "answering_doc_ids": ["llamacpp-build"], "note": "Set VK_ICD_FILENAMES (and VK_DRIVER_FILES) to the ICD JSON."}
+{"qid": "q175", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "tile_size, tech, feature, instruction, uarch."}
+{"qid": "q176", "answering_doc_ids": ["llamacpp-build"], "note": "Native: the GPU connected at build time."}
+{"qid": "q177", "answering_doc_ids": ["llamacpp-build"], "note": "Yes, on some motherboards/BIOS settings (e.g. IOMMU)."}
+{"qid": "q178", "answering_doc_ids": ["llamacpp-build"], "note": "OpenCL headers/ICD loader into NDK sysroot, then GGML_OPENCL=ON build."}
+{"qid": "q179", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "patchelf --replace-needed."}
+{"qid": "q180", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "llama-bench -t 4 -n 32 -p 64; pp64/tg32 in t/s, higher is better."}
+{"qid": "q181", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "-t."}
+{"qid": "q182", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "NDK r27+ and CMake 3.27.0+."}
+{"qid": "q183", "answering_doc_ids": ["llamacpp-build", "mlexamples-llamacpp-int4-patch"], "note": "arm64-windows-llvm-release."}
+{"qid": "q184", "answering_doc_ids": ["llamacpp-build"], "note": "Non-native build or explicit CMAKE_CUDA_ARCHITECTURES."}
+{"qid": "q185", "answering_doc_ids": ["kleidiai-readme"], "note": "cmake/toolchains/aarch64-none-linux-gnu.toolchain.cmake."}
+{"qid": "q186", "answering_doc_ids": ["llamacpp-build"], "note": "Run vulkaninfo."}
+{"qid": "q187", "answering_doc_ids": ["llamacpp-build"], "note": "No, generation performance unaffected."}
+{"qid": "q188", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "r27."}
+{"qid": "q189", "answering_doc_ids": ["learnarm-llamacpp-sme2-integration"], "note": "kai_run_lhs_quant_pack_qsi8d32p_f32_neon."}
+{"qid": "q190", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Use llama-bench (pp and tg tests)."}
+{"qid": "q191", "answering_doc_ids": ["kleidiai-microkernel-names"], "note": "Legacy names kept for API; tools/naming/issues.py, --report-known-issues."}
+{"qid": "q192", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "Once; free native RHS if not used elsewhere."}
+{"qid": "q193", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Stable base for applying the patch."}
+{"qid": "q194", "answering_doc_ids": ["kleidiai-microkernel-names", "kleidiai-matmul-qsi4cx", "kleidiai-readme"], "note": "Destination, then LHS, then RHS."}
+{"qid": "q195", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "patchelf --replace-needed."}
+{"qid": "q196", "answering_doc_ids": ["llamacpp-build", "learnarm-llamacpp-sme2-integration"], "note": "GGML_CPU_KLEIDIAI=ON."}
+{"qid": "q197", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Yes, -DGGML_KLEIDIAI_CACHE=ON."}
+{"qid": "q198", "answering_doc_ids": ["llamacpp-build"], "note": "Atomic desktops or unsupported host; convenient on Workstation."}
+{"qid": "q199", "answering_doc_ids": ["kleidiai-matmul-pack"], "note": "mr 4, kr 16, sr 2, bl 32."}
+{"qid": "q200", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "./llama-cli -m phi-2.Q4_0.gguf -p ... -n 32 -t 4."}
+{"qid": "q201", "answering_doc_ids": ["llamacpp-build"], "note": "CMAKE_CUDA_COMPILER to that nvcc, plus rpath settings."}
+{"qid": "q202", "answering_doc_ids": ["llamacpp-build"], "note": "Check KosmicKrisp box (MoltenVK is default)."}
+{"qid": "q203", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Encoder (prompt) and decoder phases in tokens/s."}
+{"qid": "q204", "answering_doc_ids": ["llamacpp-build"], "note": "Build OpenCL headers and ICD loader, then cmake with arm64 llvm toolchain."}
+{"qid": "q205", "answering_doc_ids": ["llamacpp-build"], "note": "No; use SYCL."}
+{"qid": "q206", "answering_doc_ids": ["kleidiai-matmul-qsi4cx"], "note": "N, one per output channel."}
+{"qid": "q207", "answering_doc_ids": ["llamacpp-build"], "note": "-DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON."}
+{"qid": "q208", "answering_doc_ids": ["llamacpp-build"], "note": "-j parallel jobs, Ninja, ccache."}
+{"qid": "q209", "answering_doc_ids": ["llamacpp-build"], "note": "Compile with Emscripten and emdawnwebgpu (EMDAWNWEBGPU_DIR)."}
+{"qid": "q210", "answering_doc_ids": ["mlexamples-llamacpp-int4-patch"], "note": "Use system cmd and run vcvarsall.bat arm64."}
+{"qid": "q211", "answering_doc_ids": ["llamacpp-build"], "note": "-DGGML_ZENDNN=ON."}
