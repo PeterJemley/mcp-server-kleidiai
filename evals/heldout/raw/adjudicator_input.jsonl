@@ -1,0 +1,118 @@
+{"qid": "q001", "question": "How do I build llama.cpp with KleidiAI turned on and confirm it's actually in use when running a model?"}
+{"qid": "q002", "question": "How can I tell which Arm extensions my CPU has and whether a given KleidiAI kernel will run on it?"}
+{"qid": "q003", "question": "How do I build a single llama.cpp binary that runs on every NVIDIA GPU, not only the one installed in my machine?"}
+{"qid": "q004", "question": "Which llama.cpp commit should I check out before applying Arm's KleidiAI patch, and why that one?"}
+{"qid": "q005", "question": "Where does KleidiAI put the scale factors when it quantizes an f32 LHS matrix to asymmetric int8 per row?"}
+{"qid": "q006", "question": "Which quantization granularity does the c32 tag denote in a KleidiAI kernel name, compared with cx and dx?"}
+{"qid": "q007", "question": "When KleidiAI packs a non-transposed fp16 weight matrix together with its bias, how is the output organised and why might it contain padding?"}
+{"qid": "q008", "question": "Across which phases of llama.cpp inference does KleidiAI's SME2 acceleration come into play?"}
+{"qid": "q009", "question": "What background knowledge should I have before trying KleidiAI's int4 matmul kernels?"}
+{"qid": "q010", "question": "Do I need to repack the int4 weight matrix on every inference call when using KleidiAI?"}
+{"qid": "q011", "question": "In a KleidiAI matmul kernel name, what order do the output and input buffer descriptors come in?"}
+{"qid": "q012", "question": "How do I cross-compile llama.cpp with the KleidiAI backend for an arm64 Android phone using the NDK?"}
+{"qid": "q013", "question": "What does nrx8 mean in the name of KleidiAI's Neon int4 RHS packing kernel?"}
+{"qid": "q014", "question": "How do I restrict a llama.cpp MUSA build to just the MTT S80 to cut compile time?"}
+{"qid": "q015", "question": "How do I stop llama-cli on Android from looking for libllama.so at a relative build path?"}
+{"qid": "q016", "question": "Can I use llama.cpp's Intel oneMKL BLAS build to run on an Intel GPU?"}
+{"qid": "q017", "question": "Why are activations re-quantized on every token in llama.cpp's KleidiAI integration while the weights are packed just once?"}
+{"qid": "q018", "question": "What does the qsi8d32p format mean for a packed LHS matrix in KleidiAI?"}
+{"qid": "q019", "question": "How do I fix an exception specification error about cospi when building llama.cpp with an old CUDA release and a newer glibc?"}
+{"qid": "q020", "question": "How do I open a shell on my Android or Linux target to run llama.cpp there?"}
+{"qid": "q021", "question": "Is there a KleidiAI sample that converts float weights to per-channel 4-bit values and switches between kernel variants?"}
+{"qid": "q022", "question": "Which SME2 matmul kernel does llama.cpp run during prompt prefill for a Q4_0 model?"}
+{"qid": "q023", "question": "What parts make up the description of each input or output tensor inside a KleidiAI kernel name?"}
+{"qid": "q024", "question": "My framework already has its own memory manager and thread pool; should I integrate Arm Compute Library or KleidiAI?"}
+{"qid": "q025", "question": "Can I use llama.cpp's Vulkan backend on macOS, and how do I switch between the Vulkan drivers there?"}
+{"qid": "q026", "question": "How do I set up w64devkit to build llama.cpp's Vulkan backend on Windows?"}
+{"qid": "q027", "question": "Which naming grammars cover KleidiAI matmul kernels, depthwise convolution kernels, and kernel directories?"}
+{"qid": "q028", "question": "What minimum Android NDK and CMake versions are needed to cross-compile KleidiAI-enabled llama.cpp for Android?"}
+{"qid": "q029", "question": "How can I stop llama.cpp from crashing when it runs out of VRAM on an NVIDIA card under Linux?"}
+{"qid": "q030", "question": "Which KleidiAI int4 quantization scheme corresponds to llama.cpp's Q4_0 format?"}
+{"qid": "q031", "question": "Why do KleidiAI matmul kernels require the input matrices to be packed first?"}
+{"qid": "q032", "question": "What does llama.cpp use SYCL for, and which GPUs does that cover?"}
+{"qid": "q033", "question": "What do the 8x8x32, neon and i8mm parts at the end of kai_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm tell me?"}
+{"qid": "q034", "question": "How do I keep llama.cpp from running on the GPU on a Mac?"}
+{"qid": "q035", "question": "Why does my llama.cpp build have no HTTPS support, and what package adds it on Ubuntu?"}
+{"qid": "q036", "question": "Which binaries and shared libraries do I push to an Android device to run llama-cli and llama-bench?"}
+{"qid": "q037", "question": "How do I cross-compile llama.cpp with the OpenCL backend for an Android device using the NDK?"}
+{"qid": "q038", "question": "Which Debian packages does llama.cpp's Vulkan backend need, and why might spirv.hpp be missing?"}
+{"qid": "q039", "question": "What CMake options turn on CPU-only BLAS acceleration via OpenBLAS in llama.cpp?"}
+{"qid": "q040", "question": "Which KleidiAI function converts the f32 activations to int8 and packs them for the int4 per-channel matmul, and when must it run?"}
+{"qid": "q041", "question": "What values can the tech component of a KleidiAI kernel name take?"}
+{"qid": "q042", "question": "Which weight data types can KleidiAI accelerate for matrix multiplication in llama.cpp?"}
+{"qid": "q043", "question": "Does KleidiAI allocate heap memory, schedule threads, or depend on third-party libraries?"}
+{"qid": "q044", "question": "Why does llama.cpp still use my GPU with -ngl 0, and how do I force it to run purely on the CPU?"}
+{"qid": "q045", "question": "Why do some older KleidiAI kernels break the naming scheme, and where are those exceptions tracked?"}
+{"qid": "q046", "question": "Which packing kernels must run alongside KleidiAI's int4 per-channel matmul, and how do I get the parameters they need?"}
+{"qid": "q047", "question": "What inputs do KleidiAI's RHS packing kernels for 4-bit weights take, and can they also compute reduction sums?"}
+{"qid": "q048", "question": "What -march setting do I need for KleidiAI's dotprod and i8mm kernels, and how do I build the program for Android?"}
+{"qid": "q049", "question": "What naming pattern do KleidiAI's kernel variant .c/.h files follow, and what does each part encode?"}
+{"qid": "q050", "question": "What fallback order does llama.cpp follow among SME2, I8MM and DotProd when choosing a KleidiAI kernel?"}
+{"qid": "q051", "question": "What Arm CPU features, RAM and storage does a device need to run llama.cpp with KleidiAI's int4 kernels?"}
+{"qid": "q052", "question": "What does the GGML_CUDA_FORCE_MMQ build option do, and what's the trade-off for large batches?"}
+{"qid": "q053", "question": "In KleidiAI's int4 per-channel matmul, what data types do the two input matrices use, and why is the weight quantization called per-channel?"}
+{"qid": "q054", "question": "In KleidiAI's kernel naming grammar, what do square brackets, a vertical bar and a trailing plus sign mean?"}
+{"qid": "q055", "question": "What's the process for compiling llama.cpp's OpenCL backend on a Windows Arm64 PC, including its dependencies?"}
+{"qid": "q056", "question": "Where can I find runnable example programs that show how to call KleidiAI kernels from start to finish?"}
+{"qid": "q057", "question": "What is KleidiAI, and do I have to pull the whole library into my C++ framework to use just one of its routines?"}
+{"qid": "q058", "question": "How many bytes should I allocate for an N x K int4 weight matrix before calling KleidiAI, and is it my job to allocate it?"}
+{"qid": "q059", "question": "Which header file defines the C API of the llama.cpp core library?"}
+{"qid": "q060", "question": "How do I run llama-cli on four CPU cores on an Android device so it finds its shared libraries?"}
+{"qid": "q061", "question": "What's the difference between s1s0, s4s0 and s16s0 in KleidiAI kernel names?"}
+{"qid": "q062", "question": "What optional fields can come after the buffers in a KleidiAI matmul kernel name?"}
+{"qid": "q063", "question": "What does llama.cpp's WebGPU backend depend on, and which CMake flag enables it?"}
+{"qid": "q064", "question": "How do I let multiple GPUs exchange data directly in llama.cpp, and what can go wrong?"}
+{"qid": "q065", "question": "What CMake flag builds llama.cpp with NVIDIA CUDA support?"}
+{"qid": "q066", "question": "Which helper functions tell me the byte size of the packed activation and weight buffers for a KleidiAI int4 matmul?"}
+{"qid": "q067", "question": "During token generation, which SME2 GEMV kernel does llama.cpp pick for a Q4_0 model?"}
+{"qid": "q068", "question": "Can KleidiAI's kernels, including its quantization and packing routines, be compiled to run on Intel or AMD x86 CPUs?"}
+{"qid": "q069", "question": "What packages and CMake version do I need installed before building KleidiAI?"}
+{"qid": "q070", "question": "How can I tell that llama.cpp is actually running on my Ascend NPU?"}
+{"qid": "q071", "question": "Why does the SHA-256 checksum of a KleidiAI source download change between fetches, and what should I download to get a stable hash?"}
+{"qid": "q072", "question": "Why does my llama.cpp Vulkan build break after I open a new terminal, even though the LunarG SDK is installed?"}
+{"qid": "q073", "question": "Which script checks KleidiAI kernel names in CI, and how is the naming documentation regenerated?"}
+{"qid": "q074", "question": "What do the width and height in a p<width>x<height> tag of a KleidiAI kernel name correspond to?"}
+{"qid": "q075", "question": "What does 4vl mean in a KleidiAI tile size, and how does it differ from 4vs?"}
+{"qid": "q076", "question": "How can I confirm my Vulkan SDK setup works before compiling llama.cpp with Vulkan?"}
+{"qid": "q077", "question": "How can I build KleidiAI on an x86_64 Linux PC so it runs on a Raspberry Pi?"}
+{"qid": "q078", "question": "In KleidiAI's s16s0 int4 layout, which two K positions end up sharing a byte?"}
+{"qid": "q079", "question": "What versioning scheme does KleidiAI follow, and can its function names change between releases without warning?"}
+{"qid": "q080", "question": "Why does my first llama.cpp build with ZenDNN take so long, and can I use an existing ZenDNN install instead?"}
+{"qid": "q081", "question": "Why does KleidiAI call its routines micro-kernels instead of just functions?"}
+{"qid": "q082", "question": "What does GGML_KLEIDIAI_CACHE do when building llama.cpp, and what file does it leave on disk?"}
+{"qid": "q083", "question": "What Arm CPU extension do I need to run KleidiAI's int4 per-channel matmul kernel from C code?"}
+{"qid": "q084", "question": "Which KleidiAI function repacks Q4_0 weights when llama.cpp loads a model and SME2 kernels are in use?"}
+{"qid": "q085", "question": "How are two 4-bit weights arranged within a byte in the s1s0 format used for KleidiAI's per-channel int4 RHS packing?"}
+{"qid": "q086", "question": "Why does llama.cpp's KleidiAI path rearrange Q4_0 and Q8_0 GGUF weights when a model is loaded?"}
+{"qid": "q087", "question": "Which headers do I include to use KleidiAI's int4 per-channel matmul, and do I need to include kai_common.h?"}
+{"qid": "q088", "question": "How do I benchmark llama.cpp with KleidiAI on a device, and what do pp64 and tg32 mean in the results?"}
+{"qid": "q089", "question": "How is the name of a KleidiAI depthwise convolution kernel put together, and how does its RHS packing counterpart differ?"}
+{"qid": "q090", "question": "Which CMake preset and options should I use to build llama.cpp with KleidiAI on a Windows Arm64 PC, and which features don't work there?"}
+{"qid": "q091", "question": "Do I need a toolbox container to build llama.cpp with CUDA on Fedora Silverblue?"}
+{"qid": "q092", "question": "How do I cross-compile KleidiAI for an arm64 Android target with the NDK?"}
+{"qid": "q093", "question": "What do KleidiAI's LHS quantize-and-pack kernels do to the activation input of a matmul?"}
+{"qid": "q094", "question": "What should I do when the llama.cpp HIP build fails because clang can't locate the ROCm device library?"}
+{"qid": "q095", "question": "How do I copy a GGUF model onto an Android phone so llama.cpp can load it?"}
+{"qid": "q096", "question": "How do I make the llama.cpp build use one particular CUDA toolkit when several versions are installed?"}
+{"qid": "q097", "question": "What command can I run to quickly check that a fresh llama.cpp build generates text from a model?"}
+{"qid": "q098", "question": "How can I run llama.cpp's WebGPU backend inside a web browser?"}
+{"qid": "q099", "question": "Which Arm SIMD and matrix extensions does KleidiAI target, and what build flag enables SME support?"}
+{"qid": "q100", "question": "What mr, kr, sr and block length does the vectorized Neon version of KleidiAI's qsi8d32p LHS quantize-and-pack kernel require?"}
+{"qid": "q101", "question": "Where is the KleidiAI integration code in the llama.cpp source tree, and how is it hooked into the CPU backend?"}
+{"qid": "q102", "question": "How is the packed-data layout written in a KleidiAI kernel name, and which number is width versus height?"}
+{"qid": "q103", "question": "How do I split a KleidiAI matmul across multiple threads if the kernel has no threading of its own?"}
+{"qid": "q104", "question": "What hardware is the OpenVINO backend for llama.cpp aimed at?"}
+{"qid": "q105", "question": "How do I cross-compile llama.cpp with KleidiAI for an Arm Linux board with Arm's GNU cross toolchain, and which release is recommended?"}
+{"qid": "q106", "question": "What arguments does kai_run_matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm take, and what clamp bounds leave the output unclamped?"}
+{"qid": "q107", "question": "How many scale values do I need for int4 weights quantized per channel in KleidiAI?"}
+{"qid": "q108", "question": "Which KleidiAI kernel quantizes the F32 activations during llama.cpp inference, and why does it run every time?"}
+{"qid": "q109", "question": "How do I give a llama.cpp Vulkan Docker container access to the host's GPU render devices?"}
+{"qid": "q110", "question": "nvcc can't detect my graphics card while compiling llama.cpp with CUDA; what are my options?"}
+{"qid": "q111", "question": "What directory paths should a CMake script set to compile a program using KleidiAI's int4 per-channel matmul?"}
+{"qid": "q112", "question": "Does KleidiAI ship complete ML operators like a full convolution layer, or only lower-level pieces?"}
+{"qid": "q113", "question": "How do I make a static build of llama.cpp with the MUSA backend?"}
+{"qid": "q114", "question": "Does compiling llama.cpp with BLAS make token generation faster, or only prompt processing?"}
+{"qid": "q115", "question": "Which environment variable helps prompt processing speed when llama.cpp runs pipeline-parallel across several NVIDIA GPUs?"}
+{"qid": "q116", "question": "When packing int8 weights for a KleidiAI SME matmul, how are the per-column bias and scale values precomputed?"}
+{"qid": "q117", "question": "Where can I find a complete list of the kernels KleidiAI provides?"}
+{"qid": "q118", "question": "Can llama.cpp let an integrated GPU use main system RAM on Linux, and is there a downside for discrete GPUs?"}

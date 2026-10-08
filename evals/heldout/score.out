@@ -1,0 +1,29 @@
+questions: questions.yaml (118); chunks: 206
+
+PRIMARY top-1 doc accuracy: 102/118 = 86.4% (95% Wilson 79.1%-91.5%)
+  development set for reference: 41/51 = 80.4% (95% Wilson 67.5%-89.0%)
+  decision (70% threshold on the Wilson interval): SUPPORTED: the development score generalizes (held-out within 10 points of 80%)
+
+VALIDITY GATES (any failure makes the measurement invalid, whatever the score)
+  ok   A oracle (section text as query, top-1 = source doc): 118/118; must be >= 90%
+  ok   B random-doc baseline (expected accuracy): 16.2%; must be <= 30%
+  ok   C shifted questions (each scored with another question's top-1): 24/118 = 20.3%; must be <= constant baseline + 10 points (37/118 = 31.4%, always 'llamacpp-build')
+  measurement VALID
+
+SECONDARY (no decision attached)
+  S1 expected doc anywhere in the 5 results: 117/118 = 99.2% (95% Wilson 95.4%-99.9%)
+  S2 strict ground truth (source doc only): 99/118 = 83.9% (95% Wilson 76.2%-89.4%)
+  S3 near-duplicates of a development question (token Jaccard >= 0.5): 3; without them: 99/115 = 86.1% (95% Wilson 78.6%-91.3%)
+  S4 questions where the adjudicator did not list the source doc: 0; without them: 102/118 = 86.4% (95% Wilson 79.1%-91.5%)
+     questions with more than one correct doc: 12/118
+  S5 by source doc:
+     kleidiai-matmul-pack                   10/11
+     kleidiai-matmul-qsi4cx                 15/15
+     kleidiai-microkernel-names             12/14
+     kleidiai-readme                        13/17
+     learnarm-llamacpp-sme2-integration     10/10
+     llamacpp-build                         35/37
+     mlexamples-llamacpp-int4-patch         7/14
+     doc-balanced (mean of per-doc accuracy): 85.4%
+  S6 share of question words found in the first correct doc: held-out 0.80, development 0.79
+     questions repeating 4+ consecutive words of their section: 4/118

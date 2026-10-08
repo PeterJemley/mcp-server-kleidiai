@@ -1,5 +1,39 @@
 # KleidiAI MCP — Retrieval Eval Report
 
+## Held-out set (2026-10-08) — the headline number
+
+- **Questions:** 118, one per corpus section of at least 30 words (2 of 120
+  sections skipped by the writer). Written and labelled blind by separate
+  language-model agents, frozen (`41c2390`) before the retriever saw them,
+  never used for any design choice. Plan, rules and outcome:
+  `evals/heldout/plan.md`.
+- **Scored by:** `evals/heldout/score.py`, which makes the promptfoo
+  provider's call (search the question, limit 5, top-1 doc); raw output in
+  `evals/heldout/score.out`, per question in `evals/heldout/results.tsv`.
+- **Retriever:** two-level BM25 with default settings, unchanged since the
+  2026-08-20 run below.
+
+| Measure | Score |
+|---|---|
+| **Top-1 doc accuracy** | **102/118 (86.4%; 95% Wilson 79.1%–91.5%)** |
+| Correct doc anywhere in the 5 results | 117/118 (99.2%) |
+| Source doc only counted as correct | 99/118 (83.9%) |
+| Average of per-document accuracy | 85.4% |
+
+Preregistered verdict: **supported** — the development score (41/51 below)
+generalizes to within 10 points; the interval's lower end, 79.1%, clears the
+70% bar. The validity gates passed:
+- oracle: 118/118;
+- random-doc baseline: 16.2%;
+- shifted-question control: 20.3%, against 31.4% for always answering the
+  most common doc.
+
+8 of the 16 misses confuse the two documents that both describe building
+llama.cpp with KleidiAI. That is why the ML-examples patch guide's questions
+score 7/14. The misses are recorded, not fixed.
+
+## Development set (2026-08-20)
+
 - **Run:** 2026-08-20 (UTC) · harness: promptfoo 0.121.18 · provider: `search_kleidiai_docs` (custom, deterministic)
 - **Metric:** top-1 doc — is the top-ranked doc in the question's `expected_doc_ids`?
 - **Corpus:** 7 docs · **Questions:** 51 (batch 4 added) · **Retriever: two-level BM25 (unchanged)**

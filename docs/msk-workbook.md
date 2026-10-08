@@ -99,10 +99,11 @@ Three things, in order of importance:
    Reproducing the scaffolding is trivial; reproducing careful curation is
    not.
 2. **The evals** — a 51-question *development* set with committed score
-   reports. "Development" because the same questions were used to choose
-   between retriever designs, so the score may run slightly high; a
-   separate *held-out* set (questions never used for any design choice,
-   scored once) is planned. The reports include including honest failures. Most portfolio projects
+   reports (41/51). "Development" because the same questions were used to
+   choose between retriever designs, so that score could run high. A
+   separate *held-out* set, 118 questions never used for any design choice
+   and scored once, gives 102/118 (Q22a). The reports include honest
+   failures. Most portfolio projects
    assert reliability; this one demonstrates it, including two
    on-the-record refutations of ideas that didn't survive measurement (§6).
 3. **The demo** — a real kernel port whose speedup is measured against
@@ -351,8 +352,10 @@ comment in `corpus.py`.)
 Metric: **top-1 doc** — is the highest-ranked document's id among the
 question's acceptable answers (`expected_doc_ids`)? The scoring is
 deterministic — same input, same output, every time — with no AI model and
-no API key in the loop. Current committed record: **41/51 (80%)** overall;
-the frozen 30-question subset 22/30; deliberately-HARD questions 3/5.
+no API key in the loop. Current committed record on the development set:
+**41/51 (80%)** overall; the frozen 30-question subset 22/30;
+deliberately-HARD questions 3/5. On the held-out set: **102/118 (86%)**
+(Q22a).
 
 History (all committed in `evals/reports/report.md`):
 
@@ -415,6 +418,67 @@ Writing both into one question file keeps a single source of truth: the
 same question is scored for retrieval now and for tool selection later.
 All three passed retrieval on arrival (41/51 with no change to the failure
 set). (Source: `evals/questions.yaml` batch-4 header.)
+
+**Q22a. The 51 questions also chose the retriever. Does its 80% hold up on questions it was never tuned on? (2026-10-08)**
+
+A score measured on the questions a design was chosen with tends to run
+high. Choosing between designs rewards whatever happens to work on those
+particular questions, including luck. So the 51 questions are a
+**development set**. The fix is a **held-out set**: new questions that play
+no part in any design choice and are scored once.
+
+How the 118 held-out questions were made, with every rule committed to git
+before any question existed (`evals/heldout/plan.md`):
+1. **One question per section.** The server splits each corpus document
+   into sections at its headings. All 120 sections with at least 30 words
+   were used, so there was no sample to pick.
+2. **Written blind.** A separate language-model agent saw only those
+   sections. It wrote one question per section, the way a developer would
+   ask it and in its own words, and skipped 2 sections that no developer
+   would ask about: a license notice, and a block of example values. It
+   never saw the retriever, its results or the 51 development questions.
+3. **Answer key, labelled blind.** A second agent read all 7 documents and
+   the shuffled questions, without knowing which section each came from,
+   and listed every document that answers each one. 12 questions turned
+   out to have more than one correct document.
+4. **Frozen, then scored once.** The questions and the answer key were
+   committed and pushed before the retriever saw any of them. Nothing was
+   edited afterwards.
+
+The rule, fixed in advance: the 80% "holds up" if it is shown to be within
+10 points, that is, if the held-out score's **95% Wilson interval** sits
+entirely at or above 70%. A Wilson interval is a standard range for a
+proportion measured on a limited number of questions. Roughly, the true
+accuracy on questions of this kind is very likely inside it.
+
+Result: **102/118 = 86.4%, interval 79.1%–91.5%.** The bottom of the
+interval clears 70%, so the 80% holds up. If anything, the held-out
+estimate is higher, though the two ranges overlap. A correct document
+appeared somewhere in the tool's five results for 117 of 118 questions.
+
+Three checks, also fixed in advance, confirmed the measurement itself could
+work and could fail:
+- searching with each section's own text found the right document 118
+  times out of 118;
+- a random pick would be expected to score 16%;
+- scoring each question with *another* question's answer scored 20%,
+  no better than always answering the most common document (31%).
+
+Where it misses: 8 of the 16 misses confuse the two documents that both
+explain how to build llama.cpp with KleidiAI (the llama.cpp build guide
+and Arm's patch guide). That is why the patch guide's questions score only
+7/14. The misses are recorded, not fixed. Any fix will be tested on new
+questions, because once this set is used to choose a design, it stops being
+held out.
+
+Limits:
+- the questions were written by a language model from the documents, not
+  asked by real developers;
+- the writer and the labeller may share blind spots;
+- documents with many sections weigh more, though a balanced average that
+  counts each document once gives a similar 85%.
+
+(Source: `evals/heldout/plan.md`; `evals/heldout/score.out`.)
 
 ---
 

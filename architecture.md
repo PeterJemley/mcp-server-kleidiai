@@ -68,8 +68,7 @@ version.
 ## Evals: the decision-maker
 
 `evals/questions.yaml` holds 51 development questions (also used to choose
-the retriever, so not held out; a held-out set is planned) with expected doc
-ids,
+the retriever, so not held out) with expected doc ids,
 including deliberately HARD ones and tool-use/e2e tranches awaiting an
 agentic provider. Two loops share one metric (top-1 doc):
 

@@ -1,6 +1,7 @@
 # QA set for retrieval + tool-use evals. A development set, not a held-out
 # one: these questions were also used to choose the retriever (2026-08-05),
-# so scores on them may run slightly high. A separate held-out set is planned.
+# so scores on them may run slightly high. The held-out set is
+# evals/heldout/questions.yaml (2026-10-08: 102/118, against 41/51 here).
 #
 # Each entry:
 #   id:                  stable identifier

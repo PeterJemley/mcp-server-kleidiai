@@ -39,13 +39,18 @@ pattern/planner content (`distribution/schema-sync/check.sh`).
 
 ## Measured, honestly
 
-Retrieval accuracy is scored on a 51-question QA set (top-1 doc metric) and
-the reports are committed — reviewers see scores without running anything.
-Current: **41/51 (80%)** overall (2026-08-20 report), with the 10 remaining
-failures grouped by mechanism and tracked by strict-xfail tests. It is a
-*development* set, not a held-out one: the same questions were used to choose
-the retriever, so the score may run slightly high; a separate held-out set is
-planned. Retriever candidates are compared by measured A/B on these
+Retrieval accuracy is scored with a top-1 doc metric, and the reports are
+committed — reviewers see scores without running anything. On a **held-out
+set** of 118 questions, never used for any design choice, the server ranks a
+correct document first for **102/118 (86%; 95% interval 79–92%)** and returns
+one among its five results for 117/118. The questions were written and
+labelled blind by separate language-model agents (one per corpus section, not
+real users' queries), frozen before the retriever saw them, and scored once
+under rules committed in advance (`evals/heldout/plan.md`, 2026-10-08). The
+51-question *development* set, which was also used to choose the retriever,
+scores **41/51 (80%)**, with the 10 remaining failures grouped by mechanism
+and tracked by strict-xfail tests; the held-out result shows that score did
+not run high. Retriever candidates are compared by measured A/B on these
 questions, where only large gaps can be trusted: the semantic-embedding
 candidate's 10-question deficit is one, while the chosen retriever's +4 over
 the old scorer and its 1-question edge over a chunk-level variant are within
